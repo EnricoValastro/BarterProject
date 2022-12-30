@@ -1,0 +1,21 @@
+.rootNav{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+}
+
+.rootNavTitle{
+    width: 85%;
+    margin-left: 2%;
+    font-weight: bold;
+}
+
+.rootNavLinks{
+    width: 15%;
+    display: flex;
+
+    justify-content: space-around;
+
+}
