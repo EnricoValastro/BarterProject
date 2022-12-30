@@ -1,12 +1,118 @@
-.signin {
+@keyframes background {
+    100% {
+        background-size: 4000px 1000px;
+    }
+}
+
+#signin {
     width:100%;
     height:100%;
     position: absolute;
-    background-attachment: fixed;
-    background-repeat: repeat;
+    background-image: url("waves.svg");
+    background-size: 2000px 1000px;
+    background-position: -500px 0px;
+    animation:
+            background 10s infinite alternate linear;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.signInContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleEnter{
+    margin: 1%;
+    color: whitesmoke;
+    font-size: 2.3em;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.inputSignIn{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+}
+
+.signInCard{
+    width: 25%;
+    padding: 2% 3% 2% 3%;
+    border-radius: 10px;
+    background: rgba(32, 53, 84, 0.8);
+    margin-bottom: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.yyy{
+    margin-bottom: 3%;
+    display: flex;
+    flex-direction: row;
+}
+
+.inputForm{
+    width: 100%;
+    border: 1px solid gray;
+    background: transparent;
+    color: whitesmoke;
+    font-size: 1.1em;
+    font-weight: 500;
+    z-index: 1;
+    padding: 5px 5px 5px 0px;
+
+}
+
+.inputForm:focus{
+    outline: none;
+    border: 1px solid dodgerblue;
+}
+
+.enter{
+    margin-top: 1%;
+    color: rgb(16, 169, 203);
+    font-size: 1.1em;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.newCard{
+    color: gray;
+    font-size: 1.2em;
+    font-weight: 500;
+    width: 25%;
+    padding: 1% 3% 1% 3%;
+    border-radius: 10px;
+    background: rgba(32, 53, 84, 0.8);
+    display: flex;
+    justify-content: center;
+}
+
+.links{
+    color: whitesmoke;
+    text-decoration: none;
+    padding-left: 1%;
+}
+
+.links:hover{
+    text-decoration: underline;
+    background: linear-gradient(90deg, rgba(40, 96, 157, 1) 0%, rgb(69, 128, 190) 53%, rgb(16, 169, 203) 100%);
     background-size: cover;
-    /*background-image: url("giphy-2.gif");*/
-    background: rgb(2,0,36);
-    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,68,121,1) 33%, rgba(105,0,252,1) 100%);
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue','Noto Sans', 'Liberation Sans', Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

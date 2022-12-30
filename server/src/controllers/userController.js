@@ -11,9 +11,12 @@ const signup = async (req, res) => {
         if (!profile) {
             // Token
             const token = jwt.sign(
-                { id: newUser._id },
-                process.env.JWT_SECRET,
-                { expiresIn: 3600 }
+                { user_id: newUser._id, email },
+                process.env.TOKEN_KEY,
+                {
+                    algorithm: "HS512",
+                    expiresIn: '2h'
+                }
             );
             newUser.token = token;
             newUser.save();
