@@ -4,13 +4,18 @@ const User = require('../models/userModel')(mongoose);
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
-
 const signup = async (req, res) => {
     const newUser = new User(req.body);
 
      await User.findOne({email: newUser.email}).then(async profile => {
         if (!profile) {
+            // Token
+            const token = jwt.sign(
+                { id: newUser._id },
+                process.env.JWT_SECRET,
+                { expiresIn: 3600 }
+            );
+            newUser.token = token;
             newUser.save();
             responses.OkResponse(res, {message: 'Signup successful'});
         }
@@ -35,7 +40,7 @@ const login = async (req, res) =>{
 
         if (user && (await bcrypt.compare(password, user.password))) {
             res.send({
-                token: 'test123'
+                token: user.token,
             });
 
         } else {
