@@ -1,0 +1,12 @@
+.signin {
+    width:100%;
+    height:100%;
+    position: absolute;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-size: cover;
+    /*background-image: url("giphy-2.gif");*/
+    background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,68,121,1) 33%, rgba(105,0,252,1) 100%);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue','Noto Sans', 'Liberation Sans', Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+}

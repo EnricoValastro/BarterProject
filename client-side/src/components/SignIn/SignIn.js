@@ -2,14 +2,21 @@ import React, {useState} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
-
-
+import './SignIn.css';
 export default function SignIn({setToken}) {
 
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    function EmailHandler(event) {
+        setEmail(event.target.value);
+    }
+
+    function PasswordHandler(event) {
+        setPassword(event.target.value);
+    }
 
     function SubmitHandler(event) {
         event.preventDefault();
@@ -34,16 +41,8 @@ export default function SignIn({setToken}) {
         }
     }
 
-    function EmailHandler(event) {
-        setEmail(event.target.value);
-    }
-
-    function PasswordHandler(event) {
-        setPassword(event.target.value);
-    }
-
     return (
-        <div>
+        <div className="signin">
 
         </div>
     );

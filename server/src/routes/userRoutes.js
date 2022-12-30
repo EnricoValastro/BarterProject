@@ -5,6 +5,8 @@ module.exports = (app) => {
     app.route('/')
         .get(userController.index);
     */
+    app.route('/api/emailValidation')
+        .post(userController.email);
     app.route('/api/signup')
         .post(userController.signup);
     app.route('/api/login')

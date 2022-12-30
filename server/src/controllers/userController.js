@@ -27,6 +27,22 @@ const signup = async (req, res) => {
     });
 }
 
+const email = async (req, res) => {
+    const { email } = req.body;
+    await User.findOne({email: email}).then( async profile => {
+        if (profile) {
+            res.send(true);
+            responses.OkResponse(res, {message: 'Email already exists'});
+        }
+        else {
+            res.send(false);
+            responses.OkResponse(res, {message: 'Email is available'});
+        }
+    }).catch(err => {
+        responses.InternalServerError(res, {message: err.message});
+    });
+}
+
 const login = async (req, res) =>{
     try {
         // Get user input
@@ -54,4 +70,5 @@ const login = async (req, res) =>{
 module.exports = {
     signup,
     login,
+    email
 }
