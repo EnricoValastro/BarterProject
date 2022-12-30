@@ -27,16 +27,14 @@ const signup = async (req, res) => {
     });
 }
 
-const email = async (req, res) => {
+const email =  (req, res) => {
     const { email } = req.body;
-    await User.findOne({email: email}).then( async profile => {
+    User.findOne({email: email}).then( profile => {
         if (profile) {
             res.send(true);
-            responses.OkResponse(res, {message: 'Email already exists'});
         }
         else {
             res.send(false);
-            responses.OkResponse(res, {message: 'Email is available'});
         }
     }).catch(err => {
         responses.InternalServerError(res, {message: err.message});

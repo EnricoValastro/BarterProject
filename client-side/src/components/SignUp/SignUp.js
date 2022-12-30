@@ -15,9 +15,6 @@ function Signup(){
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
-    function EmailHandler(event){
-        setEmail(event.target.value)
-    }
     function PasswordHandler(event){
         setPassword(event.target.value)
     }
@@ -61,10 +58,10 @@ function Signup(){
     }
 
     function nameNextInput(){
-        const nameInput = document.getElementById('nameField');
+        const nameInput = document.getElementById('nameField').value;
         const nextInput = document.getElementById('surnameInput');
-        if(nameInput.value.length >= 1){
-            setName(nameInput.value);
+        if(nameInput.length >= 1){
+            setName(nameInput);
             document.getElementById('errorBoxName').classList.add('hidden');
             nextInput.classList.remove('hidden');
         }
@@ -74,10 +71,10 @@ function Signup(){
     }
 
     function surnameNextInput(){
-        const surnameInput = document.getElementById('surnameField');
+        const surnameInput = document.getElementById('surnameField').value;
         const nextInput = document.getElementById('emailInput');
-        if(surnameInput.value.length >= 1){
-            setSurname(surnameInput.value);
+        if(surnameInput.length >= 1){
+            setSurname(surnameInput);
             document.getElementById('errorBoxSurname').classList.add('hidden');
             nextInput.classList.remove('hidden');
         }
@@ -86,34 +83,60 @@ function Signup(){
         }
     }
 
-    function validateEmail(email) {
-       axios.post("http://localhost:4000/api/emailValidation", {
-              email: email
-       }).then((response)=> {
-           if (response.data) {
-               return false;
-           } else {
-               return true;
-           }
-       });
-    }
-
-
-
     function emailNextInput(){
         const emailInput = document.getElementById('emailField').value;
         const nextInput = document.getElementById('pwdInput');
-        if(emailInput == ''){
-            document.getElementById('errorBoxEmail').classList.remove('hidden');
-        }
-        else if(/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(emailInput) && validateEmail(emailInput)){
-            document.getElementById('errorBoxEmail').classList.add('hidden');
-            setEmail(emailInput);
+
+        axios.post("http://localhost:4000/api/emailValidation", {
+            email: emailInput
+
+        }).then((response)=>{
+            if(emailInput === ''){
+                document.getElementById('errorBoxEmail').classList.remove('hidden');
+            }
+            else if(/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(emailInput) && !response.data){
+
+                document.getElementById('errorBoxEmail').classList.add('hidden');
+                setEmail(emailInput);
+                nextInput.classList.remove('hidden');
+            }
+            else{
+                document.getElementById('errorBoxEmail').classList.remove('hidden');
+            }
+        });
+    }
+
+    function pwdNextInput(){
+        const pwdInput = document.getElementById('pwdField').value;
+        const nextInput = document.getElementById('confpwdInput');
+        const lowerCaseLetters = /[a-z]/g;
+        const upperCaseLetters = /[A-Z]/g;
+        const numbers = /[0-9]/g;
+
+        if(pwdInput.length >= 8 && pwdInput.match(lowerCaseLetters) && pwdInput.match(upperCaseLetters) && pwdInput.match(numbers)){
+            document.getElementById('errorBoxPwd').classList.add('hidden');
+            setPassword(pwdInput);
             nextInput.classList.remove('hidden');
         }
-        else{
-            document.getElementById('errorBoxEmail').classList.remove('hidden');
+        else {
+            document.getElementById('errorBoxPwd').classList.remove('hidden');
         }
+
+    }
+
+    function confPwdNextInput(){
+        const confPwdInput = document.getElementById('confpwdField').value;
+        const nextInput = document.getElementById('subButton');
+
+        if(confPwdInput === password){
+            setConfirmPassword(confPwdInput);
+            document.getElementById('errorBoxConfPwd').classList.add('hidden');
+            nextInput.classList.remove('hidden');
+        }
+        else {
+            document.getElementById('errorBoxConfPwd').classList.remove('hidden');
+        }
+
     }
 
     return (
@@ -147,7 +170,7 @@ function Signup(){
                                     <p className="enterSomething">Enter your name</p>
                                     <div className="xxx">
                                         <input id="nameField"className="input" type="text" onBlur={nameNextInput}/>
-                                        <button onClick={nameNextInput}>→</button>
+                                        <button className="nextButton" onClick={nameNextInput}>→</button>
                                     </div>
 
                                 </div>
@@ -156,7 +179,7 @@ function Signup(){
                                     <p className="enterSomething">Enter your surname</p>
                                     <div className="xxx">
                                         <input id="surnameField" className="input" type="text" onBlur={surnameNextInput}/>
-                                        <button onClick={surnameNextInput}>→</button>
+                                        <button className="nextButton" onClick={surnameNextInput}>→</button>
                                     </div>
 
                                 </div>
@@ -165,20 +188,27 @@ function Signup(){
                                     <p className="enterSomething">Enter your email</p>
                                     <div className="xxx">
                                         <input id="emailField" className="input" type="email" onBlur={emailNextInput}/>
-                                        <button onClick={emailNextInput}>→</button>
+                                        <button className="nextButton" onClick={emailNextInput}>→</button>
                                     </div>
-
-
                                 </div>
+
                                 <div id="pwdInput" className="inputContainer hidden">
                                     <p className="enterSomething">Enter your password</p>
-                                    <input className="input" type="password" onBlur={PasswordHandler}/>
+                                    <div className="xxx">
+                                        <input id="pwdField" className="input" type="password" onBlur={pwdNextInput}/>
+                                        <button className="nextButton" onClick={pwdNextInput}>→</button>
+                                    </div>
                                 </div>
+
                                 <div id="confpwdInput" className="inputContainer hidden">
                                     <p className="enterSomething">Confirm password</p>
-                                    <input className="input" type="password" onBlur={ConfirmPasswordHandler}/>
+                                    <div className="xxx">
+                                        <input id="confpwdField" className="input" type="password" onBlur={confPwdNextInput}/>
+                                        <button className="nextButton" onClick={confPwdNextInput}>→</button>
+                                    </div>
+
                                 </div>
-                                <div className="hidden">
+                                <div id="subButton" className="hidden">
                                     <button type="submit">Sign up</button>
                                 </div>
 
@@ -193,6 +223,13 @@ function Signup(){
                     </div>
                     <div className="errorMsg hidden" id="errorBoxEmail">
                         <p>Email is invalid or already taken</p>
+                    </div>
+                    <div className="errorMsg hidden" id="errorBoxPwd">
+                        <p> Make sure it's at least 8 characters including a number,
+                           <br/> an uppercase letter and a lowercase letter </p>
+                    </div>
+                    <div className="errorMsg hidden" id="errorBoxConfPwd">
+                        <p>Passwords don't match</p>
                     </div>
 
 
