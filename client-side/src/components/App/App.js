@@ -9,7 +9,6 @@ import Root     from '../Root/Root';
 import SignIn   from '../SignIn/SignIn';
 import SignUp   from '../SignUp/SignUp';
 
-
 function App() {
 
     const { token, setToken } = useToken();

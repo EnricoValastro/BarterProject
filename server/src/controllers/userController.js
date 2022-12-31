@@ -39,8 +39,6 @@ const email =  (req, res) => {
         else {
             res.send(false);
         }
-    }).catch(err => {
-        responses.InternalServerError(res, {message: err.message});
     });
 }
 

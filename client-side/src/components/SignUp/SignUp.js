@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 
+import axios from "axios";
+
+import BubblyButton from "../BubblyButton/BubblyButton";
 import './SignUp.css';
 
 
@@ -15,49 +15,29 @@ function Signup(){
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
-    function PasswordHandler(event){
-        setPassword(event.target.value)
-    }
-    function ConfirmPasswordHandler(event){
-        console.log("ciao");
-        if(password !== event.target.value){
-            alert("Password and Confirm Password must be same")
-        }
-        else{
-            setConfirmPassword(event.target.value)
-        }
+    function SubmitHandler(){
+
+        axios.post("http://localhost:4000/api/signup", {
+            name: name,
+            surname: surname,
+            email: email,
+            password: password
+        }).then((response)=>{
+            if(response.data.error){
+                console.log(response.data.error, {type: "error"});
+            }
+            else{
+                console.log(response.data.message, {type: "success"});
+                navigate("/signin");
+            }
+        }).catch((error)=>{
+            console.log(error);
+        });
 
     }
 
-    function SubmitHandler(event){
+    function nameNextInput(event){
         event.preventDefault();
-        if(email === '' || password === '' || name === '' || surname === '' || confirmPassword === ''){
-            //todo
-        }
-        else if(password !== confirmPassword){
-            //todo
-        }
-        else{
-            axios.post("http://localhost:4000/api/signup", {
-                name: name,
-                surname: surname,
-                email: email,
-                password: password
-            }).then((response)=>{
-                if(response.data.error){
-                    console.log(response.data.error, {type: "error"});
-                }
-                else{
-                    console.log(response.data.message, {type: "success"});
-                    navigate("/signin");
-                }
-            }).catch((error)=>{
-                console.log(error);
-            });
-        }
-    }
-
-    function nameNextInput(){
         const nameInput = document.getElementById('nameField').value;
         const nextInput = document.getElementById('surnameInput');
         if(nameInput.length >= 1){
@@ -70,7 +50,8 @@ function Signup(){
         }
     }
 
-    function surnameNextInput(){
+    function surnameNextInput(event){
+        event.preventDefault();
         const surnameInput = document.getElementById('surnameField').value;
         const nextInput = document.getElementById('emailInput');
         if(surnameInput.length >= 1){
@@ -83,7 +64,8 @@ function Signup(){
         }
     }
 
-    function emailNextInput(){
+    function emailNextInput(event){
+        event.preventDefault();
         const emailInput = document.getElementById('emailField').value;
         const nextInput = document.getElementById('pwdInput');
 
@@ -106,7 +88,8 @@ function Signup(){
         });
     }
 
-    function pwdNextInput(){
+    function pwdNextInput(event){
+        event.preventDefault();
         const pwdInput = document.getElementById('pwdField').value;
         const nextInput = document.getElementById('confpwdInput');
         const lowerCaseLetters = /[a-z]/g;
@@ -124,7 +107,8 @@ function Signup(){
 
     }
 
-    function confPwdNextInput(){
+    function confPwdNextInput(event){
+        event.preventDefault();
         const confPwdInput = document.getElementById('confpwdField').value;
         const nextInput = document.getElementById('subButton');
 
@@ -164,12 +148,12 @@ function Signup(){
                             Let's start trading
                         </div>
                         <div className="form">
-                            <form onSubmit={SubmitHandler}>
+                            <form>
 
                                 <div id="nameInput"className="inputContainer">
                                     <p className="enterSomething">Enter your name</p>
                                     <div className="xxx">
-                                        <input id="nameField"className="input" type="text" onBlur={nameNextInput}/>
+                                        <input id="nameField"className="input" type="text" onBlur ={nameNextInput}/>
                                         <button className="nextButton" onClick={nameNextInput}>→</button>
                                     </div>
 
@@ -178,7 +162,7 @@ function Signup(){
                                 <div id="surnameInput" className="inputContainer hidden">
                                     <p className="enterSomething">Enter your surname</p>
                                     <div className="xxx">
-                                        <input id="surnameField" className="input" type="text" onBlur={surnameNextInput}/>
+                                        <input id="surnameField" className="input" type="text" onBlur ={surnameNextInput} />
                                         <button className="nextButton" onClick={surnameNextInput}>→</button>
                                     </div>
 
@@ -187,7 +171,7 @@ function Signup(){
                                 <div id="emailInput" className="inputContainer hidden">
                                     <p className="enterSomething">Enter your email</p>
                                     <div className="xxx">
-                                        <input id="emailField" className="input" type="email" onBlur={emailNextInput}/>
+                                        <input id="emailField" className="input" type="email" onBlur ={emailNextInput}/>
                                         <button className="nextButton" onClick={emailNextInput}>→</button>
                                     </div>
                                 </div>
@@ -195,7 +179,7 @@ function Signup(){
                                 <div id="pwdInput" className="inputContainer hidden">
                                     <p className="enterSomething">Enter your password</p>
                                     <div className="xxx">
-                                        <input id="pwdField" className="input" type="password" onBlur={pwdNextInput}/>
+                                        <input id="pwdField" className="input" type="password" onBlur={pwdNextInput} />
                                         <button className="nextButton" onClick={pwdNextInput}>→</button>
                                     </div>
                                 </div>
@@ -206,10 +190,10 @@ function Signup(){
                                         <input id="confpwdField" className="input" type="password" onBlur={confPwdNextInput}/>
                                         <button className="nextButton" onClick={confPwdNextInput}>→</button>
                                     </div>
-
                                 </div>
+
                                 <div id="subButton" className="hidden">
-                                    <button type="submit">Sign up</button>
+                                    <BubblyButton name={"Signup"} onClick={SubmitHandler}></BubblyButton>
                                 </div>
 
                             </form>
