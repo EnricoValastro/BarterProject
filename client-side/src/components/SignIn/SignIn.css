@@ -1,6 +1,6 @@
 @keyframes background {
-    100% {
-        background-size: 4000px 1000px;
+    100%{
+        background-size: 4000px 1800px;
     }
 }
 
@@ -8,11 +8,10 @@
     width:100%;
     height:100%;
     position: absolute;
-    background-image: url("waves.svg");
-    background-size: 2000px 1000px;
-    background-position: -500px 0px;
-    animation:
-            background 10s infinite alternate linear;
+    background-image: url("wave.svg");
+    background-size: 3200px 1200px;
+    background-position: -1200px 0px;
+    animation: background 10s infinite alternate linear;
 }
 
 .container {
@@ -44,14 +43,15 @@
 }
 
 .inputSignIn{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
 
 .signInCard{
-    width: 25%;
-    padding: 2% 3% 2% 3%;
+    width: 20%;
+    padding: 1% 2% 1% 2%;
     border-radius: 10px;
     background: rgba(32, 53, 84, 0.8);
     margin-bottom: 1%;
@@ -85,7 +85,7 @@
 
 .enter{
     margin-top: 1%;
-    color: rgb(16, 169, 203);
+    color: #a8dadc;
     font-size: 1.1em;
     font-weight: 500;
     z-index: 1;
@@ -93,10 +93,10 @@
 
 .newCard{
     color: gray;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 500;
-    width: 25%;
-    padding: 1% 3% 1% 3%;
+    width: 20%;
+    padding: 1% 2% 1% 2%;
     border-radius: 10px;
     background: rgba(32, 53, 84, 0.8);
     display: flex;
@@ -111,7 +111,7 @@
 
 .links:hover{
     text-decoration: underline;
-    background: linear-gradient(90deg, rgba(40, 96, 157, 1) 0%, rgb(69, 128, 190) 53%, rgb(16, 169, 203) 100%);
+    background: linear-gradient(90deg, rgba(230,57,70,1) 0%, rgba(236,102,112,1) 54%, rgba(255,132,132,1) 100%);
     background-size: cover;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

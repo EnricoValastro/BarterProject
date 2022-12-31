@@ -12,32 +12,45 @@ export default function SignIn({setToken}) {
     const [password, setPassword] = useState('');
 
     function EmailHandler(event) {
-
-        setEmail(event.target.value);
+        if(event.target.value.length > 0) {
+            setEmail(event.target.value);
+            document.getElementById('errorBoxEmail').classList.add('hidden');
+        }
+        else {
+            document.getElementById('errorBoxEmail').classList.remove('hidden');
+        }
     }
 
     function PasswordHandler(event) {
-        setPassword(event.target.value);
+        if(event.target.value.length > 0) {
+            setPassword(event.target.value);
+            document.getElementById('errorBoxPwd').classList.add('hidden');
+        }
+        else {
+            document.getElementById('errorBoxPwd').classList.remove('hidden');
+        }
     }
+
 
     function SubmitHandler(event) {
         event.preventDefault();
-        if(email === '' || password === ''){
-            //something to doi
+        if(email.length === 0 && password.length === 0) {
+            document.getElementById('errorBoxEmail').classList.remove('hidden');
+            document.getElementById('errorBoxPwd').classList.remove('hidden');
         }
-        else{
+        else {
             axios.post("http://localhost:4000/api/login", {
                 email: email,
                 password: password
-            }).then((response)=>{
-                if(response.data.error){
+            }).then((response) => {
+                if (response.data.error) {
+                    document.getElementById('errorBoxSignIn').classList.remove('hidden');
                     console.log(response.data.error, {type: "error"});
-                }
-                else{
+                } else {
                     setToken(response.data.token);
                     navigate("/home");
                 }
-            }).catch((error)=>{
+            }).catch((error) => {
                 console.log(error);
             });
         }
@@ -55,20 +68,29 @@ export default function SignIn({setToken}) {
                             <div className="inputSignIn">
                                 <p className="enter">Email address</p>
                                 <div className="yyy">
-                                    <input className="inputForm" type="text" onBlur={EmailHandler}/>
+                                    <input className="inputForm" type="text" onChange={EmailHandler}/>
                                 </div>
-                                <div className="inputSignIn">
-                                    <p className="enter">Password</p>
-                                    <div className="yyy">
-                                        <input className="inputForm" type="password" onBlur={PasswordHandler}/>
-                                    </div>
-                                </div>
-
                             </div>
-                            <div className="">
+                            <div className="inputSignIn">
+                                <p className="enter">Password</p>
+                                <div className="yyy">
+                                    <input className="inputForm" type="password" onChange={PasswordHandler}/>
+                                </div>
+                            </div>
+                            <div className="SubmitSignIn">
                                 <button type="submit">Sign In</button>
                             </div>
                         </form>
+
+                    </div>
+                    <div className="errorMsg hidden" id="errorBoxEmail">
+                        <p>Insert Email</p>
+                    </div>
+                    <div className="errorMsg hidden" id="errorBoxPwd">
+                        <p>Insert Password</p>
+                    </div>
+                    <div className="errorMsg hidden" id="errorBoxSignIn">
+                        <p>Invalid Credentials</p>
                     </div>
                     <div className="newCard">
                         New to Barter?
