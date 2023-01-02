@@ -15,7 +15,7 @@ function BubblyButton(props) {
         setTimeout(function(){
             props.onClick();
         },800);
-        
+
     }
 
 
