@@ -50,15 +50,12 @@ export default function SignIn({setToken}) {
                 email: email,
                 password: password
             }).then((response) => {
-                if (response.data.error) {
-                    document.getElementById('errorBoxSignIn').classList.remove('hidden');
-                    console.log(response.data.error, {type: "error"});
-                } else {
                     setToken(response.data.token);
                     navigate("/home");
-                }
             }).catch((error) => {
                 console.log(error);
+                document.getElementById('errorBoxSignIn').classList.remove('hidden');
+                document.getElementById('username').innerHTML = error.response.data.message;
             });
         }
     }
@@ -97,7 +94,7 @@ export default function SignIn({setToken}) {
                         <p>Insert Password</p>
                     </div>
                     <div className="errorMsg hidden" id="errorBoxSignIn">
-                        <p>Invalid Credentials</p>
+                        <p id="username"></p>
                     </div>
                     <div className="newCard">
                         New to Barter?
