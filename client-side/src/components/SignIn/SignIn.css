@@ -1,3 +1,4 @@
+
 @keyframes background {
     100%{
         background-size: 4000px 1800px;
@@ -8,10 +9,10 @@
     width:100%;
     height:100%;
     position: absolute;
-    background-image: url("wave.svg");
+    background-image: url("Cloudy.svg");
     background-size: 3200px 1200px;
     background-position: -1200px 0px;
-    animation: background 10s infinite alternate linear;
+    animation: background 13s infinite alternate linear;
 }
 
 .container {
@@ -25,7 +26,7 @@
     background-color: rgba(0,0,0,0.1);
 }
 
-.signInContainer{
+.signinContainer{
     width: 100%;
     height: 100%;
     display: flex;
@@ -34,7 +35,7 @@
     justify-content: center;
 }
 
-.titleEnter{
+.signinTitle{
     margin: 1%;
     color: whitesmoke;
     font-size: 2.3em;
@@ -42,33 +43,60 @@
     z-index: 2;
 }
 
-.inputSignIn{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1%;
-}
-
-.signInCard{
-    width: 20%;
-    padding: 1% 2% 1% 2%;
+.signinCard{
+    width: 25%;
+    padding: 2% 4% 2% 4%;
     border-radius: 10px;
     background: rgba(32, 53, 84, 0.8);
-    margin-bottom: 1%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-
-.yyy{
-    margin-bottom: 3%;
+.inputSignin{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6%;
+}
+.extContainer{
     display: flex;
     flex-direction: row;
 }
+.iconContainer{
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 2px;
+    color:rgba(236,102,112,1);
+}
+.icon{
+    margin-right: 2%;
+    margin-top: 2%;
+}
+.fieldContainer{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.enter{
+    margin: 0;
+    color: #a8dadc;
+    font-size: 1.1em;
+    font-weight: 500;
+    z-index: 1;
+}
+.yyy{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 
 .inputForm{
     width: 100%;
-    border: 1px solid gray;
+    border: 0;
+    border-bottom: 1px solid gray;
     background: transparent;
     color: whitesmoke;
     font-size: 1.1em;
@@ -80,27 +108,20 @@
 
 .inputForm:focus{
     outline: none;
-    border: 1px solid dodgerblue;
-}
-
-.enter{
-    margin-top: 1%;
-    color: #a8dadc;
-    font-size: 1.1em;
-    font-weight: 500;
-    z-index: 1;
+    border-bottom: 1px solid dodgerblue;
 }
 
 .newCard{
     color: gray;
     font-size: 1.1em;
     font-weight: 500;
-    width: 20%;
-    padding: 1% 2% 1% 2%;
+    width: 25%;
+    padding: 1% 4% 1% 4%;
     border-radius: 10px;
     background: rgba(32, 53, 84, 0.8);
     display: flex;
     justify-content: center;
+    margin-top: 1%;
 }
 
 .links{
@@ -110,30 +131,16 @@
 }
 
 .links:hover{
-    text-decoration: underline;
     background: linear-gradient(90deg, rgba(230,57,70,1) 0%, rgba(236,102,112,1) 54%, rgba(255,132,132,1) 100%);
     background-size: cover;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.SubmitSignIn{
+.SubmitSignin{
+    margin-top: 6%;
     display: flex;
     justify-content: center;
-    margin-top: 1%;
     align-items: center;
     flex-direction: column;
-}
-
-.buttonSignIn{
-    width: 50%;
-    height: 35px;
-    border: none;
-    border-radius: 5px;
-    background: linear-gradient(90deg, rgba(230,57,70,1) 0%, rgba(236,102,112,1)  54%, rgba(255, 132, 132, 1) 100%);
-    color: whitesmoke;
-    font-size: 1.1em;
-    font-weight: 500;
-    z-index: 1;
-    cursor: pointer;
 }

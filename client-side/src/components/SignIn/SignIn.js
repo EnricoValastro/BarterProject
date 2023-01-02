@@ -1,8 +1,12 @@
 import React, {useState} from "react";
-import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
+
+import axios from "axios";
+
 import './SignIn.css';
+import PersonIcon from '@mui/icons-material/Person';
+import PasswordIcon from '@mui/icons-material/Password';
 import BubblyButton from "../BubblyButton/BubblyButton";
 
 export default function SignIn({setToken}) {
@@ -15,90 +19,103 @@ export default function SignIn({setToken}) {
     function EmailHandler(event) {
         if(event.target.value.length > 0) {
             setEmail(event.target.value);
-            document.getElementById('errorBoxEmail').classList.add('hidden');
+            document.getElementById('errorBoxSignin').classList.add('hidden');
         }
         else {
-            document.getElementById('errorBoxEmail').classList.remove('hidden');
+            document.getElementById('errorBoxSignin').classList.remove('hidden');
         }
     }
 
     function PasswordHandler(event) {
         if(event.target.value.length > 0) {
             setPassword(event.target.value);
-            document.getElementById('errorBoxPwd').classList.add('hidden');
+            document.getElementById('errorBoxSignin').classList.add('hidden');
         }
         else {
-            document.getElementById('errorBoxPwd').classList.remove('hidden');
+            document.getElementById('errorBoxSignin').classList.remove('hidden');
         }
     }
 
 
     function SubmitHandler() {
         //event.preventDefault();
-        if(email.length === 0 && password.length === 0) {
-            document.getElementById('errorBoxEmail').classList.remove('hidden');
-            document.getElementById('errorBoxPwd').classList.remove('hidden');
-        }
-        else if(email.length !== 0 && password.length === 0) {
-            document.getElementById('errorBoxPwd').classList.remove('hidden');
-        }
-        else if(email.length === 0 && password.length !== 0) {
-            document.getElementById('errorBoxEmail').classList.remove('hidden');
-        }
-        else {
+        if(email.length !== 0 && password.length !== 0) {
             axios.post("http://localhost:4000/api/login", {
                 email: email,
                 password: password
             }).then((response) => {
-                    setToken(response.data.token);
-                    navigate("/home");
+                setToken(response.data.token);
+                navigate("/home");
             }).catch((error) => {
-                console.log(error);
-                document.getElementById('errorBoxSignIn').classList.remove('hidden');
-                document.getElementById('username').innerHTML = error.response.data.message;
+                document.getElementById('errorBoxSignin').classList.remove('hidden');
+
             });
+        }
+        else {
+            document.getElementById('errorBoxSignin').classList.remove('hidden');
+
         }
     }
 
     return (
         <div id="signin">
+
             <div className="container">
-                <div className="signInContainer">
-                    <div className="titleEnter">
-                        Sign In to Barter
+                <div className="navbarContainer">
+                    <div className="navbar">
+                        <div className="logo">
+                            <Link to="/" className="link">Barter</Link>
+                        </div>
                     </div>
-                    <div className="signInCard">
+                </div>
+
+                <div className="signinContainer">
+
+                    <div className="signinTitle">
+                        Sign in to Barter
+                    </div>
+
+                    <div className="signinCard">
                         <form>
-                            <div className="inputSignIn">
-                                <p className="enter">Email address</p>
-                                <div className="yyy">
-                                    <input className="inputForm" type="text" onChange={EmailHandler}/>
+                            <div className="inputSignin">
+                                <div className="extContainer">
+                                    <div className="iconContainer">
+                                        <PersonIcon className="icon"/>
+                                    </div>
+                                    <div className="fieldContainer">
+                                        <div className="enter">
+                                            Email address
+                                        </div>
+                                        <input className="inputForm" type="text" onChange={EmailHandler}/>
+                                    </div>
                                 </div>
                             </div>
                             <div className="inputSignIn">
-                                <p className="enter">Password</p>
-                                <div className="yyy">
-                                    <input className="inputForm" type="password" onChange={PasswordHandler}/>
+                                <div className="extContainer">
+                                    <div className="iconContainer">
+                                        <PasswordIcon className="icon"/>
+                                    </div>
+                                    <div className="fieldContainer">
+                                        <div className="enter">
+                                            Password
+                                        </div>
+                                        <input className="inputForm" type="password" onChange={PasswordHandler}/>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="SubmitSignIn">
+                            <div className="SubmitSignin">
                                 <BubblyButton name={"Sign in"} onClick={SubmitHandler} />
                             </div>
                         </form>
+                    </div>
 
+                    <div className="errorMsg hidden" id="errorBoxSignin">
+                        <p id="error">Incorrect username or password</p>
                     </div>
-                    <div className="errorMsg hidden" id="errorBoxEmail">
-                        <p>Insert Email</p>
-                    </div>
-                    <div className="errorMsg hidden" id="errorBoxPwd">
-                        <p>Insert Password</p>
-                    </div>
-                    <div className="errorMsg hidden" id="errorBoxSignIn">
-                        <p id="username"></p>
-                    </div>
+
                     <div className="newCard">
                         New to Barter?
-                        <Link to="/signup" className="links"> Create an account </Link>
+                        <Link to="/signup" className="links"> Create an account →</Link>
                     </div>
                 </div>
             </div>

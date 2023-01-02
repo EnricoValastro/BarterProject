@@ -55,7 +55,6 @@
 }
 .link:hover{
     font-size: 20px;
-    text-decoration: underline;
     background: linear-gradient(90deg, rgb(230,57,70) 0%, rgb(236,102,112) 53%,  rgb(255,132,132) 100%);
     background-size: cover;
     -webkit-background-clip: text;
@@ -150,7 +149,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     margin-left: 2%;
     color: green;
 }
@@ -164,9 +162,10 @@ div.errorMsg p{
     color: gray;
     font-size: 1.1em;
     font-weight: 600;
+    margin: 0;
+    margin-top: 4%;
 
 }
-
 .hidden{
     display: none;
 }
