@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import useToken from './useToken';
 import Home     from '../Home/Home';
-import Root     from '../Root/Root';
+import OnBoarding     from '../OnBoarding/OnBoarding';
 import SignIn   from '../SignIn/SignIn';
 import SignUp   from '../SignUp/SignUp';
 
@@ -19,7 +19,7 @@ function App() {
 
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Root />}>
+                    <Route path="/" element={<OnBoarding />}>
                     </Route>
                     <Route path="/signup" element={<SignUp />}>
                     </Route>

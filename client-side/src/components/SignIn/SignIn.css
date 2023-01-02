@@ -86,12 +86,6 @@
     font-weight: 500;
     z-index: 1;
 }
-.yyy{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 
 .inputForm{
     width: 100%;
@@ -124,13 +118,13 @@
     margin-top: 1%;
 }
 
-.links{
+.link{
     color: whitesmoke;
     text-decoration: none;
     padding-left: 1%;
 }
 
-.links:hover{
+.link:hover{
     background: linear-gradient(90deg, rgba(230,57,70,1) 0%, rgba(236,102,112,1) 54%, rgba(255,132,132,1) 100%);
     background-size: cover;
     -webkit-background-clip: text;

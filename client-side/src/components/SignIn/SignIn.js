@@ -63,8 +63,8 @@ export default function SignIn({setToken}) {
             <div className="container">
                 <div className="navbarContainer">
                     <div className="navbar">
-                        <div className="logo">
-                            <Link to="/" className="link">Barter</Link>
+                        <div>
+                            <Link to="/" className="link" id="barter">Barter</Link>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ export default function SignIn({setToken}) {
 
                     <div className="newCard">
                         New to Barter?
-                        <Link to="/signup" className="links"> Create an account →</Link>
+                        <Link to="/signup" className="link">Create an account →</Link>
                     </div>
                 </div>
             </div>

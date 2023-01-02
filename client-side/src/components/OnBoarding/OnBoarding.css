@@ -1,0 +1,263 @@
+#onBoarding{
+    width:100%;
+    height:100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.navContainer{
+    width: 100%;
+    height: 40%;
+    background-image: url("OnBoardingWav.png");
+    background-repeat: no-repeat;
+    position: absolute;
+}
+.nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.logo{
+    color : whitesmoke;
+    width: 60%;
+    padding: 5px;
+    font-size: 32px;
+    font-weight: 700;
+}
+.logoLink{
+    color : whitesmoke;
+    text-decoration: none;
+}
+.navigate{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 20px;
+    color: whitesmoke;
+    font-weight: 600;
+}
+.links {
+    position: relative;
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+    text-decoration: none;
+    margin-left: 12%;
+
+}
+.links.eff {
+    color: whitesmoke;
+}
+.links.eff.eff::after, .links.eff.eff::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    border: 2px solid;
+    transition: all 0.6s ease;
+    border-radius: 2px;
+}
+.links.eff.eff::after {
+    bottom: 0;
+    right: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+.links.eff.eff::before {
+    top: 0;
+    left: 0;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+.links.eff.eff:hover:after, .links.eff.eff:hover:before {
+    border-bottom-color: rgba(20, 54, 89, 1);
+    border-right-color: rgba(20, 54, 89, 1);
+    border-top-color: rgba(20, 54, 89, 1);
+    border-left-color: rgba(20, 54, 89, 1);
+    width: 100%;
+    height: 100%;
+
+}
+
+.sectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40%;
+}
+.section1{
+    width: 80%;
+    height: 70vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+
+}
+.presentation{
+    height: 100%;
+    width: 50%;
+    background-image: url("trade.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.description{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4%;
+}
+.section2{
+    width: 100%;
+    height: 50vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url("section2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.presentation2{
+    margin-right: 10%;
+    margin-left: 4%;
+    height: 100%;
+    width: 40%;
+    background-image: url("trade.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.description2{
+    margin-left: 10%;
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.descriptionTitle{
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(20, 54, 89, 1);
+    margin: 0;
+}
+.descriptionText{
+    font-size: 24px;
+    font-weight: 500;
+    color: gray;
+    margin-bottom: 2%;
+}
+.descriptionTitle2{
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(20, 54, 89, 1);
+    margin: 0;
+}
+.descriptionText2{
+    font-size: 24px;
+    font-weight: 500;
+    color: whitesmoke;
+    margin-bottom: 2%;
+}
+
+/*---------------------------------------------------------------------------*/
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:700");
+@keyframes showTopText {
+    0% {
+        transform: translate3d(0, 100%, 0);
+    }
+    40%, 60% {
+        transform: translate3d(0, 50%, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes showBottomText {
+    0% {
+        transform: translate3d(0, -100%, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+.animated-title {
+    color: rgba(40, 96, 157, 1);
+    font-family: Roboto, Arial, sans-serif;
+    height: 90vmin;
+    left: 50%;
+    position: absolute;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    width: 90vmin;
+}
+
+.animated-title > div {
+    height: 50%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+.animated-title > div div {
+    font-size: 11vmin;
+    padding: 2vmin 0;
+    position: absolute;
+}
+
+.animated-title > div div span {
+    display: block;
+}
+
+.animated-title > div.text-top {
+    border-bottom: 1vmin solid rgba(18, 70, 123, 1);
+    top: 0;
+}
+
+.animated-title > div.text-top div {
+    animation: showTopText 1s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    bottom: 0;
+    transform: translate(0, 100%);
+}
+
+.animated-title > div.text-top div span:first-child {
+    color:rgba(20, 54, 89, 1) ;
+}
+
+.animated-title > div.text-bottom {
+    bottom: 0;
+}
+
+.animated-title > div.text-bottom div {
+    animation: showBottomText 0.5s;
+    animation-delay: 1.75s;
+    animation-fill-mode: forwards;
+    top: 0;
+    transform: translate(0, -100%);
+}

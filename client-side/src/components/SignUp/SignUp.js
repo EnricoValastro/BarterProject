@@ -167,13 +167,12 @@ function Signup(){
 
                 <div className="navbarContainer">
                     <div className="navbar">
-                        <div className="logo">
-                            <Link to="/" className="link">Barter</Link>
+                        <div >
+                            <Link to="/" className="link" id="barter">Barter</Link>
                         </div>
-                        <div className="signIn">
+                        <div>
                             Already have an account?
                             <Link to="/signin" className="link"> Sign in →</Link>
-
                         </div>
                     </div>
                 </div>
