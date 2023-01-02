@@ -116,3 +116,24 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.SubmitSignIn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.buttonSignIn{
+    width: 50%;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(90deg, rgba(230,57,70,1) 0%, rgba(236,102,112,1)  54%, rgba(255, 132, 132, 1) 100%);
+    color: whitesmoke;
+    font-size: 1.1em;
+    font-weight: 500;
+    z-index: 1;
+    cursor: pointer;
+}

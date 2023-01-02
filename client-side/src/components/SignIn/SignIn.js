@@ -3,6 +3,7 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 import './SignIn.css';
+import BubblyButton from "../BubblyButton/BubblyButton";
 
 export default function SignIn({setToken}) {
 
@@ -32,11 +33,17 @@ export default function SignIn({setToken}) {
     }
 
 
-    function SubmitHandler(event) {
-        event.preventDefault();
+    function SubmitHandler() {
+        //event.preventDefault();
         if(email.length === 0 && password.length === 0) {
             document.getElementById('errorBoxEmail').classList.remove('hidden');
             document.getElementById('errorBoxPwd').classList.remove('hidden');
+        }
+        else if(email.length !== 0 && password.length === 0) {
+            document.getElementById('errorBoxPwd').classList.remove('hidden');
+        }
+        else if(email.length === 0 && password.length !== 0) {
+            document.getElementById('errorBoxEmail').classList.remove('hidden');
         }
         else {
             axios.post("http://localhost:4000/api/login", {
@@ -64,7 +71,7 @@ export default function SignIn({setToken}) {
                         Sign In to Barter
                     </div>
                     <div className="signInCard">
-                        <form onSubmit={SubmitHandler}>
+                        <form>
                             <div className="inputSignIn">
                                 <p className="enter">Email address</p>
                                 <div className="yyy">
@@ -78,7 +85,7 @@ export default function SignIn({setToken}) {
                                 </div>
                             </div>
                             <div className="SubmitSignIn">
-                                <button type="submit">Sign In</button>
+                                <BubblyButton name={"Sign in"} onClick={SubmitHandler} />
                             </div>
                         </form>
 
