@@ -8,11 +8,13 @@ import Home     from '../Home/Home';
 import OnBoarding     from '../OnBoarding/OnBoarding';
 import SignIn   from '../SignIn/SignIn';
 import SignUp   from '../SignUp/SignUp';
+import Search from "../Search/Search";
+import Marketplace from "../Marketplace/Marketplace";
+import Profile from "../Profile/Profile";
 
 function App() {
 
     const { token, setToken } = useToken();
-    console.log(token);
 
     return (
         <div className="wrapper">
@@ -26,6 +28,12 @@ function App() {
                     <Route path="/signin" element={<SignIn setToken={setToken} />}>
                     </Route>
                     <Route path="/home" element={<Home />}>
+                    </Route>
+                    <Route path="/search" element={<Search />}>
+                    </Route>
+                    <Route path="/profile" element={<Profile />}>
+                    </Route>
+                    <Route path="/marketplace" element={<Marketplace />}>
                     </Route>
                 </Routes>
             </BrowserRouter>
