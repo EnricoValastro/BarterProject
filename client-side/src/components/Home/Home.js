@@ -2,6 +2,7 @@ import React from 'react';
 
 import useToken from '../App/useToken';
 import {useNavigate} from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -13,6 +14,10 @@ export default function Home() {
 
 
     return(
-        <h2>Home</h2>
+        <div>
+            <Navbar />
+
+        </div>
+
     );
 }
