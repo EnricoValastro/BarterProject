@@ -118,10 +118,12 @@
     margin-top: 1%;
 }
 
+#oldsignup{
+    padding-left: 1.5%;
+}
 .link{
     color: whitesmoke;
     text-decoration: none;
-    padding-left: 1%;
 }
 
 .link:hover{
@@ -137,4 +139,49 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+    .signinCard{
+        width: 80%;
+        padding: 2% 3% 2% 3%;
+        margin-bottom: 4%;
+    }
+    .newCard{
+        width: 80%;
+        padding: 2% 3% 2% 3%;
+        margin-top: 4%;
+    }
+    .SubmitSignin{
+        margin-bottom: 3%;
+    }
+    #new{
+        display: none;
+    }
+    #oldsignup{
+        display: none;
+    }
+    #newsignup{
+        font-size: 1.2em;
+        display: block;
+    }
+    .inputForm{
+        width: 80%;
+    }
+    .inputSignin{
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+    .enter{
+        margin-top: 3%;
+        margin-bottom: 2%;
+    }
+    .signinTitle{
+        margin-bottom: 4%;
+    }
+    #error{
+        font-size: 1.3em;
+        margin: auto;
+        font-weight: 600;
+    }
 }

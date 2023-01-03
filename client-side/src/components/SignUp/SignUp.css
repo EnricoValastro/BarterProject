@@ -160,6 +160,7 @@
     flex-direction: row;
     justify-content: center;
 }
+
 div.errorMsg p{
     color: gray;
     font-size: 1.1em;
@@ -172,6 +173,56 @@ div.errorMsg p{
     display: none;
 }
 
+@media screen and (max-width: 768px) {
+    .formCard{
+        width: 80%;
+    }
+    #already{
+        display: none;
+    }
+    .link{
+        font-size: 1.2em;
+        margin-right: 10px;
+    }
+    #surnameInput, #emailInput, #pwdInput, #confpwdInput{
+        display: block;
+    }
+    .inputContainer{
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+    .nextButton{
+        display: none;
+    }
+    .title{
+        margin-right: 8%;
+        margin-left: 8%;
+        font-size: 2em;
+        margin-top: 5%;
+    }
+    .subtitle{
+        margin-right: 8%;
+        margin-left: 8%;
+        font-size: 1.2em;
+    }
+    #subButton{
+        display: block;
+        margin-left: 8%;
+        margin-bottom: 5%;
+    }
+
+    .input{
+        width: 85%;
+    }
+
+    div.errorMsg p{
+        font-size: 1.1em;
+        font-weight: 400;
+        margin: 4% 4%;
+    }
+
+
+}
 
 
 /*

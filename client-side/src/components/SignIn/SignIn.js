@@ -90,7 +90,7 @@ export default function SignIn({setToken}) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="inputSignIn">
+                            <div className="inputSignin">
                                 <div className="extContainer">
                                     <div className="iconContainer">
                                         <PasswordIcon className="icon"/>
@@ -114,8 +114,9 @@ export default function SignIn({setToken}) {
                     </div>
 
                     <div className="newCard">
-                        New to Barter?
-                        <Link to="/signup" className="link">Create an account →</Link>
+                        <span id="new">New to Barter?</span>
+                        <Link id="oldsignup" to="/signup" className="link">Create an account →</Link>
+                        <Link id="newsignup" to="/signup" className="link hidden">Signup →</Link>
                     </div>
                 </div>
             </div>

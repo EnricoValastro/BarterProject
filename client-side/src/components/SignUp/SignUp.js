@@ -170,8 +170,8 @@ function Signup(){
                         <div >
                             <Link to="/" className="link" id="barter">Barter</Link>
                         </div>
-                        <div>
-                            Already have an account?
+                        <div >
+                            <span id="already">Already have an account?</span>
                             <Link to="/signin" className="link"> Sign in →</Link>
                         </div>
                     </div>
