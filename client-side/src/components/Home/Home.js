@@ -15,8 +15,7 @@ export default function Home() {
 
     return(
         <div>
-            <Navbar />
-
+            <Navbar pagename={"Home"} />
         </div>
 
     );

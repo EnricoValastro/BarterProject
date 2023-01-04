@@ -115,3 +115,7 @@
     color: #2F4F75;
     transform: scale(1.5);
 }
+
+.selected{
+    border-bottom: 2px solid #5751FF;
+}
