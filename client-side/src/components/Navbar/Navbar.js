@@ -8,14 +8,30 @@ export default function Navbar(props) {
 
    useEffect(() => {
        const PageControl =  () => {
-           console.log("ciao: " + props.pagename);
+           console.log(props.pagename);
            if(props.pagename === "Home"){
-               document.getElementById('iconHome').classList.add('selected');
-               document.getElementById('iconSearch').classList.remove('selected');
+                document.getElementById('iconHome').classList.add('selected');
+                document.getElementById('iconSearch').classList.remove('selected');
+                document.getElementById('iconMarket').classList.remove('selected');
+                document.getElementById('iconProfile').classList.remove('selected');
            }
            else if(props.pagename === "Search"){
-               document.getElementById('iconSearch').classList.add('selected');
-               document.getElementById('iconHome').classList.remove('selected');
+                document.getElementById('iconSearch').classList.add('selected');
+                document.getElementById('iconHome').classList.remove('selected');
+                document.getElementById('iconMarket').classList.remove('selected');
+                document.getElementById('iconProfile').classList.remove('selected');
+           }
+           else if(props.pagename === "Profile"){
+                document.getElementById('iconProfile').classList.add('selected');
+                document.getElementById('iconHome').classList.remove('selected');
+                document.getElementById('iconSearch').classList.remove('selected');
+                document.getElementById('iconMarket').classList.remove('selected');
+           }
+              else if(props.pagename === "Marketplace"){
+                document.getElementById('iconMarket').classList.add('selected');
+                document.getElementById('iconHome').classList.remove('selected');
+                document.getElementById('iconSearch').classList.remove('selected');
+                document.getElementById('iconProfile').classList.remove('selected');
            }
 
        }
@@ -49,8 +65,8 @@ export default function Navbar(props) {
                             <span>Search</span>
                         </Link>
                     </div>
-                    <div className="navItem">
-                        <Link id="iconMarket" to="/marketplace" className="icons">
+                    <div className="navItem" id="iconMarket">
+                        <Link  to="/marketplace" className="icons">
                             <span><Storefront  className="Icon"/></span>
                             <span>Marketplace</span>
                         </Link>
@@ -65,7 +81,7 @@ export default function Navbar(props) {
                             <span>Notifications</span>
                         </Link>
                     </div>
-                    <div className="navItem">
+                    <div className="navItem" id="iconProfile">
                         <Link to="/profile" className="icons">
                             <span><Person className="Icon"/></span>
                             <span>Profile</span>

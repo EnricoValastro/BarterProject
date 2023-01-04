@@ -1,6 +1,7 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import useToken from "../App/useToken";
+import Navbar from "../Navbar/Navbar";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -12,6 +13,6 @@ export default function Profile() {
 
 
     return(
-        <h2>Profile</h2>
+        <Navbar pagename={"Profile"} />
     );
 }

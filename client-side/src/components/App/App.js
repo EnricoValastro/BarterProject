@@ -9,8 +9,9 @@ import HomePage from "../../Pages/HomePage/HomePage";
 import SearchPage from "../../Pages/SearchPage/SearchPage";
 import OnBoardingPage from "../../Pages/OnBoardingPage/OnBoardingPage";
 import ProfilePage from "../../Pages/ProfilePage/ProfilePage";
-import MarketPlacePage from "../../Pages/MarketPlacePage/MarketPlacePage";
-import SignUpPage from "../../Pages/SignUpPage/SignUpPage";
+import MarketplacePage from "../../Pages/MarketplacePage/MarketplacePage";
+import SignupPage from "../../Pages/SignupPage/SignupPage";
+import SigninPage from "../../Pages/SigninPage/SigninPage";
 
 function App() {
 
@@ -23,9 +24,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<OnBoardingPage />}>
                     </Route>
-                    <Route path="/signup" element={<SignUpPage />}>
+                    <Route path="/signup" element={<SignupPage />}>
                     </Route>
-                    <Route path="/signin" element={<SignInPage setToken={setToken} />}>
+                    <Route path="/signin" element={<SigninPage setToken={setToken} />}>
                     </Route>
                     <Route path="/home" element={<HomePage />}>
                     </Route>
@@ -33,7 +34,7 @@ function App() {
                     </Route>
                     <Route path="/profile" element={<ProfilePage />}>
                     </Route>
-                    <Route path="/marketplace" element={<MarketPlacePage />}>
+                    <Route path="/marketplace" element={<MarketplacePage />}>
                     </Route>
                     <Route path="*" element={<NotFound />}>
                     </Route>

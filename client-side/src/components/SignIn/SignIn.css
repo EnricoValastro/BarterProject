@@ -39,7 +39,7 @@
     margin: 1%;
     color: whitesmoke;
     font-size: 2.3em;
-    font-weight: 600;
+
     z-index: 2;
 }
 
@@ -83,7 +83,6 @@
     margin: 0;
     color: #a8dadc;
     font-size: 1.1em;
-    font-weight: 500;
     z-index: 1;
 }
 
@@ -94,7 +93,7 @@
     background: transparent;
     color: whitesmoke;
     font-size: 1.1em;
-    font-weight: 500;
+    font-family: Ubuntu;
     z-index: 1;
     padding: 5px 5px 5px 0px;
 
@@ -108,7 +107,6 @@
 .newCard{
     color: gray;
     font-size: 1.1em;
-    font-weight: 500;
     width: 25%;
     padding: 1% 4% 1% 4%;
     border-radius: 10px;

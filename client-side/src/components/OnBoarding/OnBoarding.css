@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -27,7 +27,6 @@
     width: 60%;
     padding: 5px;
     font-size: 40px;
-    font-weight: 700;
 }
 .logoLink{
     color : #E9EFFF;
@@ -49,7 +48,6 @@
     cursor: pointer;
     outline: none;
     font-size: 22px;
-    font-weight: 700;
     text-decoration: none;
     margin-left: 12%;
 
@@ -117,7 +115,6 @@
 }
 .animated-title {
     color: #5751FF;
-    font-family: Roboto, Arial, sans-serif;
     height: 90vmin;
     left: 50%;
     position: absolute;
@@ -203,13 +200,11 @@
 }
 .descriptionTitle{
     font-size: 50px;
-    font-weight: 700;
     color: #2F4F75;
     margin: 0;
 }
 .descriptionText{
     font-size: 24px;
-    font-weight: 500;
     color: gray;
     margin-bottom: 2%;
     margin-top: 2%;
@@ -247,14 +242,12 @@
 }
 .descriptionTitle2{
     font-size: 50px;
-    font-weight: 700;
-    color: #2F4F75;
+    color: #E9EFFF;
     margin: 0;
 }
 .descriptionText2{
     font-size: 24px;
-    font-weight: 500;
-    color: whitesmoke;
+    color: #E9EFFF;
     margin-bottom: 2%;
     margin-top: 2%;
     display: flex;
@@ -271,7 +264,7 @@
 }
 #SignupLink{
     color: #E9EFFF !important;
-    padding: 3% 3%;
+    padding: 2% 2%;
 }
 .section3{
     width: 100%;
@@ -302,13 +295,11 @@
 }
 .descriptionTitle3{
     font-size: 50px;
-    font-weight: 700;
     color: #2F4F75;
     margin: 0;
 }
 .descriptionText3{
     font-size: 24px;
-    font-weight: 500;
     color: gray;
     margin-bottom: 2%;
     margin-top: 2%;
@@ -344,13 +335,11 @@
 }
 .descriptionTitle4{
     font-size: 50px;
-    font-weight: 700;
     color: #2F4F75;
     margin: 0;
 }
 .descriptionText4{
     font-size: 24px;
-    font-weight: 500;
     color: gray;
     margin-bottom: 2%;
     margin-top: 2%;
@@ -388,13 +377,11 @@
 }
 .descriptionTitle5{
     font-size: 50px;
-    font-weight: 700;
     color: white;
     margin: 0;
 }
 .descriptionText5{
     font-size: 24px;
-    font-weight: 500;
     color: #E9EFFF;
     margin-bottom: 2%;
     margin-top: 2%;
