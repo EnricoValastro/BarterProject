@@ -4,11 +4,6 @@
     align-items: center;
     flex-direction: column;
     background-color: #E9EFFF;
-   /* background-image: url("./WaveNav.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 0px -60px;*/
-
 }
 
 .navAll{
@@ -17,7 +12,6 @@
     align-items: center;
     flex-direction: row;
     width: 100%;
-    /*border-bottom: 1px solid #6D72A6;*/
 }
 
 .navLeft{
@@ -117,5 +111,6 @@
 }
 
 .selected{
-    border-bottom: 2px solid #5751FF;
+    border-bottom: 3px solid #5751FF;
+    border-radius: 4px;
 }
