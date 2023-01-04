@@ -11,6 +11,7 @@ import SignUp   from '../SignUp/SignUp';
 import Search from "../Search/Search";
 import Marketplace from "../Marketplace/Marketplace";
 import Profile from "../Profile/Profile";
+import NotFound from "../../Pages/NotFoundPage/NotFound";
 
 function App() {
 
@@ -34,6 +35,8 @@ function App() {
                     <Route path="/profile" element={<Profile />}>
                     </Route>
                     <Route path="/marketplace" element={<Marketplace />}>
+                    </Route>
+                    <Route path="*" element={<NotFound />}>
                     </Route>
                 </Routes>
             </BrowserRouter>
