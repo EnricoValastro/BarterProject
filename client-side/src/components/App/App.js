@@ -4,14 +4,13 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import useToken from './useToken';
-import Home     from '../Home/Home';
-import OnBoarding     from '../OnBoarding/OnBoarding';
-import SignIn   from '../SignIn/SignIn';
-import SignUp   from '../SignUp/SignUp';
-import Search from "../Search/Search";
-import Marketplace from "../Marketplace/Marketplace";
-import Profile from "../Profile/Profile";
 import NotFound from "../../Pages/NotFoundPage/NotFound";
+import HomePage from "../../Pages/HomePage/HomePage";
+import SearchPage from "../../Pages/SearchPage/SearchPage";
+import OnBoardingPage from "../../Pages/OnBoardingPage/OnBoardingPage";
+import ProfilePage from "../../Pages/ProfilePage/ProfilePage";
+import MarketPlacePage from "../../Pages/MarketPlacePage/MarketPlacePage";
+import SignUpPage from "../../Pages/SignUpPage/SignUpPage";
 
 function App() {
 
@@ -22,19 +21,19 @@ function App() {
 
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<OnBoarding />}>
+                    <Route path="/" element={<OnBoardingPage />}>
                     </Route>
-                    <Route path="/signup" element={<SignUp />}>
+                    <Route path="/signup" element={<SignUpPage />}>
                     </Route>
-                    <Route path="/signin" element={<SignIn setToken={setToken} />}>
+                    <Route path="/signin" element={<SignInPage setToken={setToken} />}>
                     </Route>
-                    <Route path="/home" element={<Home />}>
+                    <Route path="/home" element={<HomePage />}>
                     </Route>
-                    <Route path="/search" element={<Search />}>
+                    <Route path="/search" element={<SearchPage />}>
                     </Route>
-                    <Route path="/profile" element={<Profile />}>
+                    <Route path="/profile" element={<ProfilePage />}>
                     </Route>
-                    <Route path="/marketplace" element={<Marketplace />}>
+                    <Route path="/marketplace" element={<MarketPlacePage />}>
                     </Route>
                     <Route path="*" element={<NotFound />}>
                     </Route>
