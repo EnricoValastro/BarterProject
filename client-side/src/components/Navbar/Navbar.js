@@ -15,97 +15,46 @@ export default function Navbar() {
 
                 <div className="navCenter">
                     <div className="navItem">
-                        <div className="icons">
-                            <div className="layer">
-                                <span></span>
-                                <span></span>
-                                <span className="Icon">
-                                    <Link className="linknav" to="/home">
-                                        <Home />
-                                    </Link>
-                                </span>
-                            </div>
-                            <div className="text">
-                                Home
-                            </div>
-                        </div>
+                        <button className="icons">
+                            <span><Home className="Icon"/></span>
+                            <span>Home</span>
+                        </button>
                     </div>
                     <div className="navItem">
-                        <div className="icons">
-                            <div className="layer">
-                                <span></span>
-                                <span></span>
-                                <span className="Icon">
-                                    <Link className="linknav" to="">
-                                        <Search />
-                                    </Link>
-                                </span>
-                            </div>
-                            <div className="text">
-                                Search
-                            </div>
-                        </div>
+                        <button className="icons">
+                            <span><Search className="Icon"/></span>
+                            <span>Search</span>
+                        </button>
                     </div>
                     <div className="navItem">
-                        <div className="icons">
-                            <div className="layer">
-                                <span></span>
-                                <span></span>
-                                <span className="Icon">
-                                    <Link className="linknav" to="">
-                                        <Storefront />
-                                    </Link>
-                                </span>
-                            </div>
-                            <div className="text">
-                                Marketplace
-                            </div>
-                        </div>
+                        <button className="icons">
+                            <span><Storefront className="Icon"/></span>
+                            <span>Marketplace</span>
+                        </button>
 
                     </div>
 
                 </div>
                 <div className="navRight">
                     <div className="navItem">
-                        <div className="icons">
-                            <div className="layer">
-                                <span></span>
-                                <span></span>
-                                <span className="Icon">
-                                    <Link className="linknav" to="">
-                                        <Notifications />
-                                    </Link>
-                                </span>
-                            </div>
-                            <div className="text">
-                                Notifications
-                            </div>
-                        </div>
+                        <button className="icons">
+                            <span><Notifications className="Icon"/></span>
+                            <span>Notifications</span>
+                        </button>
                     </div>
                     <div className="navItem">
-                        <div className="icons">
-                            <div className="layer">
-                                <span></span>
-                                <span></span>
-                                <span className="Icon">
-                                    <Link className="linknav" to="">
-                                        <Person />
-                                    </Link>
-                                </span>
-                            </div>
-                            <div className="text">
-                                Profile
-                            </div>
-                        </div>
+                        <button className="icons">
+                            <span><Person className="Icon"/></span>
+                            <span>Profile</span>
+                        </button>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
 
 
     );
-
 
 
 }
