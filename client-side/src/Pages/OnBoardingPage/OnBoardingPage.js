@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useToken from '../App/useToken';
+import useToken from '../../components/App/useToken';
 import OnBoarding from "../../components/OnBoarding/OnBoarding";
 
 export default function OnBoardingPage() {

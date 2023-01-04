@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useToken from '../App/useToken';
+import useToken from '../../components/App/useToken';
 import Home from "../../components/Home/Home";
 
 export default function HomePage() {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useToken from '../App/useToken';
+import useToken from '../../components/App/useToken';
 import Profile from "../../components/Profile/Profile";
 
 export default function ProfilePage() {
