@@ -61,7 +61,7 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    margin: 0% 0%;
+
 }
 
 .icons{
@@ -72,11 +72,13 @@
     background-color: #E9EFFF;
     border: none;
     outline: none;
+
 }
+
 
 .icons span:first-child{
     display: inline-block;
-    padding: 15px 40px;
+    padding: 15px 50px;
 }
 
 .icons span:last-child{

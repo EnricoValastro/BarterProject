@@ -4,7 +4,7 @@ import {Notifications, Person, Search} from "@mui/icons-material";
 import {Home} from "@mui/icons-material";
 import {Storefront} from "@mui/icons-material";
 import './Navbar.css'
-export default function Navbar() {
+export default function Navbar(props) {
 
     return (
         <div className="appNavContainer">
@@ -15,38 +15,38 @@ export default function Navbar() {
 
                 <div className="navCenter">
                     <div className="navItem">
-                        <button className="icons">
-                            <span><Home className="Icon"/></span>
+                        <Link to="/home" className="icons">
+                            <span><Home id="iconHome" className="Icon"/></span>
                             <span>Home</span>
-                        </button>
+                        </Link>
                     </div>
                     <div className="navItem">
-                        <button className="icons">
-                            <span><Search className="Icon"/></span>
+                        <Link to="/search" className="icons">
+                            <span><Search id="iconSearch" className="Icon"/></span>
                             <span>Search</span>
-                        </button>
+                        </Link>
                     </div>
                     <div className="navItem">
-                        <button className="icons">
-                            <span><Storefront className="Icon"/></span>
+                        <Link to="/marketplace" className="icons">
+                            <span><Storefront id="iconMarket" className="Icon"/></span>
                             <span>Marketplace</span>
-                        </button>
+                        </Link>
 
                     </div>
 
                 </div>
                 <div className="navRight">
                     <div className="navItem">
-                        <button className="icons">
-                            <span><Notifications className="Icon"/></span>
+                        <Link className="icons linknav">
+                            <span><Notifications id="iconNotify" className="Icon"/></span>
                             <span>Notifications</span>
-                        </button>
+                        </Link>
                     </div>
                     <div className="navItem">
-                        <button className="icons">
-                            <span><Person className="Icon"/></span>
+                        <Link to="/profile" className="icons">
+                            <span><Person id="iconPerson" className="Icon"/></span>
                             <span>Profile</span>
-                        </button>
+                        </Link>
                     </div>
 
                 </div>
