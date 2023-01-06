@@ -7,6 +7,7 @@ import axios from "axios";
 import './SignIn.css';
 import PersonIcon from '@mui/icons-material/Person';
 import PasswordIcon from '@mui/icons-material/Password';
+import LockIcon from '@mui/icons-material/Lock';
 import BubblyButton from "../BubblyButton/BubblyButton";
 
 export default function SignIn({setToken}) {
@@ -93,7 +94,7 @@ export default function SignIn({setToken}) {
                             <div className="inputSignin">
                                 <div className="extContainer">
                                     <div className="iconContainer">
-                                        <PasswordIcon className="icon"/>
+                                        <LockIcon className="icon"/>
                                     </div>
                                     <div className="fieldContainer">
                                         <div className="enter">

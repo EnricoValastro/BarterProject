@@ -1,0 +1,63 @@
+#home{
+    width: 100%;
+    height: 100%;
+    background-color: #E9EFFF;
+    overflow: scroll;
+}
+.carousel{
+    width: 100%;
+    height: 70%;
+
+    background-color: #E9EFFF;
+}
+.secContainer{
+    width: 100%;
+    height: 100%;
+}
+.productSection{
+    width: 100%;
+    height: 55%;
+    margin: 5% 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.secTitle{
+    width: 100%;
+    height: 20%;
+    margin-left: 11%;
+    color: #5751FF;
+    font-size: 1.9em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.carouselNew{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mySwiper {
+    padding: 5%;
+    width: 100%;
+    height: 100%;
+
+}
+
+.swiper-slide {
+
+}
+.swiper-button-prev, .swiper-button-next {
+    cursor: pointer;
+    color: rgb(236,102,112);
+
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    transform: scale(1.2);
+}

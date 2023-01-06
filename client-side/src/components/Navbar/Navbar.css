@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    background-color: #E9EFFF;
+    background-color: #5751FF;
 }
 
 .navAll{
@@ -46,10 +46,9 @@
 
 .linknav{
     text-decoration: none;
-    color: black;
     font-size: 1.1em;
     margin-left: 5%;
-    color: #2F4F75
+    color: #E9EFFF
 }
 
 .navItem{
@@ -64,7 +63,7 @@
     display: block;
     position: relative;
     overflow: hidden;
-    background-color: #E9EFFF;
+    background-color: #5751FF;
     border: none;
     outline: none;
 
@@ -89,7 +88,7 @@
 }
 
 .icons span{
-    color: #2F4F75;
+    color: #E9EFFF;
     font-size: 19px;
     font-weight: bold;
     transition: transform 0.2s ease-out;
@@ -107,11 +106,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #2F4F75;
+    color: #E9EFFF;
     transform: scale(1.5);
 }
 
 .selected{
-    border-bottom: 3px solid #5751FF;
+    border-bottom: 5px solid #aba9fd;
     border-radius: 4px;
 }
