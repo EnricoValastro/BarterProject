@@ -67,6 +67,11 @@ export default function SignIn({setToken}) {
                         <div>
                             <Link to="/" className="link" id="barter">Barter</Link>
                         </div>
+                        <div className="signinlinktosignup">
+                            <span id="new">New to Barter?</span>
+                            <Link id="oldsignup" to="/signup" className="link">Signup →</Link>
+                            <Link id="newsignup" to="/signup" className="link hidden">Signup →</Link>
+                        </div>
                     </div>
                 </div>
 
@@ -84,26 +89,28 @@ export default function SignIn({setToken}) {
                                         <PersonIcon className="icon"/>
                                     </div>
                                     <div className="fieldContainer">
-                                        <div className="enter">
-                                            Email address
+                                        <div className="form__group field">
+                                            <input required="" placeholder="Email" className="form__field" type="input" onChange={EmailHandler}/>
+                                            <label className="form__label" htmlFor="name">Email</label>
                                         </div>
-                                        <input className="inputForm" type="text" onChange={EmailHandler}/>
                                     </div>
                                 </div>
                             </div>
+
                             <div className="inputSignin">
                                 <div className="extContainer">
                                     <div className="iconContainer">
                                         <LockIcon className="icon"/>
                                     </div>
                                     <div className="fieldContainer">
-                                        <div className="enter">
-                                            Password
+                                        <div className="form__group field">
+                                            <input required="" placeholder="Password" className="form__field" type="password" onChange={PasswordHandler}/>
+                                            <label className="form__label" htmlFor="name">Password</label>
                                         </div>
-                                        <input className="inputForm" type="password" onChange={PasswordHandler}/>
                                     </div>
                                 </div>
                             </div>
+
                             <div className="SubmitSignin">
                                 <BubblyButton name={"Sign in"} onClick={SubmitHandler} />
                             </div>
@@ -112,12 +119,6 @@ export default function SignIn({setToken}) {
 
                     <div className="errorMsg hidden" id="errorBoxSignin">
                         <p id="error">Incorrect username or password</p>
-                    </div>
-
-                    <div className="newCard">
-                        <span id="new">New to Barter?</span>
-                        <Link id="oldsignup" to="/signup" className="link">Create an account →</Link>
-                        <Link id="newsignup" to="/signup" className="link hidden">Signup →</Link>
                     </div>
                 </div>
             </div>

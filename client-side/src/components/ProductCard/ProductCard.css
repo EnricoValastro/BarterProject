@@ -1,5 +1,23 @@
+.bttContainer{
+    transform: translate(-50%, 125%);
+    width: 60%;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: .2rem 3rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .productCard{
-    cursor: pointer;
     width: 96%;
     height: 96%;
     margin: 2% 2%;
@@ -9,41 +27,20 @@
     border-radius: 10px;
     box-shadow: 0px 10px 15px 0px #343e4f;
 }
-.productCardBtt{
-    cursor: pointer;
-    width: 45%;
-    height:25px;
-    margin-top: 4%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    appearance: none;
-    border: none;
-    box-shadow: 0px 3px 3px 0px #343e4f;
-    background-color: #5751FF;
-    color: white;
-    font-size: 1.01em;
-    display: none;
-}
-.productCardBtt:hover{
-    transform: scale(1.03);
-    color: #5751FF;
-    background-color: #E9EFFF;
-}
-.productCard:hover{
-    border: 3px solid #5751FF;
-    transform: scale(1.05);
-    transition: all 0.2s ease-in-out;
-}
-.productCard:hover .productCardBtt{
-    display: flex;
-}
 
+.productCard:hover{
+    border: 3px solid #317AC7;
+    transform: scale(1.04);
+    transition: all 0.4s ease-out;
+}
+.productCard:hover .bttContainer{
+    transform: translate(-50%, 50%);
+    opacity: 1;
+}
 .productImage{
     width: 100%;
     height: 60%;
-    background: #18264d;
+    background: #2c3552;
     background-image: url("CardConcept.png");
     background-size: cover;
     background-position: center;
@@ -63,31 +60,33 @@
     margin: 0;
     margin-top: 5%;
     padding: 0;
-    font-size: 1.2em;
-    color: #5751FF;
+    font-size: 24px;
+    color: #317AC7;
 }
 .productText{
     margin-top: 2%;
-    color: gray;
-
+    color: #707D9D;
 }
 
 .modalviewContainer{
-    width: 70vw;
-    height: 80vh;
-    margin: 10vh 15vw;
+    width: 92vw;
+    height: 100vh;
+    margin: 0 4%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(47, 79, 117, 0.8);
+    background-color: #E9EFFF;
+    border: none;
+
+    outline: none;
 
 }
 .modalTitle{
-    color: #aba9fd;
+    color: red;
 }
 .modalText{
-    color: white;
+    color: black;
     padding: 0 5% ;
     margin: 0;
 }

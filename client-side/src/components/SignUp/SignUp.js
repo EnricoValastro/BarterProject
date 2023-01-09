@@ -118,7 +118,7 @@ function Signup(){
     function pwdNextInput(event){
         event.preventDefault();
         const pwdInput = document.getElementById('pwdField').value;
-        const nextInput = document.getElementById('confpwdInput');
+        const nextInput = document.getElementById('subButton');
         const focusOn   = document.getElementById('confpwdField');
         const ok        = document.getElementById('done4');
         const next      = document.getElementById('next4');
@@ -133,30 +133,9 @@ function Signup(){
             nextInput.classList.remove('hidden');
             next.classList.add('hidden');
             ok.classList.remove('hidden');
-            focusOn.focus();
         }
         else {
             document.getElementById('errorBoxPwd').classList.remove('hidden');
-        }
-
-    }
-
-    function confPwdNextInput(event){
-        event.preventDefault();
-        const confPwdInput = document.getElementById('confpwdField').value;
-        const nextInput = document.getElementById('subButton');
-        const ok        = document.getElementById('done5');
-        const next      = document.getElementById('next5');
-
-        if(confPwdInput === password){
-            setConfirmPassword(confPwdInput);
-            document.getElementById('errorBoxConfPwd').classList.add('hidden');
-            nextInput.classList.remove('hidden');
-            next.classList.add('hidden');
-            ok.classList.remove('hidden');
-        }
-        else {
-            document.getElementById('errorBoxConfPwd').classList.remove('hidden');
         }
 
     }
@@ -176,6 +155,7 @@ function Signup(){
                         </div>
                     </div>
                 </div>
+
                 <div className="formContainer">
                     <div className="formCard">
                         <div className="title">
@@ -188,9 +168,11 @@ function Signup(){
                             <form>
 
                                 <div id="nameInput"className="inputContainer">
-                                    <p className="enterSomething">Enter your name</p>
                                     <div className="xxx">
-                                        <input id="nameField"className="input" type="text"  onBlur ={nameNextInput} onFocus={iconInit.bind(this, "done1", "next1")}/>
+                                        <div className="form__group field">
+                                            <input id="nameField" required="" placeholder="Name" className="form__field" type="input" onBlur ={nameNextInput} onFocus={iconInit.bind(this, "done1", "next1")}/>
+                                            <label className="form__label" htmlFor="name">Name</label>
+                                        </div>
                                         <div id="done1" className="DoneIcon hidden">
                                             <DoneIcon className="doneIcon"/>
                                         </div>
@@ -199,9 +181,12 @@ function Signup(){
                                 </div>
 
                                 <div id="surnameInput" className="inputContainer hidden">
-                                    <p className="enterSomething">Enter your surname</p>
                                     <div className="xxx">
-                                        <input id="surnameField" className="input" type="text" onBlur ={surnameNextInput} onFocus={iconInit.bind(this, "done2", "next2")}/>
+                                        <div className="form__group field">
+                                            <input id="surnameField" required="" placeholder="Surname" className="form__field" type="input" onBlur ={surnameNextInput} onFocus={iconInit.bind(this, "done2", "next2")}/>
+                                            <label className="form__label" htmlFor="name">Surname</label>
+                                        </div>
+
                                         <div id="done2" className="DoneIcon hidden">
                                             <DoneIcon className="doneIcon"/>
                                         </div>
@@ -210,9 +195,12 @@ function Signup(){
                                 </div>
 
                                 <div id="emailInput" className="inputContainer hidden">
-                                    <p className="enterSomething">Enter your email</p>
                                     <div className="xxx">
-                                        <input id="emailField" className="input" type="text" onBlur ={emailNextInput} onFocus={iconInit.bind(this, "done3", "next3")}/>
+                                        <div className="form__group field">
+                                            <input id="emailField" required="" placeholder="Email" className="form__field" type="input" onBlur ={emailNextInput} onFocus={iconInit.bind(this, "done3", "next3")}/>
+                                            <label className="form__label" htmlFor="name">Email</label>
+                                        </div>
+
                                         <div id="done3" className="DoneIcon hidden">
                                             <DoneIcon className="doneIcon"/>
                                         </div>
@@ -221,24 +209,16 @@ function Signup(){
                                 </div>
 
                                 <div id="pwdInput" className="inputContainer hidden">
-                                    <p className="enterSomething">Enter your password</p>
                                     <div className="xxx">
-                                        <input id="pwdField" className="input" type="password" onBlur={pwdNextInput} onFocus={iconInit.bind(this, "done4", "next4")}/>
+                                        <div className="form__group field">
+                                            <input id="pwdField" required="" placeholder="Password" className="form__field" type="password" onBlur={pwdNextInput} onFocus={iconInit.bind(this, "done4", "next4")}/>
+                                            <label className="form__label" htmlFor="name">Password</label>
+                                        </div>
+
                                         <div id="done4" className="DoneIcon hidden">
                                             <DoneIcon className="doneIcon"/>
                                         </div>
                                         <button id="next4" className="nextButton" onClick={pwdNextInput}>→</button>
-                                    </div>
-                                </div>
-
-                                <div id="confpwdInput" className="inputContainer hidden">
-                                    <p className="enterSomething">Confirm password</p>
-                                    <div className="xxx">
-                                        <input id="confpwdField" className="input" type="password" onBlur={confPwdNextInput} onFocus={iconInit.bind(this, "done5", "next5")}/>
-                                        <div id="done5" className="DoneIcon hidden">
-                                            <DoneIcon className="doneIcon"/>
-                                        </div>
-                                        <button id="next5" className="nextButton" onClick={confPwdNextInput}>→</button>
                                     </div>
                                 </div>
 

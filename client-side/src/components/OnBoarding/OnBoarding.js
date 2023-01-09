@@ -29,7 +29,6 @@ export default function OnBoarding() {
                 </div>
             </div>
 
-
             <div className="sectionContainer">
                 <div className="section1">
                     <div className="presentation"></div>

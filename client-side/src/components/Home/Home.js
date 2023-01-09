@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import './Home.css';
 
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Navigation, Pagination} from "swiper";
+import {Autoplay, Navigation, Pagination} from "swiper";
 import {createRoot} from "react-dom";
 
 
@@ -29,7 +29,28 @@ export default function Home() {
         <div id="home">
             <Navbar pagename={"Home"} />
 
-            <div className="carousel"></div>
+            <div className="carousel">
+                <Swiper
+                    spaceBetween={30}
+                    centeredSlides={true}
+                    autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    }}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    navigation={true}
+                    modules={[Autoplay, Pagination, Navigation]}
+                    className="mySwiper"
+                >
+                    <SwiperSlide><ProductCard /></SwiperSlide>
+                    <SwiperSlide><ProductCard /></SwiperSlide>
+                    <SwiperSlide><ProductCard /></SwiperSlide>
+                    <SwiperSlide><ProductCard /></SwiperSlide>
+                    <SwiperSlide><ProductCard /></SwiperSlide>
+                </Swiper>
+            </div>
 
             <div className="secContainer">
                 <div className="productSection">

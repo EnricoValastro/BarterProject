@@ -8,15 +8,21 @@
     width:100%;
     height:100%;
     position: absolute;
-    background-image: url("Wave.svg");
+    background-image: url("Wave.png");
     background-size: 2000px 1000px;
     background-position: -500px 0px;
     animation:
             background 10s infinite alternate linear;
 }
 #barter{
-    font-size: 32px;
+    font-size: 40px;
+    padding: 5px;
+    color: white;
 }
+#barter:hover{
+    color: #2F4F75;
+}
+
 .cont {
     width: 100%;
     height: 100%;
@@ -37,29 +43,50 @@
     align-items: center;
     background-color: transparent;
 }
-
 .navbar{
-    color: gray;
-    font-size: 18px;
+    color: #2F4F75;
+    font-size: 20px;
     width: 100%;
-    margin-left: 5%;
-    margin-right: 2%;
+    margin: 4% 2% 0 5%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
-
 .link{
     padding: 0;
-    color: whitesmoke;
+    color: white;
     text-decoration: none;
+    position: relative;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 800ms;
+    transition-property: color;
 }
-.link:hover{
-    background: linear-gradient(90deg, rgb(230,57,70) 0%, rgb(236,102,112) 53%,  rgb(255,132,132) 100%);
-    background-size: cover;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.link:focus,
+.link:hover {
+    color: #2F4F75;
+}
+.link:focus:after,
+.link:hover:after {
+    width: 100%;
+    left: 0%;
+}
+.link:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #2F4F75;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 800ms;
+    transition-property: width, left;
 }
 
 .formContainer{
@@ -70,7 +97,6 @@
     align-items: center;
     justify-content: center;
 }
-
 .formCard{
     width: 30%;
     padding: 2% 5% 2% 5%;
@@ -80,52 +106,25 @@
     flex-direction: column;
     justify-content: space-around;
 }
-
 .title{
     color: whitesmoke;
     font-size: 2.3em;
     z-index: 2;
 }
-
 .subtitle{
-    color: gray;
+    color: #38caef;
     font-size: 1.3em;
     z-index: 2;
     margin-bottom: 7%;
 }
-
 .inputContainer{
     margin-bottom: 4%;
 }
 
-.enterSomething{
-    margin: 0;
-    color: #a8dadc;
-    font-size: 1.1em;
-    z-index: 1;
-}
 
 .xxx{
     display: flex;
     flex-direction: row;
-}
-
-.input{
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid gray;
-    background: transparent;
-    color: #E9EFFF;
-    font-size: 1.1em;
-    font-family: Ubuntu;
-    z-index: 1;
-    padding: 5px 5px 5px 0px;
-
-}
-
-.input:focus{
-    outline: none;
-    border-bottom: 1px solid #5751FF;
 }
 
 .nextButton{
@@ -134,12 +133,10 @@
     background: transparent;
     border: none;
     margin-left: 2%;
+    padding: 15px 0 0 0;
 }
 .nextButton:hover{
-    background: linear-gradient(90deg, rgb(230,57,70) 0%, rgb(236,102,112) 53%,  rgb(255,132,132) 100%);
-    background-size: cover;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #38caef;
 }
 
 .DoneIcon{
@@ -148,7 +145,8 @@
     align-items: center;
     justify-content: center;
     margin-left: 2%;
-    color: green;
+    padding: 15px 0 0 0;
+    color: lightseagreen;
 }
 
 .errorMsg{
@@ -160,9 +158,7 @@
 div.errorMsg p{
     color: #e0eaff;
     font-size: 1.1em;
-    margin: 0;
-    margin-top: 4%;
-
+    margin: 4% 0 0 0;
 }
 .hidden{
     display: none;
@@ -216,10 +212,64 @@ div.errorMsg p{
         margin: 4% 4%;
     }
 
-
 }
 
+.form__group {
+    position: relative;
+    padding: 20px 0 0;
+    width: 100%;
+}
+.form__field {
+    font-family: inherit;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: #fff;
+    padding: 5px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
 
-/*
-Color:  rgba(20, 54, 89, 1) - rgba(18, 70, 123, 1) - rgba(40, 96, 157, 1)
-*/
+.form__field::placeholder {
+    color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+    font-size: 17px;
+    cursor: text;
+    top: 20px;
+}
+
+.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #38caef;
+    pointer-events: none;
+}
+
+.form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #116399, #38caef);
+    border-image-slice: 1;
+}
+
+.form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #38caef;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+    box-shadow: none;
+}

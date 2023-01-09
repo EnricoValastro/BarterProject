@@ -2,13 +2,12 @@
     width: 100%;
     height: 100%;
     background-color: #E9EFFF;
-    overflow: scroll;
+    overflow-x: hidden;
 }
 .carousel{
     width: 100%;
     height: 70%;
-
-    background-color: #E9EFFF;
+    background-color: rgba(47, 79, 117, 0.4);
 }
 .secContainer{
     width: 100%;
@@ -27,8 +26,9 @@
     width: 100%;
     height: 20%;
     margin-left: 11%;
-    color: #5751FF;
+    color: #317AC7;
     font-size: 1.9em;
+    font-weight: 600;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -60,4 +60,39 @@
 
 .swiper-button-next:hover, .swiper-button-prev:hover {
     transform: scale(1.2);
+}
+
+
+div.carousel >.swiper {
+    width: 90%;
+    height: 85%;
+    margin: 0 auto;
+    padding: 0 5% 5% 5%;
+}
+
+div.carousel > .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+div.carousel > .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

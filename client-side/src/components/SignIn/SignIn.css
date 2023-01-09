@@ -9,7 +9,7 @@
     width:100%;
     height:100%;
     position: absolute;
-    background-image: url("Cloudy.svg");
+    background-image: url("Wave.svg");
     background-size: 3200px 1200px;
     background-position: -1200px 0px;
     animation: background 13s infinite alternate linear;
@@ -39,8 +39,14 @@
     margin: 1%;
     color: whitesmoke;
     font-size: 2.3em;
-
     z-index: 2;
+}
+.signinlinktosignup{
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .signinCard{
@@ -73,64 +79,17 @@
 .icon{
     margin-right: 2%;
     margin-top: 2%;
+    padding: 5px 0;
 }
 .fieldContainer{
     width: 90%;
     display: flex;
     flex-direction: column;
 }
-.enter{
-    margin: 0;
-    color: #a8dadc;
-    font-size: 1.1em;
-    z-index: 1;
-}
-
-.inputForm{
-    width: 100%;
-    border: 0;
-    border-bottom: 1px solid gray;
-    background: transparent;
-    color: whitesmoke;
-    font-size: 1.1em;
-    font-family: Ubuntu;
-    z-index: 1;
-    padding: 5px 5px 5px 0px;
-
-}
-
-.inputForm:focus{
-    outline: none;
-    border-bottom: 1px solid dodgerblue;
-}
-
-.newCard{
-    color: gray;
-    font-size: 1.1em;
-    width: 25%;
-    padding: 1% 4% 1% 4%;
-    border-radius: 10px;
-    background: rgba(32, 53, 84, 0.8);
-    display: flex;
-    justify-content: center;
-    margin-top: 1%;
-}
 
 #oldsignup{
     padding-left: 1.5%;
 }
-.link{
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-.link:hover{
-    background: linear-gradient(90deg, rgba(230,57,70,1) 0%, rgba(236,102,112,1) 54%, rgba(255,132,132,1) 100%);
-    background-size: cover;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 .SubmitSignin{
     margin-top: 6%;
     display: flex;
