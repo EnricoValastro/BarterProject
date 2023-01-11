@@ -1,20 +1,19 @@
 import React from 'react';
 
-import useToken from '../App/useToken';
 import {Link, useNavigate} from "react-router-dom";
+
+import useToken from '../App/useToken';
 import Navbar from "../Navbar/Navbar";
 import ProductCard from "../ProductCard/ProductCard";
+import Footer from "../Footer/Footer";
 
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Autoplay, Navigation, Pagination} from "swiper";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import './Home.css';
-
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay, Navigation, Pagination} from "swiper";
-import {createRoot} from "react-dom";
-
 
 export default function Home() {
     const navigate = useNavigate();
@@ -34,7 +33,7 @@ export default function Home() {
                     spaceBetween={30}
                     centeredSlides={true}
                     autoplay={{
-                        delay: 3000,
+                        delay: 10000,
                         disableOnInteraction: false,
                     }}
                     pagination={{
@@ -53,6 +52,7 @@ export default function Home() {
             </div>
 
             <div className="secContainer">
+
                 <div className="productSection">
                     <div className="secTitle">
                         Some title for the section
@@ -80,7 +80,6 @@ export default function Home() {
                         </Swiper>
                     </div>
                 </div>
-
                 <div className="productSection">
                     <div className="secTitle">
                         Some title for the section
@@ -139,8 +138,38 @@ export default function Home() {
 
                     </div>
                 </div>
+                <div className="productSection">
+                    <div className="secTitle">
+                        Some title for the section
+                    </div>
+                    <div className="carouselNew">
+
+                        <Swiper
+                            slidesPerView={4}
+                            spaceBetween={5}
+                            slidesPerGroup={4}
+                            loop={false}
+                            loopFillGroupWithBlank={true}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            navigation={true}
+                            modules={[Pagination, Navigation]}
+                            className="mySwiper"
+                        >
+                            {arr.map(() => (
+                                <SwiperSlide >
+                                    <ProductCard />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+
+
+                    </div>
+                </div>
+
+                <Footer />
             </div>
-
         </div>
     );
 }

@@ -29,8 +29,8 @@
 }
 
 .productCard:hover{
-    border: 3px solid #317AC7;
-    transform: scale(1.04);
+
+    transform: scale(1.06);
     transition: all 0.4s ease-out;
 }
 .productCard:hover .bttContainer{

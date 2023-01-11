@@ -3,11 +3,15 @@
     height: 100%;
     background-color: #E9EFFF;
     overflow-x: hidden;
+    background-image: url("./wave-haikei.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
 .carousel{
     width: 100%;
     height: 70%;
-    background-color: rgba(47, 79, 117, 0.4);
+
 }
 .secContainer{
     width: 100%;
@@ -16,7 +20,7 @@
 .productSection{
     width: 100%;
     height: 55%;
-    margin: 5% 0%;
+    margin: 5% 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,7 +30,7 @@
     width: 100%;
     height: 20%;
     margin-left: 11%;
-    color: #317AC7;
+    color: white;
     font-size: 1.9em;
     font-weight: 600;
     display: flex;
@@ -95,4 +99,10 @@ div.carousel > .swiper-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    .carouselNew{
+        flex-direction: column;
+    }
 }

@@ -12,8 +12,8 @@ export default function OnBoarding() {
                         <Link to="/" className="logoLink">Barter</Link>
                     </div>
                     <div className="navigate">
-                        <Link to="/signin" className="links eff">Signin</Link>
-                        <Link to="/signup" className="links eff">Signup</Link>
+                        <Link to="/signin" className="links">Signin</Link>
+                        <Link to="/signup" className="links">Signup</Link>
                     </div>
                 </div>
             </div>
