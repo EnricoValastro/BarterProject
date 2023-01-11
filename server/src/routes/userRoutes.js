@@ -11,4 +11,6 @@ module.exports = (app) => {
         .post(userController.signup);
     app.route('/api/login')
         .post(userController.login);
+    app.route('/api/user/:token')
+        .get(userController.getUserFromToken);
 }

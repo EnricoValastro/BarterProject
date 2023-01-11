@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const responses = require('./responses/response');
 const User = require('../models/userModel')(mongoose);
+const responses = require('./responses/response');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -28,6 +28,19 @@ const signup = async (req, res) => {
     }).catch(err => {
         responses.InternalServerError(res, {message: err.message});
     });
+}
+
+const getUserFromToken = (req, res) => {
+    console.log(req.params.token);
+    User.findOne({token: req.params.token}).then( profile => {
+        if (profile) {
+            res.send(profile);
+        }
+        else {
+            res.send(false);
+        }
+    })
+
 }
 
 const email =  (req, res) => {
@@ -69,5 +82,6 @@ const login = async (req, res) =>{
 module.exports = {
     signup,
     login,
-    email
+    email,
+    getUserFromToken
 }

@@ -2,11 +2,14 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose');
-
 const routes = require('./src/routes/userRoutes')
+const routes2 = require('./src/routes/productRoutes')
+
 const PORT = process.env.PORT;
 
 const app = express();
+
+app.use(express.static(__dirname + '/static'));
 
 mongoose.connect(process.env.DB_CONNECTION).then(() => {
     console.log('Connected to database');
@@ -21,7 +24,9 @@ app.use(cors({
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
+
 routes(app);
+routes2(app);
 
 
 app.listen(PORT, () => {
