@@ -37,6 +37,7 @@ const createProduct = async (req, res) => {
             data: fs.readFileSync(path.resolve(__dirname, "../../static/uploads/" + req.file.filename)),
             contentType: req.file.mimetype
         },
+        date: Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()),
         category: req.body.category,
         status: req.body.status,
         value: req.body.value,

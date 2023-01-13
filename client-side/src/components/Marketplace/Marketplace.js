@@ -17,7 +17,6 @@ export default function Marketplace() {
     let userID;
 
     fetch("http://localhost:4000/api/user/"+ token).then(res => res.json()).then(data => {
-        console.log(data);
         userID = data._id;
     }).catch(err => console.log(err));
 

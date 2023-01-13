@@ -1,3 +1,4 @@
+const {now} = require("mongoose");
 module.exports = function (mongoose) {
     const productSchema = new mongoose.Schema({
         name: {
@@ -18,7 +19,6 @@ module.exports = function (mongoose) {
         },
         date: {
             type: Date,
-            default: Date.now
         },
         status: {
             type: String,
