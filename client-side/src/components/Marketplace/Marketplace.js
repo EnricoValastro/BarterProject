@@ -54,8 +54,6 @@ export default function Marketplace() {
         setLocation(e.target.value)
     }
 
-
-
     function handleSubmit(e){
         e.preventDefault();
         const formData = new FormData();
@@ -67,14 +65,41 @@ export default function Marketplace() {
         formData.append('value', value);
         formData.append('location', location);
         formData.append('userID', userID);
-        axios.post('http://localhost:4000/api/upload', formData)
+        axios.post('http://localhost:4000/api/product/upload', formData)
             .then(res => {
                 console.log(res);
             }).catch(err => {
             console.log(err);
         })
     }
+    /*Function For Retrieve images from mongodb*/
+    /*function arrayBufferToBase64( buffer ) {
+        let binary = '';
+        let bytes = new Uint8Array( buffer );
+        let len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode( bytes[ i ] );
+        }
+        return window.btoa( binary );
+    }
 
+    function handleProductSearch(e){
+        e.preventDefault();
+        let img = document.getElementById("images");
+        let x = document.getElementById("search").value;
+        console.log(x)
+        fetch("http://localhost:4000/search/"+ x).then(res => res.json()).then(data => {
+            console.log(data);
+            img.innerHTML = "";
+            for(let i = 0; i < data.length; i++){
+                let imgTag = document.createElement("img");
+                imgTag.src = "data:image/png;base64," + arrayBufferToBase64(data[i].img.data.data);
+                imgTag.style.width = "400px";
+                imgTag.style.height = "400px";
+                img.appendChild(imgTag);
+            }
+        }).catch(err => console.log(err));
+    }*/
 
     return(
         <div id="marketplace">

@@ -23,7 +23,11 @@ module.exports = function(mongoose) {
         password: {
             type: String,
             required: true
-        }
+        },
+        products: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        }]
     });
 
     userSchema.pre('save',  function(next) {

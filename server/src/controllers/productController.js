@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+const User = mongoose.model('User');
 const Product = require('../models/productModel')(mongoose);
 const responses = require('./responses/response');
 const multer = require('multer');
 const fs = require("fs");
 const path = require('path');
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -32,7 +34,7 @@ const createProduct = async (req, res) => {
         name: req.body.name,
         description: req.body.description,
         image: {
-            data: fs.readFileSync(path.resolve(__dirname , "../../static/uploads/" + req.file.filename)),
+            data: fs.readFileSync(path.resolve(__dirname, "../../static/uploads/" + req.file.filename)),
             contentType: req.file.mimetype
         },
         category: req.body.category,
@@ -42,13 +44,15 @@ const createProduct = async (req, res) => {
         userID: req.body.userID
     });
 
-    newProduct.save().then(result => {
-        console.log('Product created successfully');
-        res.send(result);
-    }).catch(err => {
-        console.log('Error creating product');
-        console.log(err);
-    });
+    newProduct.save().then(async result => {
+        await User.findOne({_id: req.body.userID}).then(user => {
+            user.products.push(result);
+            user.save();
+            responses.OkResponse(res, {message: "Product created successfully"});
+        }).catch(err => {
+            responses.InternalServerError(res, err);
+        });
+    })
 }
 
 const searchProduct = async (req, res) => {

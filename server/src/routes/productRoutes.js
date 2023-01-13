@@ -1,8 +1,9 @@
 const productController = require('../controllers/productController');
 
+
 module.exports = (app) => {
-    app.route('/api/upload')
+    app.route('/api/product/upload')
         .post(productController.upload.single('image'), productController.createProduct);
-    app.route('/api/searchproduct/:title')
+    app.route('/api/product/:title')
         .get(productController.searchProduct);
 }

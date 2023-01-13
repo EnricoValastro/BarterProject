@@ -1,10 +1,7 @@
 const userController = require('../controllers/userController');
 
 module.exports = (app) => {
-   /*
-    app.route('/')
-        .get(userController.index);
-    */
+
     app.route('/api/emailValidation')
         .post(userController.email);
     app.route('/api/signup')

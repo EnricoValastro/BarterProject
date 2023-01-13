@@ -33,7 +33,8 @@ module.exports = function (mongoose) {
             required: true
         },
         userID: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
             required: true
         }
     });
