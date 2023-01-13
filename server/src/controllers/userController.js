@@ -31,7 +31,6 @@ const signup = async (req, res) => {
 }
 
 const getUserFromToken = (req, res) => {
-    console.log(req.params.token);
     User.findOne({token: req.params.token}).then( profile => {
         if (profile) {
             res.send(profile);
