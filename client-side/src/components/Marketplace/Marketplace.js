@@ -20,6 +20,9 @@ export default function Marketplace() {
         userID = data._id;
     }).catch(err => console.log(err));
 
+    fetch("http://localhost:4000/api/product/getbycategory/informatica").then(res => res.json()).then(data=>{
+        console.log(data)
+    }).catch(err => console.log(err));
 
     if(!token){
         window.location.href = '/signin';

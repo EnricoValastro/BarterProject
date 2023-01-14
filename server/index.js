@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const routes = require('./src/routes/Routes')
+const routes = require('./src/routes/Routes');
 
 const PORT = process.env.PORT;
 
@@ -23,7 +23,6 @@ app.use(cors({
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
-
 routes(app);
 
 app.listen(PORT, () => {

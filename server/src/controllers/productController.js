@@ -55,22 +55,24 @@ const createProduct = async (req, res) => {
     })
 }
 
-const searchProductForName = async (req, res) => {
-    await Product.find({name: req.params.name})
+const searchProductForName = (req, res) => {
+     Product.find({name: req.params.name})
         .then(result => {
-            res.json(result)
+            res.json({result})
         }).catch(err => {
             res.send(err)
         });
 }
 
-const searchProductForCategory = async (req,res) =>{
-    await Product.find({category: req.params.category}).limit(8)
+const searchProductForCategory =  (req,res) =>{
+    Product.find({category: req.params.category}).select("name -_id").limit(8)
         .then(result => {
-            res.json(result)
+                res.send(result)
         }).catch(err => {
-            res.send(err)
-        });
+        res.send(err)
+    });
+
+
 }
 
 module.exports = {

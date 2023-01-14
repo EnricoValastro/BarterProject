@@ -39,7 +39,6 @@ const getUserFromToken = (req, res) => {
             res.send(false);
         }
     })
-
 }
 
 const email =  (req, res) => {

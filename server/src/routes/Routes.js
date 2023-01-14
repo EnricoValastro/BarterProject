@@ -12,8 +12,8 @@ module.exports = (app) => {
         .get(userController.getUserFromToken);
     app.route('/api/product/upload')
         .post(productController.upload.single('image'), productController.createProduct);
-    app.route('api/product/:category')
+    app.route('/api/product/getbycategory/:category')
         .get(productController.searchProductForCategory)
-    app.route('/api/product/:name')
+    app.route('/api/product/getbyname/:name')
         .get(productController.searchProductForName);
 }
