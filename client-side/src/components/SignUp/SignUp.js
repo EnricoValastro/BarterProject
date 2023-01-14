@@ -14,7 +14,6 @@ function Signup(){
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
 
     function iconInit(done, next){
         const ok        = document.getElementById(done);
@@ -26,7 +25,7 @@ function Signup(){
 
     function SubmitHandler(){
 
-        axios.post("http://localhost:4000/api/signup", {
+        axios.post("http://localhost:4000/api/user/signup", {
             name: name,
             surname: surname,
             email: email,
@@ -93,7 +92,7 @@ function Signup(){
         const ok        = document.getElementById('done3');
         const next      = document.getElementById('next3');
 
-        axios.post("http://localhost:4000/api/emailValidation", {
+        axios.post("http://localhost:4000/api/user/emailValidation", {
             email: emailInput
 
         }).then((response)=>{

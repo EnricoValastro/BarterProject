@@ -14,6 +14,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import './Home.css';
+import CarouselProductCard from "../CarouselProductCard/CarouselProductCard";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -43,11 +44,11 @@ export default function Home() {
                     modules={[Autoplay, Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    <SwiperSlide><ProductCard /></SwiperSlide>
-                    <SwiperSlide><ProductCard /></SwiperSlide>
-                    <SwiperSlide><ProductCard /></SwiperSlide>
-                    <SwiperSlide><ProductCard /></SwiperSlide>
-                    <SwiperSlide><ProductCard /></SwiperSlide>
+                    {arr.map(() => (
+                        <SwiperSlide >
+                            <CarouselProductCard />
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
 

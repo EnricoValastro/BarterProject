@@ -3,11 +3,16 @@
     height: 30vh;
     margin-top: 10%;
     background-color: #2F4F75;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .footerContainer{
-    width: 100%;
+    width: 90%;
     height: 100%;
+    border-top: 2px solid #317AC7;
     display: flex;
     flex-direction: column;
     align-items: center;

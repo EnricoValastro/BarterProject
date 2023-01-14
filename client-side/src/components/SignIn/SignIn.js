@@ -6,7 +6,6 @@ import axios from "axios";
 
 import './SignIn.css';
 import PersonIcon from '@mui/icons-material/Person';
-import PasswordIcon from '@mui/icons-material/Password';
 import LockIcon from '@mui/icons-material/Lock';
 import BubblyButton from "../BubblyButton/BubblyButton";
 
@@ -41,7 +40,7 @@ export default function SignIn({setToken}) {
     function SubmitHandler() {
         //event.preventDefault();
         if(email.length !== 0 && password.length !== 0) {
-            axios.post("http://localhost:4000/api/login", {
+            axios.post("http://localhost:4000/api/user/signin", {
                 email: email,
                 password: password
             }).then((response) => {
