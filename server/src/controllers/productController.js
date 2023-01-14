@@ -6,7 +6,6 @@ const multer = require('multer');
 const fs = require("fs");
 const path = require('path');
 
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './static/uploads')
@@ -40,7 +39,7 @@ const createProduct = async (req, res) => {
         date: Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()),
         category: req.body.category,
         status: req.body.status,
-        value: req.body.value,
+        value: parseFloat(req.body.value),
         location: req.body.location,
         userID: req.body.userID
     });
@@ -56,8 +55,17 @@ const createProduct = async (req, res) => {
     })
 }
 
-const searchProduct = async (req, res) => {
+const searchProductForName = async (req, res) => {
     await Product.find({name: req.params.name})
+        .then(result => {
+            res.json(result)
+        }).catch(err => {
+            res.send(err)
+        });
+}
+
+const searchProductForCategory = async (req,res) =>{
+    await Product.find({category: req.params.category}).limit(8)
         .then(result => {
             res.json(result)
         }).catch(err => {
@@ -68,5 +76,6 @@ const searchProduct = async (req, res) => {
 module.exports = {
     createProduct,
     upload,
-    searchProduct
+    searchProductForName,
+    searchProductForCategory
 }
