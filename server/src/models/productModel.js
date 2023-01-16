@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-require('mongoose-double')(mongoose);
+const double = require('mongoose-double')(mongoose);
 module.exports = function (mongoose) {
     const productSchema = new mongoose.Schema({
         name: {
@@ -26,7 +26,7 @@ module.exports = function (mongoose) {
             required: true
         },
         value:{
-            type: mongoose.Schema.Types.Double,
+            type: double,
             required: true,
         },
         location: {

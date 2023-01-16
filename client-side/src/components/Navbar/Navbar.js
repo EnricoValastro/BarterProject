@@ -1,10 +1,14 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {Notifications, Person, Search} from "@mui/icons-material";
 import {Home} from "@mui/icons-material";
 import {Storefront} from "@mui/icons-material";
 import './Navbar.css'
+import MenuIcon from "@mui/icons-material/Menu";
+import Menu from "../Menu/Menu";
 export default function Navbar(props) {
+    //Hamburger menu
+    const [isOpen, setOpen] = useState(false);
 
    useEffect(() => {
        const PageControl =  () => {
@@ -61,20 +65,25 @@ export default function Navbar(props) {
                     </div>
                     <div id="iconSearch" className="navItem">
                         <Link to="/search" className="icons">
-                            <span><Search  className="Icon"/></span>
+                            <span><Search className="Icon"/></span>
                             <span>Search</span>
                         </Link>
                     </div>
                     <div className="navItem" id="iconMarket">
                         <Link  to="/marketplace" className="icons">
-                            <span><Storefront  className="Icon"/></span>
+                            <span><Storefront className="Icon"/></span>
                             <span>Marketplace</span>
                         </Link>
 
                     </div>
 
                 </div>
+
                 <div className="navRight">
+                    <div className="navMobile navMobile-hidden">
+                        <MenuIcon className="menu-btn" onClick={()=>setOpen(true)} />
+                        <Menu isOpen={isOpen} onChange={setOpen}></Menu>
+                    </div>
                     <div className="navItem">
                         <Link className="icons ">
                             <span><Notifications className="Icon"/></span>

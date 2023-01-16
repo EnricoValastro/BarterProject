@@ -16,4 +16,6 @@ module.exports = (app) => {
         .get(productController.searchProductForCategory)
     app.route('/api/product/search/name/:name')
         .get(productController.searchProductForName); //per il ritorno di immagini dal DB
+    app.route('/api/product/search/user/:userID')
+        .get(productController.searchProductForUser);
 }

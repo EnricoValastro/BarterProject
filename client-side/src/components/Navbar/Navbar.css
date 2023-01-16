@@ -55,7 +55,6 @@
     display:flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .icons{
@@ -68,7 +67,6 @@
     outline: none;
 
 }
-
 
 .icons span:first-child{
     display: inline-block;
@@ -113,4 +111,39 @@
 .selected{
     border-bottom: 5px solid white;
     border-radius: 4px;
+}
+
+.menu-btn{
+    color: white;
+    cursor: pointer;
+    transform: scale(2);
+}
+
+.navMobile{
+    display: grid;
+
+}
+
+.navMobile-hidden{
+    display: none;
+}
+
+@media screen and (max-width: 800px){
+    .navCenter{
+        visibility: hidden;
+        width: 0%;
+    }
+
+    .navItem{
+        visibility: hidden;
+    }
+
+    .navMobile-hidden{
+        display: block;
+    }
+
+    .navMobile{
+        margin-left: 50%;
+    }
+
 }

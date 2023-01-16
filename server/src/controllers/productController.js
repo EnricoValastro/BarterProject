@@ -5,6 +5,7 @@ const responses = require('./responses/response');
 const multer = require('multer');
 const fs = require("fs");
 const path = require('path');
+const now = new Date;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -18,17 +19,17 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     fileFilter: function (req, file, cb) {
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'
+            || file.mimetype === 'image/jpg' || file.mimetype === 'image/svg'){
             cb(null, true);
         } else {
             cb(null, false);
-            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+            return cb(new Error('Only .png, .svg, .jpg and .jpeg format allowed!'));
         }
     }
 });
 
-const now = new Date;
-const createProduct = async (req, res) => {
+const createProduct = (req, res) => {
     const newProduct = new Product({
         name: req.body.name,
         description: req.body.description,
@@ -43,14 +44,13 @@ const createProduct = async (req, res) => {
         location: req.body.location,
         userID: req.body.userID
     });
-
-    newProduct.save().then(async result => {
-        await User.findOne({_id: req.body.userID}).then(user => {
+    newProduct.save().then(result => {
+        User.findOne({_id: req.body.userID}).then(user => {
             user.products.push(result);
             user.save();
             responses.OkResponse(res, {message: "Product created successfully"});
         }).catch(err => {
-            responses.InternalServerError(res, err);
+            responses.InternalServerError(res, {message: err.message});
         });
     })
 }
@@ -61,23 +61,37 @@ const searchProductForName = (req, res) => {
             res.json(result)
         }).catch(err => {
             res.send(err)
-        });
+        }).catch(err => {
+         responses.InternalServerError(res, {message: err.message});
+     });
 }
 
 const searchProductForCategory =  (req,res) =>{
     Product.find({category: req.params.category}).select("name -_id").limit(8)
         .then(result => {
-                res.json(result)
+                res.send()
         }).catch(err => {
         res.send(err)
+    }).catch(err => {
+        responses.InternalServerError(res, {message: err.message});
     });
 
-
+}
+const searchProductForUser = (req, res) => {
+    Product.find({userID: req.params.userID}).select("name -_id")
+        .then(result => {
+            res.json(result)
+        }).catch(err => {
+            res.send(err)
+        }).catch(err => {
+        responses.InternalServerError(res, {message: err.message});
+    });
 }
 
 module.exports = {
     createProduct,
     upload,
     searchProductForName,
-    searchProductForCategory
+    searchProductForCategory,
+    searchProductForUser
 }

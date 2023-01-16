@@ -12,7 +12,6 @@ import ProfilePage from "../../Pages/ProfilePage/ProfilePage";
 import MarketplacePage from "../../Pages/MarketplacePage/MarketplacePage";
 import SignupPage from "../../Pages/SignupPage/SignupPage";
 import SigninPage from "../../Pages/SigninPage/SigninPage";
-
 function App() {
 
     const { token, setToken } = useToken();

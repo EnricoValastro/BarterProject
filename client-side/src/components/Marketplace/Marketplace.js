@@ -4,6 +4,7 @@ import useToken from "../App/useToken";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import './Marketplace.css';
+
 export default function Marketplace() {
     const { token, setToken } = useToken();
 
@@ -96,7 +97,7 @@ export default function Marketplace() {
         let name = document.getElementById("searchInput").value;
         fetch("http://localhost:4000/api/product/search/name/"+ name).then(res => res.json()).then(data => {
             divContainer.innerHTML = "";
-            console.log(data) //contiene tutte le info, basta accedere ai vari campi con l'indice
+            console.log(data)   // data contiene tutte le info, basta accedere ai vari campi con l'indice
             for(let i = 0; i < data.length; i++){
                 let imgTag = document.createElement("img");
                 imgTag.src = "data:image/png;base64," + arrayBufferToBase64(data[i].image.data.data);
@@ -106,6 +107,8 @@ export default function Marketplace() {
             }
         }).catch(err => console.log(err));
     }
+
+
 
     return(
         <div id="marketplace">

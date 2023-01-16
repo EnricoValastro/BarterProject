@@ -141,4 +141,7 @@
         margin: auto;
         font-weight: 600;
     }
+    .form__group{
+        width: 85%;
+    }
 }

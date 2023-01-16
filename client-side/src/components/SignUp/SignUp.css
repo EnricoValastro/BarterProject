@@ -179,8 +179,8 @@ div.errorMsg p{
         display: block;
     }
     .inputContainer{
-        margin-left: 8%;
-        margin-right: 8%;
+        margin-left: 12%;
+        margin-right: 6%;
     }
     .nextButton{
         display: none;
@@ -198,7 +198,7 @@ div.errorMsg p{
     }
     #subButton{
         display: block;
-        margin-left: 8%;
+        margin-left: 12%;
         margin-bottom: 5%;
     }
 
@@ -208,9 +208,9 @@ div.errorMsg p{
 
     div.errorMsg p{
         font-size: 1.1em;
-
         margin: 4% 4%;
     }
+
 
 }
 

@@ -6,8 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const signup = async (req, res) => {
     const newUser = new User(req.body);
-
-     await User.findOne({email: newUser.email}).then(async profile => {
+     await User.findOne({email: newUser.email}).then(profile => {
         if (!profile) {
             // Token
             const token = jwt.sign(
@@ -27,29 +26,6 @@ const signup = async (req, res) => {
         }
     }).catch(err => {
         responses.InternalServerError(res, {message: err.message});
-    });
-}
-
-const getUserFromToken = (req, res) => {
-    User.findOne({token: req.params.token}).then( profile => {
-        if (profile) {
-            res.send(profile);
-        }
-        else {
-            res.send(false);
-        }
-    })
-}
-
-const email =  (req, res) => {
-    const { email } = req.body;
-    User.findOne({email: email}).then( profile => {
-        if (profile) {
-            res.send(true);
-        }
-        else {
-            res.send(false);
-        }
     });
 }
 
@@ -75,6 +51,33 @@ const login = async (req, res) =>{
     } catch (err) {
         console.log(err);
     }
+}
+
+const email =  (req, res) => {
+    const { email } = req.body;
+    User.findOne({email: email}).then( profile => {
+        if (profile) {
+            res.send(true);
+        }
+        else {
+            res.send(false);
+        }
+    }).catch(err => {
+        responses.InternalServerError(res, {message: err.message});
+    });
+}
+
+const getUserFromToken = (req, res) => {
+    User.findOne({token: req.params.token}).then( profile => {
+        if (profile) {
+            res.send(profile);
+        }
+        else {
+            res.send(false);
+        }
+    }).catch(err => {
+        responses.InternalServerError(res, {message: err.message});
+    })
 }
 
 module.exports = {
