@@ -58,7 +58,7 @@ const createProduct = async (req, res) => {
 const searchProductForName = (req, res) => {
      Product.find({name: req.params.name})
         .then(result => {
-            res.json({result})
+            res.json(result)
         }).catch(err => {
             res.send(err)
         });
@@ -67,7 +67,7 @@ const searchProductForName = (req, res) => {
 const searchProductForCategory =  (req,res) =>{
     Product.find({category: req.params.category}).select("name -_id").limit(8)
         .then(result => {
-                res.send(result)
+                res.json(result)
         }).catch(err => {
         res.send(err)
     });
