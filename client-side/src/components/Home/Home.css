@@ -1,12 +1,11 @@
 #home{
     width: 100%;
     height: 100%;
-    background-color: #E9EFFF;
+    background-color: #2F4F75;
     overflow-x: hidden;
-    background-image: url("./wave-haikei.png");
+    background-image: url("./slanted-gradient2.png");
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 .carousel{
     width: 100%;

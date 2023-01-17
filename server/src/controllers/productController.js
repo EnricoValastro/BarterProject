@@ -58,6 +58,7 @@ const createProduct = (req, res) => {
 const searchProductForName = (req, res) => {
      Product.find({name: req.params.name})
         .then(result => {
+            console.log(result);
             res.json(result)
         }).catch(err => {
             res.send(err)
@@ -67,14 +68,23 @@ const searchProductForName = (req, res) => {
 }
 
 const searchProductForCategory =  (req,res) =>{
-    Product.find({category: req.params.category}).select("name -_id").limit(8)
+    let product = [];
+    let name = [];
+
+    Product.find({category: req.params.category}).select("name").limit(8)
         .then(result => {
-                res.send()
-        }).catch(err => {
-        res.send(err)
-    }).catch(err => {
-        responses.InternalServerError(res, {message: err.message});
-    });
+            console.log(result);
+            result.forEach((item) => {
+                product.push(item.name);
+            });
+            res.send(result);
+        })
+        .catch(err => {
+            res.send(err)
+        })
+        .catch(err => {
+            responses.InternalServerError(res, {message: err.message});
+        });
 
 }
 const searchProductForUser = (req, res) => {

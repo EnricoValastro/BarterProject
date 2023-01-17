@@ -4,6 +4,7 @@ import useToken from "../App/useToken";
 
 import Navbar from "../Navbar/Navbar";
 import './Profile.css';
+
 export default function Profile() {
     const navigate = useNavigate();
     const { token, setToken } = useToken();
@@ -11,7 +12,11 @@ export default function Profile() {
     if(!token){
         window.location.href = '/signin';
     }
-
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ]
 
     return(
         <div id="profile">

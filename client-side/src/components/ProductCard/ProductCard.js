@@ -5,13 +5,17 @@ import CloseIcon from '@mui/icons-material/Close';
 import "./ProductCard.css";
 import {Box, Modal, Typography} from "@mui/material";
 import MoreButton from "../MoreButton/MoreButton";
+import axios from "axios";
 
-export default function ProductCard() {
+export default function ProductCard(props) {
 
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+
+    console.log(props.id);
 
     return (
         <div className="productCard">
@@ -20,7 +24,7 @@ export default function ProductCard() {
             </div>
             <div className="productDescription">
                 <p className="productName">
-                    Some name
+                    {props.name}
                 </p>
                 <span className="productText" >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ommodo consequat.

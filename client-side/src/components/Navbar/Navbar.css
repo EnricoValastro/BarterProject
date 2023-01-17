@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    background-color:  #317AC7;
+    background-color:  transparent;
 }
 
 .navAll{
@@ -62,7 +62,7 @@
     display: block;
     position: relative;
     overflow: hidden;
-    background-color:  #317AC7;
+    background-color:  transparent;
     border: none;
     outline: none;
 

@@ -4,7 +4,7 @@
     overflow: scroll;
     overflow-x: hidden;
     background-color: #E9EFFF;
-    background-image: url("./wave-haikei.png");
+    background-image: url("./slanted-gradient2.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -35,14 +35,14 @@
 
 }
 .searchBar:hover{
-    border: 2px solid #317AC7;
-    box-shadow: 0 0 10px #317AC7;
+    border: 2px solid snow;
+    box-shadow: 0 0 10px snow;
     width: 40%;
     transition: 0.4s ease-in-out;
 }
 .focused{
-    border: 2px solid #317AC7;
-    box-shadow: 0 0 10px #317AC7;
+    border: 2px solid snow;
+    box-shadow: 0 0 10px snow;
     width: 40%;
     transition: 0.4s ease-in-out;
 }

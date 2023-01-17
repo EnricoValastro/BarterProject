@@ -3,6 +3,12 @@ import React from 'react';
 import './CarouselProductCard.css';
 
 export default function CarouselProductCard() {
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ]
+
 
     return (
        <div id="CarouselProductCard">
@@ -27,6 +33,12 @@ export default function CarouselProductCard() {
                        Notebook in alluminio da 15,6" Touchscreen OLED FHD Glossy.
                        Processore AMD Ryzen 7 5800H, RAM 16GB, 512GB SSD PCIE, NVIDIA GeForce RTX 3050 Ti 4GB GDDR6, Win 11 Home, Grigio.
                        Il notebook si presenta in ottime condizioni, con pochi segni di usura, acquistato nel 2022 scambio per mancato utilizzo.
+                       Notebook in alluminio da 15,6" Touchscreen OLED FHD Glossy.
+                       Processore AMD Ryzen 7 5800H, RAM 16GB, 512GB SSD PCIE, NVIDIA GeForce RTX 3050 Ti 4GB GDDR6, Win 11 Home, Grigio.
+                       Il notebook si presenta in ottime condizioni, con pochi segni di usura, acquistato nel 2022 scambio per mancato utilizzo.
+                       Notebook in alluminio da 15,6" Touchscreen OLED FHD Glossy.
+                       Processore AMD Ryzen 7 5800H, RAM 16GB, 512GB SSD PCIE, NVIDIA GeForce RTX 3050 Ti 4GB GDDR6, Win 11 Home, Grigio.
+                       Il notebook si presenta in ottime condizioni, con pochi segni di usura, acquistato nel 2022 scambio per mancato utilizzo.
                    </div>
                    <div className="carouselBottomContentValueState">
                        Valore commerciale: 500$
@@ -34,14 +46,17 @@ export default function CarouselProductCard() {
                        Stato: Ottimo
                    </div>
                    <div className="carouselBottomContentOffer">
-                       <select>
+                       <select className="carouselCardOfferSelect" name="productSelect" id="productSelect">
                            <option value="" selected disabled hidden>Seleziona un prodotto</option>
-                           <option value="informatica">Informatica</option>
-                           <option value="smarthpone">Smartphone</option>
-                           <option value="console&game">Console&Game</option>
+                           {options.map((value) => (
+                                 <option value={value.value}>{value.label}</option>
+                           ))}
                        </select>
-                       <button>Fai la tua offerta</button>
+                       <button className="carouselCardOfferBtt" >
+                           Trade it!
+                       </button>
                    </div>
+
                </div>
            </div>
        </div>

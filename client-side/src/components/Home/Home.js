@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {Link, useNavigate} from "react-router-dom";
-
-import useToken from '../App/useToken';
 import Navbar from "../Navbar/Navbar";
 import ProductCard from "../ProductCard/ProductCard";
 import Footer from "../Footer/Footer";
+import CarouselProductCard from "../CarouselProductCard/CarouselProductCard";
 
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay, Navigation, Pagination} from "swiper";
@@ -14,16 +12,27 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import './Home.css';
-import CarouselProductCard from "../CarouselProductCard/CarouselProductCard";
+
+import axios from "axios";
 
 export default function Home() {
-    const navigate = useNavigate();
-    const { token, setToken } = useToken();
 
-    if(!token){
-        window.location.href = '/signin';
-    }
-    const arr = [1,2,3,4,5,6,7,8]
+    const [infProducts, setInfProducts] = useState([]);
+    const [arrProducts, setArrProducts] = useState([]);
+    const [sportProducts, setSportProducts] = useState([]);
+    const [abbProducts, setAbbProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:4000/api/product/search/category/informatica')
+            .then(response => {
+                setInfProducts(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, []);
+
+    let arr = [1,2,3,4,5,6,7,8];
 
     return(
         <div id="home">
@@ -34,8 +43,9 @@ export default function Home() {
                     spaceBetween={30}
                     centeredSlides={true}
                     autoplay={{
-                        delay: 10000,
+                        delay: 5000,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
                     }}
                     pagination={{
                         clickable: true,
@@ -56,7 +66,7 @@ export default function Home() {
 
                 <div className="productSection">
                     <div className="secTitle">
-                        Some title for the section
+                        Informatica
                     </div>
                     <div className="carouselNew">
 
@@ -73,9 +83,9 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {arr.map(() => (
+                            {infProducts.map((p) => (
                                     <SwiperSlide >
-                                        <ProductCard />
+                                        <ProductCard name={p.name} id={p._id} />
                                     </SwiperSlide>
                             ))}
                         </Swiper>
@@ -83,7 +93,7 @@ export default function Home() {
                 </div>
                 <div className="productSection">
                     <div className="secTitle">
-                        Some title for the section
+                        Arredamento
                     </div>
                     <div className="carouselNew">
 
@@ -112,7 +122,7 @@ export default function Home() {
                 </div>
                 <div className="productSection">
                     <div className="secTitle">
-                        Some title for the section
+                        Sport
                     </div>
                     <div className="carouselNew">
 
@@ -141,7 +151,7 @@ export default function Home() {
                 </div>
                 <div className="productSection">
                     <div className="secTitle">
-                        Some title for the section
+                        Abbigliamento
                     </div>
                     <div className="carouselNew">
 

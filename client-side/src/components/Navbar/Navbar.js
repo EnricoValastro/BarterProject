@@ -12,7 +12,6 @@ export default function Navbar(props) {
 
    useEffect(() => {
        const PageControl =  () => {
-           console.log(props.pagename);
            if(props.pagename === "Home"){
                 document.getElementById('iconHome').classList.add('selected');
                 document.getElementById('iconSearch').classList.remove('selected');
@@ -44,7 +43,6 @@ export default function Navbar(props) {
            PageControl();
        }
        else {
-           console.log("not ready");
            window.addEventListener('load', PageControl);
        }
    });
