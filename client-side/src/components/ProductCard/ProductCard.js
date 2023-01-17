@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -9,25 +9,71 @@ import axios from "axios";
 
 export default function ProductCard(props) {
 
+    const [id, setId] = useState();
+    const [name, setName] = useState();
+    const [value, setValue] = useState();
+    const [description, setDescription] = useState();
+    const [category, setCategory] = useState();
+    const [status, setStatus] = useState();
+    const [location, setLocation] = useState();
+    const [date, setDate] = useState();
+    const [user, setUser] = useState();
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        setId(props.id);
+        setName(props.name);
+        setValue(props.value);
+        setDescription(props.desc);
+        setCategory(props.category);
+        setStatus(props.status);
+        setLocation(props.location);
+        setDate(props.date);
+        setUser(props.user);
+    }, [props.id, props.name, props.value, props.desc, props.category, props.status, props.location, props.date, props.user]);
+
+    useEffect(() => {
+        axios.get("http://localhost:4000/api/product/search/id/"+props.id)
+            .then(response => {
+                console.log(response.data[0].image.data.data);
+                let imgTag = document.createElement("img");
+                imgTag.src = "data:image/png;base64," + arrayBufferToBase64(response.data[0].image.data.data);
+                imgTag.classList.add("product-image");
+                const im = document.getElementById(props.id);
+                im.innerHTML = "";
+                im.appendChild(imgTag);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, []);
+
+    function arrayBufferToBase64( buffer ) {
+        let binary = '';
+        let bytes = new Uint8Array( buffer );
+        let len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode( bytes[ i ] );
+        }
+        return window.btoa( binary );
+    }
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
 
-    console.log(props.id);
-
     return (
         <div className="productCard">
-            <div className="productImage">
+            <div id={props.id} className="productImage">
 
             </div>
             <div className="productDescription">
                 <p className="productName">
-                    {props.name}
+                    {name}
                 </p>
                 <span className="productText" >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ommodo consequat.
+                    {description}
                 </span>
 
             </div>
@@ -44,12 +90,9 @@ export default function ProductCard(props) {
                 <Box >
                     <div className="modalviewContainer">
                         <CloseIcon onClick={handleClose}></CloseIcon>
-                        <h1 className="modalTitle">Some title for the modal card</h1>
+                        <h1 className="modalTitle">{name}</h1>
                         <p className="modalText">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ommodo consequat.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ommodo consequat.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ommodo consequat.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ommodo consequat.
+                            {description}
                         </p>
                     </div>
                 </Box>

@@ -25,6 +25,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 10px;
+    background-color: white;
     box-shadow: 0px 10px 15px 0px #343e4f;
 }
 
@@ -37,18 +38,25 @@
     opacity: 1;
 }
 .productImage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 60%;
+    height: 55%;
     background: #343e4f;
-    background-image: url("CardConcept.png");
-    background-size: cover;
-    background-position: center;
+    border-radius: 7px 7px 0 0;
+}
+.product-image{
+    width: 100%;
+    height: 100%;
     border-radius: 7px 7px 0 0;
 }
 .productDescription{
     width: 90%;
     height: 40%;
-    padding: 0% 5% 5% 5%;
+    max-height: 40%;
+    margin: 0% 5% 5% 5%;
     background: white;
     border-radius: 0 0 7px 7px;
     display: flex;
@@ -56,6 +64,7 @@
 
 }
 .productName{
+    height: 15%;
     margin: 0;
     margin-top: 5%;
     padding: 0;
@@ -63,8 +72,11 @@
     color: #317AC7;
 }
 .productText{
+    height: 78%;
+    max-height: 73%;
     margin-top: 2%;
     color: #707D9D;
+    overflow: scroll;
 }
 
 .modalviewContainer{

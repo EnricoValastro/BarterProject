@@ -95,7 +95,7 @@ export default function Marketplace() {
         let divContainer = document.getElementById("containerProduct");
         let div = document.getElementById("images");
         let name = document.getElementById("searchInput").value;
-        fetch("http://localhost:4000/api/product/search/name/"+ name).then(res => res.json()).then(data => {
+        fetch("http://localhost:4000/api/product/search/id/"+ name).then(res => res.json()).then(data => {
             divContainer.innerHTML = "";
             console.log(data)   // data contiene tutte le info, basta accedere ai vari campi con l'indice
             for(let i = 0; i < data.length; i++){

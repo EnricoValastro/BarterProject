@@ -14,8 +14,8 @@ module.exports = (app) => {
         .post(productController.upload.single('image'), productController.createProduct);
     app.route('/api/product/search/category/:category')
         .get(productController.searchProductForCategory)
-    app.route('/api/product/search/name/:name')
-        .get(productController.searchProductForName); //per il ritorno di immagini dal DB
+    app.route('/api/product/search/id/:id')
+        .get(productController.searchProductForId); //per il ritorno di immagini dal DB
     app.route('/api/product/search/user/:userID')
         .get(productController.searchProductForUser);
 }

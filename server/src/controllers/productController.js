@@ -55,11 +55,10 @@ const createProduct = (req, res) => {
     })
 }
 
-const searchProductForName = (req, res) => {
-     Product.find({name: req.params.name})
+const searchProductForId = (req, res) => {
+     Product.find({_id: req.params.id}).select("image -_id")
         .then(result => {
-            console.log(result);
-            res.json(result)
+            res.send(result)
         }).catch(err => {
             res.send(err)
         }).catch(err => {
@@ -68,15 +67,9 @@ const searchProductForName = (req, res) => {
 }
 
 const searchProductForCategory =  (req,res) =>{
-    let product = [];
-    let name = [];
 
-    Product.find({category: req.params.category}).select("name").limit(8)
+    Product.find({category: req.params.category}).select("-image").limit(8)
         .then(result => {
-            console.log(result);
-            result.forEach((item) => {
-                product.push(item.name);
-            });
             res.send(result);
         })
         .catch(err => {
@@ -101,7 +94,7 @@ const searchProductForUser = (req, res) => {
 module.exports = {
     createProduct,
     upload,
-    searchProductForName,
+    searchProductForId,
     searchProductForCategory,
     searchProductForUser
 }

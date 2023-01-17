@@ -32,6 +32,16 @@ export default function Home() {
             })
     }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:4000/api/product/search/category/abbigliamento')
+            .then(response => {
+                setAbbProducts(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, []);
+
     let arr = [1,2,3,4,5,6,7,8];
 
     return(
@@ -85,7 +95,7 @@ export default function Home() {
                         >
                             {infProducts.map((p) => (
                                     <SwiperSlide >
-                                        <ProductCard name={p.name} id={p._id} />
+                                        <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                     </SwiperSlide>
                             ))}
                         </Swiper>
@@ -110,9 +120,9 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {arr.map(() => (
+                            {abbProducts.map((p) => (
                                 <SwiperSlide >
-                                    <ProductCard />
+                                    <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -141,7 +151,7 @@ export default function Home() {
                         >
                             {arr.map(() => (
                                 <SwiperSlide >
-                                    <ProductCard />
+
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -170,7 +180,7 @@ export default function Home() {
                         >
                             {arr.map(() => (
                                 <SwiperSlide >
-                                    <ProductCard />
+
                                 </SwiperSlide>
                             ))}
                         </Swiper>
