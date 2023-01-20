@@ -7,7 +7,7 @@
     left: 0;
     top: 0;
     z-index: 2;
-    background: #61dafb;
+    background: rgba(0, 0, 0, 0.9);
     transform: translate(-100%);
     transition: all .45s;
 }
@@ -20,11 +20,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    color: #2F4F75;
+    color: white;
     cursor: pointer;
     font-size: 1.5em;
     transform: scale(1.5);
-    padding: 1%;
+    padding-top: 2%;
+    padding-left: 2%;
 }
 
 .Menu > .Menu-items{
@@ -34,7 +35,7 @@
 }
 
 .Menu > .Menu-items > .Menu-item{
-    color: #2F4F75;
+    color: white;
     font-size: 1.5em;
     text-decoration: none;
     transition: color .4s ease-out;
@@ -42,13 +43,13 @@
 }
 
 .Menu-item:hover {
-    color: #2F4F75;
+    color: white;
     right: 0;
     text-decoration: none;
 }
 
 .Menu-item:hover:after {
-    border-color: #2F4F75;
+    border-color: white;
     right: 0;
 }
 

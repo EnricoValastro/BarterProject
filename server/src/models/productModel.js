@@ -20,6 +20,7 @@ module.exports = function (mongoose) {
         },
         date: {
             type: Date,
+            default: Date.now
         },
         status: {
             type: String,
