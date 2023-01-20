@@ -10,7 +10,7 @@ button {
     padding: 0;
     font-size: inherit;
     font-family: inherit;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 button.learn-more {
@@ -24,8 +24,8 @@ button.learn-more .circle {
     margin: 0;
     width: 3rem;
     height: 2.5rem;
-    background: #343e4f;
-    border-radius: 20px ;
+    background: #EE6C4D;
+    border-radius: 10px 0 0 10px;
 
 }
 
@@ -76,6 +76,7 @@ button.learn-more .button-text {
 
 button:hover .circle {
     width: 100%;
+    border-radius: 10px;
 }
 
 button:hover .circle .icon2.arrow2 {

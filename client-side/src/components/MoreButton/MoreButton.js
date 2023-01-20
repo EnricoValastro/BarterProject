@@ -6,7 +6,7 @@ export default function MoreButton({ onClick }) {
           <span className="circle" aria-hidden="true">
               <span className="icon2 arrow2"></span>
           </span>
-          <span className="button-text">Learn More</span>
+          <span className="button-text">Scopri</span>
       </button>
   );
 }

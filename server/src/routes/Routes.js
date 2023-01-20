@@ -12,10 +12,12 @@ module.exports = (app) => {
         .get(userController.getUserFromToken);
     app.route('/api/product/upload')
         .post(productController.upload.single('image'), productController.createProduct);
-    app.route('/api/product/search/category/:category')
-        .get(productController.searchProductForCategory)
-    app.route('/api/product/search/id/:id')
-        .get(productController.searchProductForId); //per il ritorno di immagini dal DB
-    app.route('/api/product/search/user/:userID')
-        .get(productController.searchProductForUser);
+    app.route('/api/product/search/firstincategory/:category/:token')
+        .get(productController.searchFirstProductByCategory)
+    app.route('/api/product/search/imgbyid/:id')
+        .get(productController.searchProductImgById);
+    app.route('/api/product/search/topproducts/:token')
+        .get(productController.searchTopProducts);
+    app.route('/api/product/getuserproductfromtoken/:token')
+        .get(productController.getUserProductFromToken);
 }

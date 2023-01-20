@@ -3,8 +3,6 @@ import NotFoundComponent from "../../components/NotFoundComponent/NotFoundCompon
 
 export default function NotFound() {
     return(
-        <div>
-            <NotFoundComponent />
-        </div>
+        <NotFoundComponent />
     );
 }

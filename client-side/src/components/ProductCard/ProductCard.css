@@ -1,11 +1,6 @@
 .bttContainer{
     transform: translate(-50%, 125%);
     width: 60%;
-    border-radius: 10px;
-    border: none;
-    color: #fff;
-    font-size: 1rem;
-    padding: .2rem 3rem;
     position: absolute;
     left: 50%;
     bottom: 0;
@@ -21,12 +16,11 @@
     width: 96%;
     height: 96%;
     margin: 2% 2%;
-    margin-right: 1%;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     background-color: white;
-    box-shadow: 0px 10px 15px 0px #343e4f;
+    box-shadow: 0 10px 15px 0 #343e4f;
 }
 
 .productCard:hover{
@@ -56,7 +50,7 @@
     width: 90%;
     height: 40%;
     max-height: 40%;
-    margin: 0% 5% 5% 5%;
+    margin: 0 5% 5% 5%;
     background: white;
     border-radius: 0 0 7px 7px;
     display: flex;
@@ -65,15 +59,15 @@
 }
 .productName{
     height: 15%;
-    margin: 0;
-    margin-top: 5%;
+    margin: 5% 0 0 0;
     padding: 0;
     font-size: 24px;
     color: #317AC7;
+    overflow-x: scroll;
 }
 .productText{
     height: 78%;
-    max-height: 73%;
+    max-height: 70%;
     margin-top: 2%;
     color: #707D9D;
     overflow: scroll;
@@ -100,4 +94,60 @@
     color: black;
     padding: 0 5% ;
     margin: 0;
+}
+.moreBtt{
+    display: none;
+}
+
+@media screen and (max-width: 800px){
+    .bttContainer{
+        display: none;
+    }
+    .moreBtt{
+        display: flex;
+        height: 20%;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .productDescription{
+        margin: 0 5% 2% 5%;
+        height: 43%;
+        max-height: 45%;
+    }
+    .productName{
+        height: 15%;
+        margin: 2% 0 0 0;
+    }
+    .productText{
+        height: 70%;
+        max-height: 70%;
+        margin-top: 0;
+    }
+    .productCard:hover{
+        transform: scale(1);
+        transition: all 0.4s ease-out;
+    }
+}
+@media screen and (max-width: 880px){
+    .bttContainer{
+        display: none;
+    }
+    .moreBtt{
+        display: flex;
+        height: 20%;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .productCard{
+        height: 85%;
+    }
+    .productDescription{
+        margin: 0 5% 2% 5%;
+        height: 43%;
+        max-height: 45%;
+    }
 }

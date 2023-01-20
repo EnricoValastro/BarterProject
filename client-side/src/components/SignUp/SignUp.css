@@ -148,7 +148,13 @@
     padding: 15px 0 0 0;
     color: lightseagreen;
 }
-
+.subButton{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 .errorMsg{
     display: flex;
     flex-direction: row;
@@ -162,56 +168,6 @@ div.errorMsg p{
 }
 .hidden{
     display: none;
-}
-
-@media screen and (max-width: 768px) {
-    .formCard{
-        width: 80%;
-    }
-    #already{
-        display: none;
-    }
-    .link{
-        font-size: 1.2em;
-        margin-right: 10px;
-    }
-    #surnameInput, #emailInput, #pwdInput, #confpwdInput{
-        display: block;
-    }
-    .inputContainer{
-        margin-left: 12%;
-        margin-right: 6%;
-    }
-    .nextButton{
-        display: none;
-    }
-    .title{
-        margin-right: 8%;
-        margin-left: 8%;
-        font-size: 2em;
-        margin-top: 5%;
-    }
-    .subtitle{
-        margin-right: 8%;
-        margin-left: 8%;
-        font-size: 1.2em;
-    }
-    #subButton{
-        display: block;
-        margin-left: 12%;
-        margin-bottom: 5%;
-    }
-
-    .input{
-        width: 85%;
-    }
-
-    div.errorMsg p{
-        font-size: 1.1em;
-        margin: 4% 4%;
-    }
-
-
 }
 
 .form__group {
@@ -272,4 +228,54 @@ div.errorMsg p{
 /* reset input */
 .form__field:required, .form__field:invalid {
     box-shadow: none;
+}
+
+@media screen and (max-width: 768px) {
+    .formCard{
+        width: 80%;
+    }
+    #already{
+        display: none;
+    }
+    .link{
+        font-size: 1.2em;
+        margin-right: 10px;
+    }
+    #surnameInput, #emailInput, #pwdInput, #confpwdInput{
+        display: block;
+    }
+    .inputContainer{
+        margin-left: 9%;
+        margin-right: 6%;
+    }
+    .nextButton{
+        display: none;
+    }
+    .title{
+        margin-right: 8%;
+        margin-left: 9%;
+        font-size: 2em;
+        margin-top: 5%;
+    }
+    .subtitle{
+        margin-right: 8%;
+        margin-left: 9%;
+        font-size: 1.2em;
+    }
+    #subButton{
+        display: block;
+        margin-left: 9%;
+        margin-bottom: 5%;
+    }
+
+    .input{
+        width: 85%;
+    }
+
+    div.errorMsg p{
+        font-size: 1.1em;
+        margin: 4% 4%;
+    }
+
+
 }

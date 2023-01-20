@@ -79,46 +79,14 @@ export default function Marketplace() {
     }
 
 
-    function arrayBufferToBase64( buffer ) {
-        let binary = '';
-        let bytes = new Uint8Array( buffer );
-        let len = bytes.byteLength;
-        for (let i = 0; i < len; i++) {
-            binary += String.fromCharCode( bytes[ i ] );
-        }
-        return window.btoa( binary );
-    }
 
-    /*Function For Retrieve images from mongodb*/
-    function handleProductSearch(e){
-        e.preventDefault();
-        let divContainer = document.getElementById("containerProduct");
-        let div = document.getElementById("images");
-        let name = document.getElementById("searchInput").value;
-        fetch("http://localhost:4000/api/product/search/id/"+ name).then(res => res.json()).then(data => {
-            divContainer.innerHTML = "";
-            console.log(data)   // data contiene tutte le info, basta accedere ai vari campi con l'indice
-            for(let i = 0; i < data.length; i++){
-                let imgTag = document.createElement("img");
-                imgTag.src = "data:image/png;base64," + arrayBufferToBase64(data[i].image.data.data);
-                imgTag.style.width = "400px";
-                imgTag.style.height = "400px";
-                div.appendChild(imgTag);
-            }
-        }).catch(err => console.log(err));
-    }
+
 
 
 
     return(
         <div id="marketplace">
             <Navbar pagename={"Marketplace"} />
-            <div id="containerSearch">
-                        <form onSubmit={handleProductSearch}>
-                            <input id="searchInput" type="text" placeholder="Cerca su Barter"/>
-                        </form>
-                <div id="images"></div>
-            </div>
 
             <div id="containerProduct">
                 <input type="input" name="name"onChange={handleName}/>
@@ -127,21 +95,21 @@ export default function Marketplace() {
 
                 <select name="category" onChange={handleCategory}>
                     <option value="" selected disabled hidden>Choose here</option>
-                    <option value="informatica">Informatica</option>
-                    <option value="smartphone">Smartphone</option>
-                    <option value="console&game">Console&Game</option>
-                    <option value="arredamento">Arredamento</option>
-                    <option value="elettrodomestici">Elettrodomestici</option>
-                    <option value="arte">Arte</option>
-                    <option value="antiquariato">Antiquariato</option>
-                    <option value="fotografia">Fotografia</option>
-                    <option value="sport">Sport</option>
-                    <option value="libri">Fotografia</option>
-                    <option value="musica">Musica</option>
-                    <option value="pelletteria"> Pelletteria</option>
-                    <option value="abbigliamento"> Abbigliamento</option>
-                    <option value="gioielleria"> Gioielleria</option>
-                    <option value="orologi"> Orologi</option>
+                    <option value="Informatica">Informatica</option>
+                    <option value="Smartphone">Smartphone</option>
+                    <option value="Console&Game">Console&Game</option>
+                    <option value="Arredamento">Arredamento</option>
+                    <option value="Elettrodomestici">Elettrodomestici</option>
+                    <option value="Arte">Arte</option>
+                    <option value="Antiquariato">Antiquariato</option>
+                    <option value="Fotografia">Fotografia</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Libri">Libri</option>
+                    <option value="Musica">Musica</option>
+                    <option value="Pelletteria"> Pelletteria</option>
+                    <option value="Abbigliamento"> Abbigliamento</option>
+                    <option value="Gioielleria"> Gioielleria</option>
+                    <option value="Orologi"> Orologi</option>
                 </select>
 
                 <select name="status" onChange={handleStatus}>

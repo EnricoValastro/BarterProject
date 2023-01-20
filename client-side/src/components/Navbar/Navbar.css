@@ -1,6 +1,5 @@
 .appNavContainer{
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     background-color:  transparent;
@@ -8,46 +7,43 @@
 
 .navAll{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
 }
 
 .navLeft{
     width: 20%;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     font-size: 1.7em;
-    margin-left: 4%;
     margin-bottom: 5px;
 
 }
 
 .navRight{
-    margin-right: 1%;
     width: 20%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 
 .navCenter{
     width: 60%;
     display: flex;
-    margin-left: 16%;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 
 .linknav{
     text-decoration: none;
     font-size: 1.1em;
-    margin-left: 5%;
+    padding: 15px 0;
     color: white;
 }
 
@@ -120,7 +116,12 @@
 }
 
 .navMobile{
-    display: grid;
+    width: 46%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 4%;
 
 }
 
@@ -130,20 +131,20 @@
 
 @media screen and (max-width: 800px){
     .navCenter{
-        visibility: hidden;
-        width: 0%;
+        display: none;
     }
-
-    .navItem{
-        visibility: hidden;
+    .navRight{
+        display: none;
     }
-
     .navMobile-hidden{
-        display: block;
+        display: flex;
+    }
+    .navLeft{
+        width: 46%;
+        justify-content: flex-start;
+        margin-left: 4%;
+
     }
 
-    .navMobile{
-        margin-left: 50%;
-    }
 
 }

@@ -38,7 +38,6 @@ export default function SignIn({setToken}) {
 
 
     function SubmitHandler() {
-        //event.preventDefault();
         if(email.length !== 0 && password.length !== 0) {
             axios.post("http://localhost:4000/api/user/signin", {
                 email: email,

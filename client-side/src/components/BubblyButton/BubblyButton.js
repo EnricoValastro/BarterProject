@@ -1,8 +1,6 @@
 import React from "react";
-import Signup from "../SignUp/SignUp";
 
 import "./BubblyButton.css";
-import * as events from "events";
 
 function BubblyButton(props) {
     function animateButton(event){
@@ -17,7 +15,6 @@ function BubblyButton(props) {
         },800);
 
     }
-
 
     return (
         <div>

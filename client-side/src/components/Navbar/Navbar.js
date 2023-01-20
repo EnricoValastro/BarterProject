@@ -53,7 +53,6 @@ export default function Navbar(props) {
                 <div className="navLeft">
                     <Link to="/home" className="linknav">Barter</Link>
                 </div>
-
                 <div className="navCenter">
                     <div id="iconHome"className="navItem">
                         <Link to="/home" className="icons">
@@ -76,12 +75,7 @@ export default function Navbar(props) {
                     </div>
 
                 </div>
-
                 <div className="navRight">
-                    <div className="navMobile navMobile-hidden">
-                        <MenuIcon className="menu-btn" onClick={()=>setOpen(true)} />
-                        <Menu isOpen={isOpen} onChange={setOpen}></Menu>
-                    </div>
                     <div className="navItem">
                         <Link className="icons ">
                             <span><Notifications className="Icon"/></span>
@@ -96,6 +90,11 @@ export default function Navbar(props) {
                     </div>
 
                 </div>
+                <div className="navMobile navMobile-hidden">
+                    <MenuIcon className="menu-btn" onClick={()=>setOpen(true)} />
+                    <Menu isOpen={isOpen} onChange={setOpen}></Menu>
+                </div>
+
             </div>
         </div>
     );

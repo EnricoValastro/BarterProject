@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
+import {Box, Modal} from "@mui/material";
+import axios from "axios";
 
+import MoreButton from "../MoreButton/MoreButton";
 
 import CloseIcon from '@mui/icons-material/Close';
 import "./ProductCard.css";
-import {Box, Modal, Typography} from "@mui/material";
-import MoreButton from "../MoreButton/MoreButton";
-import axios from "axios";
-
+import BubblyButton from "../BubblyButton/BubblyButton";
 export default function ProductCard(props) {
 
     const [id, setId] = useState();
@@ -34,9 +34,8 @@ export default function ProductCard(props) {
     }, [props.id, props.name, props.value, props.desc, props.category, props.status, props.location, props.date, props.user]);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/product/search/id/"+props.id)
+        axios.get("http://localhost:4000/api/product/search/imgbyid/"+props.id)
             .then(response => {
-                console.log(response.data[0].image.data.data);
                 let imgTag = document.createElement("img");
                 imgTag.src = "data:image/png;base64," + arrayBufferToBase64(response.data[0].image.data.data);
                 imgTag.classList.add("product-image");
@@ -60,25 +59,31 @@ export default function ProductCard(props) {
     }
 
     const handleOpen = () => setOpen(true);
+
     const handleClose = () => setOpen(false);
 
 
     return (
-        <div className="productCard">
-            <div id={props.id} className="productImage">
+        <>
+            <div className="productCard">
+                <div id={props.id} className="productImage">
 
-            </div>
-            <div className="productDescription">
-                <p className="productName">
-                    {name}
-                </p>
-                <span className="productText" >
-                    {description}
-                </span>
+                </div>
+                <div className="productDescription">
+                    <p className="productName">
+                        {name}
+                    </p>
+                    <span className="productText" >
+                        {description}
+                    </span>
+                    <div className="moreBtt">
+                        <BubblyButton onClick={handleOpen} name={"Scopri"}/>
+                    </div>
 
-            </div>
-            <div className="bttContainer">
-                <MoreButton onClick={handleOpen}/>
+                </div>
+                <div className="bttContainer">
+                    <MoreButton onClick={handleOpen}/>
+                </div>
             </div>
 
             <Modal
@@ -97,7 +102,7 @@ export default function ProductCard(props) {
                     </div>
                 </Box>
             </Modal>
+        </>
 
-        </div>
     );
 }

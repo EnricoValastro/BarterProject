@@ -29,7 +29,7 @@ const signup = async (req, res) => {
     });
 }
 
-const login = async (req, res) =>{
+const login =  (req, res) =>{
     try {
         // Get user input
         const { email, password } = req.body;
@@ -37,17 +37,17 @@ const login = async (req, res) =>{
         if (!(email && password)) {
             responses.BadRequestError(res, {message: 'All input is required'});
         }
-        // Validate if user exist in our database
-        const user = await User.findOne({ email });
+        const user =  User.findOne({ email });
+        User.find({email: email}).select("password token -_id").then(result => {
 
-        if (user && (await bcrypt.compare(password, user.password))) {
-            res.send({
-                token: user.token,
-            });
-
-        } else {
-            responses.BadRequestError(res, {message: 'Invalid credentials'});
-        }
+            if (user && ( bcrypt.compare(password, result[0].password))) {
+                res.send({
+                    token: result[0].token,
+                });
+            } else {
+                responses.BadRequestError(res, {message: 'Invalid credentials'});
+            }
+        });
     } catch (err) {
         console.log(err);
     }

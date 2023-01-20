@@ -14,16 +14,32 @@ import "swiper/css/navigation";
 import './Home.css';
 
 import axios from "axios";
+import useToken from "../App/useToken";
 
 export default function Home() {
+
+    let count = 0;
+
+    const {token, setToken} = useToken();
 
     const [infProducts, setInfProducts] = useState([]);
     const [arrProducts, setArrProducts] = useState([]);
     const [sportProducts, setSportProducts] = useState([]);
     const [abbProducts, setAbbProducts] = useState([]);
+    const [topProducts, setTopProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/category/informatica')
+        axios.get('http://localhost:4000/api/product/search/topproducts/'+token)
+            .then(response => {
+                setTopProducts(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, []);
+
+    useEffect(() => {
+        axios.get('http://localhost:4000/api/product/search/firstincategory/informatica/'+token)
             .then(response => {
                 setInfProducts(response.data);
             })
@@ -31,9 +47,26 @@ export default function Home() {
                 console.log(error);
             })
     }, []);
-
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/category/abbigliamento')
+        axios.get('http://localhost:4000/api/product/search/firstincategory/arredamento/'+token)
+            .then(response => {
+                setArrProducts(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, []);
+    useEffect(() => {
+        axios.get('http://localhost:4000/api/product/search/firstincategory/sport/'+token)
+            .then(response => {
+                setSportProducts(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, []);
+    useEffect(() => {
+        axios.get('http://localhost:4000/api/product/search/firstincategory/abbigliamento/'+token)
             .then(response => {
                 setAbbProducts(response.data);
             })
@@ -41,8 +74,6 @@ export default function Home() {
                 console.log(error);
             })
     }, []);
-
-    let arr = [1,2,3,4,5,6,7,8];
 
     return(
         <div id="home">
@@ -64,9 +95,11 @@ export default function Home() {
                     modules={[Autoplay, Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    {arr.map(() => (
-                        <SwiperSlide >
-                            <CarouselProductCard />
+                    {topProducts.map((p) => (
+                        count++,
+                        <SwiperSlide key={p._id} >
+
+                            <CarouselProductCard count={count} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -81,9 +114,21 @@ export default function Home() {
                     <div className="carouselNew">
 
                         <Swiper
-                            slidesPerView={4}
+                            breakpoints={{
+                                300: {
+                                    slidesPerView: 1,
+                                    slidesPerGroup: 1,
+                                },
+                                700: {
+                                    slidesPerView: 2,
+                                    slidesPerGroup: 2,
+                                },
+                                850: {
+                                    slidesPerView: 4,
+                                    slidesPerGroup: 4,
+                                },
+                            }}
                             spaceBetween={5}
-                            slidesPerGroup={4}
                             loop={false}
                             loopFillGroupWithBlank={true}
                             pagination={{
@@ -94,7 +139,7 @@ export default function Home() {
                             className="mySwiper"
                         >
                             {infProducts.map((p) => (
-                                    <SwiperSlide >
+                                    <SwiperSlide key={p._id} >
                                         <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                     </SwiperSlide>
                             ))}
@@ -107,10 +152,23 @@ export default function Home() {
                     </div>
                     <div className="carouselNew">
 
+
                         <Swiper
-                            slidesPerView={4}
+                            breakpoints={{
+                                300: {
+                                    slidesPerView: 1,
+                                    slidesPerGroup: 1,
+                                },
+                                700: {
+                                    slidesPerView: 2,
+                                    slidesPerGroup: 2,
+                                },
+                                850: {
+                                    slidesPerView: 4,
+                                    slidesPerGroup: 4,
+                                },
+                            }}
                             spaceBetween={5}
-                            slidesPerGroup={4}
                             loop={false}
                             loopFillGroupWithBlank={true}
                             pagination={{
@@ -120,8 +178,8 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {abbProducts.map((p) => (
-                                <SwiperSlide >
+                            {arrProducts.map((p) => (
+                                <SwiperSlide key={p._id}>
                                     <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                 </SwiperSlide>
                             ))}
@@ -137,9 +195,21 @@ export default function Home() {
                     <div className="carouselNew">
 
                         <Swiper
-                            slidesPerView={4}
+                            breakpoints={{
+                                300: {
+                                    slidesPerView: 1,
+                                    slidesPerGroup: 1,
+                                },
+                                700: {
+                                    slidesPerView: 2,
+                                    slidesPerGroup: 2,
+                                },
+                                850: {
+                                    slidesPerView: 4,
+                                    slidesPerGroup: 4,
+                                },
+                            }}
                             spaceBetween={5}
-                            slidesPerGroup={4}
                             loop={false}
                             loopFillGroupWithBlank={true}
                             pagination={{
@@ -149,9 +219,9 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {arr.map(() => (
-                                <SwiperSlide >
-
+                            {sportProducts.map((p) => (
+                                <SwiperSlide key={p._id}>
+                                    <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -166,9 +236,21 @@ export default function Home() {
                     <div className="carouselNew">
 
                         <Swiper
-                            slidesPerView={4}
+                            breakpoints={{
+                                300: {
+                                    slidesPerView: 1,
+                                    slidesPerGroup: 1,
+                                },
+                                700: {
+                                    slidesPerView: 2,
+                                    slidesPerGroup: 2,
+                                },
+                                850: {
+                                    slidesPerView: 4,
+                                    slidesPerGroup: 4,
+                                },
+                            }}
                             spaceBetween={5}
-                            slidesPerGroup={4}
                             loop={false}
                             loopFillGroupWithBlank={true}
                             pagination={{
@@ -178,9 +260,9 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {arr.map(() => (
-                                <SwiperSlide >
-
+                            {abbProducts.map((p) => (
+                                <SwiperSlide key={p._id} >
+                                    <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

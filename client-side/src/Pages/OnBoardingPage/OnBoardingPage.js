@@ -5,8 +5,6 @@ import OnBoarding from "../../components/OnBoarding/OnBoarding";
 export default function OnBoardingPage() {
 
     return (
-        <div>
-            <OnBoarding />
-        </div>
+        <OnBoarding />
     )
 }

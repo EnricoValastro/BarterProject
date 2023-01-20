@@ -18,7 +18,6 @@ function Signup(){
     function iconInit(done, next){
         const ok        = document.getElementById(done);
         const nex      = document.getElementById(next);
-
         ok.classList.add('hidden');
         nex.classList.remove('hidden');
     }
@@ -118,7 +117,6 @@ function Signup(){
         event.preventDefault();
         const pwdInput = document.getElementById('pwdField').value;
         const nextInput = document.getElementById('subButton');
-        const focusOn   = document.getElementById('confpwdField');
         const ok        = document.getElementById('done4');
         const next      = document.getElementById('next4');
 
@@ -221,7 +219,7 @@ function Signup(){
                                     </div>
                                 </div>
 
-                                <div id="subButton" className="hidden">
+                                <div id="subButton" className="subButton hidden">
                                     <BubblyButton name={"Signup"} onClick={SubmitHandler}/>
                                 </div>
 

@@ -1,13 +1,12 @@
 .bubblyButton{
     display: inline-block;
-    font-size: 1.1em;
-    font-family: Ubuntu, sans-serif;
-    padding: 8px 2em;
+    font-size: 16px;
+    padding: 8px 25px;
     margin-top: 4%;
     margin-bottom: 2px;
     -webkit-appearance: none;
     appearance: none;
-    background-color: #E63946;
+    background-color: #EE6C4D;
     color: #fff;
     border-radius: 4px;
     border: none;
@@ -17,7 +16,6 @@
     transition: transform ease-in 0.1s,
                 box-shadow ease-in 0.25s;
 }
-
 .bubblyButton::before,
 .bubblyButton::after{
     position: absolute;
@@ -33,42 +31,40 @@
 
 .bubblyButton::before{
     top: -75%;
-    background-image: radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, transparent 20%, rgb(230,57,70) 20%, transparent 30%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, transparent 10%, rgb(230,57,70) 15%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%);
+    background-image: radial-gradient(circle, #317AC7 20%, transparent 20%),
+                        radial-gradient(circle, transparent 20%, #EE6C4D 20%, transparent 30%),
+                        radial-gradient(circle, #317AC7 20%, transparent 20%),
+                        radial-gradient(circle, #EE6C4D 20%, transparent 20%),
+                        radial-gradient(circle, transparent 10%, #317AC7 15%, transparent 20%),
+                        radial-gradient(circle, #EE6C4D 20%, transparent 20%),
+                        radial-gradient(circle, #317AC7 20%, transparent 20%),
+                        radial-gradient(circle, #EE6C4D 20%, transparent 20%),
+                        radial-gradient(circle, #317AC7 20%, transparent 20%);
 
     background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
 }
-
 .bubblyButton::after{
     bottom: -75%;
-    background-image: radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, transparent 10%, rgb(230,57,70) 15%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%),
-                        radial-gradient(circle, rgb(230,57,70) 20%, transparent 20%);
+    background-image: radial-gradient(circle, #EE6C4D 20%, transparent 20%),
+                        radial-gradient(circle, #317AC7 20%, transparent 20%),
+                        radial-gradient(circle, transparent 10%, #EE6C4D 15%, transparent 20%),
+                        radial-gradient(circle, #317AC7 20%, transparent 20%),
+                        radial-gradient(circle, #EE6C4D 20%, transparent 20%),
+                        radial-gradient(circle, #317AC7 20%, transparent 20%),
+                        radial-gradient(circle, #EE6C4D 20%, transparent 20%);
     background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
 }
 
 .bubblyButton:active{
     transform: scale(0.9);
-    background-color: rgb(236,102,112);
-    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+    background-color: #EE6C4D;
+    box-shadow: 0 2px 25px rgba(87, 81, 255, 0.2);
 }
 
 .bubblyButton.animate::before{
     display: block;
     animation: topBubbles ease-in-out 0.75s forwards;
 }
-
 .bubblyButton.animate::after{
     display: block;
     animation: bottomBubbles ease-in-out 0.75s forwards;
@@ -86,7 +82,6 @@
         background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
     }
 }
-
 @keyframes bottomBubbles{
     0%{
         background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
