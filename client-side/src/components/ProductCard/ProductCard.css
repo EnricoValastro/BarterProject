@@ -69,32 +69,112 @@
     height: 78%;
     max-height: 70%;
     margin-top: 2%;
-    color: #707D9D;
+    color: gray;
     overflow: scroll;
 }
-
-.modalviewContainer{
-    width: 92vw;
+.modal{
+    width: 100vw;
     height: 100vh;
-    margin: 0 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.modalviewContainer{
+    width: 70%;
+    height: 80%;
+    background-color: rgba(217, 227, 231, 0.9);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #343e4f;
     border: none;
-
     outline: none;
+}
+.iconClose{
+    width: 95%;
+    height: 5%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+.xIcon{
+    color:#317AC7
+}
 
+.modalviewContentContainer{
+    width: 90%;
+    height: 89%;
+    margin: 2% 0 2% 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.modalviewLeftCont{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.modalImg{
+    width: 100%;
+    height: 100%;
+    border-radius: 7px ;
+}
+
+.modalviewRightCont{
+    height: 85%;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Ubuntu;
 }
 .modalTitle{
-    color: red;
+    font-size: 30px;
+    color: #317AC7 ;
+}
+.modalCategory{
+    font-size: 14px;
+    color: gray;
 }
 .modalText{
+    width: 100%;
+    height: 80%;
     color: black;
-    padding: 0 5% ;
-    margin: 0;
+    padding: 0  ;
+    margin: 2% 0 0 0;
 }
+.modalLocAndDate{
+    color: gray;
+    margin-bottom: 1%;
+}
+.modalDescription{
+    max-height: 50%;
+    overflow: scroll;
+}
+.modalValAndStatus{
+    color: gray;
+    margin-top: 2%;
+}
+.modalButton{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+
 .moreBtt{
     display: none;
 }
@@ -129,6 +209,7 @@
         transform: scale(1);
         transition: all 0.4s ease-out;
     }
+
 }
 @media screen and (max-width: 880px){
     .bttContainer{
@@ -149,5 +230,12 @@
         margin: 0 5% 2% 5%;
         height: 43%;
         max-height: 45%;
+    }
+    .modalviewContainer{
+        width:100%;
+        height: 100%;
+    }
+    .modalviewContentContainer{
+        flex-direction: column;
     }
 }

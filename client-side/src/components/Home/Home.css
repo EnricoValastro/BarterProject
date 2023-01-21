@@ -128,3 +128,9 @@ div.carousel > .swiper-slide img {
         height: 65%;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .carousel{
+        height: 90%;
+    }
+}

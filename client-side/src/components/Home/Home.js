@@ -19,7 +19,6 @@ import useToken from "../App/useToken";
 export default function Home() {
 
     let count = 0;
-
     const {token, setToken} = useToken();
 
     const [infProducts, setInfProducts] = useState([]);
@@ -98,7 +97,6 @@ export default function Home() {
                     {topProducts.map((p) => (
                         count++,
                         <SwiperSlide key={p._id} >
-
                             <CarouselProductCard count={count} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                         </SwiperSlide>
                     ))}

@@ -29,7 +29,7 @@ export default function CarouselProductCard(props) {
         setCategory(props.category);
         setStatus(props.status);
         setLocation(props.location);
-        setDate(props.date);
+        setDate(props.date.split("T")[0]);
         setUser(props.user);
     }, [props.id, props.name, props.value, props.desc, props.category, props.status, props.location, props.date, props.user]);
 
@@ -38,7 +38,7 @@ export default function CarouselProductCard(props) {
             .then(response => {
                 let imgTag = document.createElement("img");
                 imgTag.src = "data:image/png;base64," + arrayBufferToBase64(response.data[0].image.data.data);
-                //imgTag.classList.add("product-image");
+                imgTag.classList.add("carousel-product-image");
                 let im = document.getElementById(props.count);
                 im.innerHTML = "";
                 im.appendChild(imgTag);
@@ -69,50 +69,50 @@ export default function CarouselProductCard(props) {
     }
 
 
+    /* Funzione per inviare notifica di scambio prodotto ad un altro utente, necessita recuperare valore della select */
     function someFun(){
         console.log("someFun");
     }
-    
+
     return (
        <div id="CarouselProductCard">
-            <div className="upContent">
-                <div className="carouselUpContentTitle">
-                    {props.name}
-                </div>
-                <div className="carouselUpContentCategory">
-                    {props.category}
-                </div>
-            </div>
-            <div className="bottomContent">
-
+           <div className="leftContent">
                <div id={props.count} className="carouselBottomContentImg">
-
                </div>
-               <div className="carouselBottomContent">
+           </div>
+
+           <div className="rightContent">
+               <div className="ctitle">
+                   <div className="carouselRightContentTitle">
+                       {name}
+                   </div>
+                   <div className="carouselRightContentCategory">
+                       {category}
+                   </div>
+               </div>
+               <div className="ccontent">
                    <div className="carouselBottomContentLocationTime">
-                       {props.location} - {props.date.split("T")[0]}
+                       {location} - {date}
                    </div>
                    <div className="carouselBottomContentDescription">
-                          {props.desc}
+                       {description}
                    </div>
                    <div className="carouselBottomContentValueState">
-                       Valore commerciale: {props.value} €
+                       Valore commerciale: {value} €
                        <br/>
-                       Stato: {props.status}
+                       Stato: {status}
                    </div>
-                   <div className="carouselBottomContentOffer">
-                       <select className="carouselCardOfferSelect" name="productSelect" id="productSelect">
-                           <option value="" selected disabled hidden>Seleziona un prodotto</option>
-                           {product.map((p) => (
-                                 <option value={p._id}>{p.name}</option>
-                           ))}
-                       </select>
-                       <div className="carouselCardOfferBtt">
-                           <BubblyButton name={"Trade it!"} onClick={someFun} />
-                       </div>
-
+               </div>
+               <div className="cbtt">
+                   <select className="carouselCardOfferSelect" name="productSelect" id="productSelect">
+                       <option value="" selected disabled hidden>Seleziona un prodotto</option>
+                       {product.map((p) => (
+                           <option value={p._id}>{p.name}</option>
+                       ))}
+                   </select>
+                   <div className="carouselCardOfferBtt">
+                       <BubblyButton name={"Trade it!"} onClick={someFun} />
                    </div>
-
                </div>
            </div>
        </div>
