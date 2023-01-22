@@ -18,7 +18,6 @@ export default function Marketplace() {
     let userID;
 
     axios.get("http://localhost:4000/api/user/" + token).then(data => {
-        console.log(data);
         userID = data.data._id;
     }).catch(err => {
         console.log(err);

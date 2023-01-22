@@ -1,16 +1,16 @@
 button {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    outline: none;
-    border: 0;
-    vertical-align: middle;
-    text-decoration: none;
-    background: #317AC7;
     padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: #317AC7;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
     font-size: inherit;
     font-family: inherit;
-    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    vertical-align: middle;
 }
 
 button.learn-more {
@@ -18,15 +18,14 @@ button.learn-more {
 }
 
 button.learn-more .circle {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: relative;
-    display: block;
-    margin: 0;
     width: 3rem;
     height: 2.5rem;
-    background: #EE6C4D;
+    margin: 0;
     border-radius: 10px 0 0 10px;
-
+    position: relative;
+    display: block;
+    background: #EE6C4D;
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
 }
 
 button.learn-more .circle .icon2 {

@@ -77,18 +77,11 @@ export default function Navbar(props) {
                 </div>
                 <div className="navRight">
                     <div className="navItem">
-                        <Link className="icons ">
-                            <span><Notifications className="Icon"/></span>
-                            <span>Notifications</span>
-                        </Link>
+                        <span><Notifications className="Icon"/></span>
                     </div>
                     <div className="navItem" id="iconProfile">
-                        <Link to="/profile" className="icons">
-                            <span><Person className="Icon"/></span>
-                            <span>Profile</span>
-                        </Link>
+                        <span><Person className="Icon"/></span>
                     </div>
-
                 </div>
                 <div className="navMobile navMobile-hidden">
                     <MenuIcon className="menu-btn" onClick={()=>setOpen(true)} />

@@ -129,11 +129,30 @@ const searchTopProducts = (req, res) => {
         });
 }
 
+/* Ritrova tutti i prodotti di una data categoria */
+const getProductFromCategory = (req, res) => {
+    User.find({token: req.params.token}).select("_id")
+        .then(result => {
+            Product.find({category: req.params.category, userID: {$ne: result[0]._id.toString()}}).select("-image")
+                .then(result => {
+                    res.send(result);
+                })
+                .catch(err => {
+                    res.send(err)
+                })
+                .catch(err => {
+                    responses.InternalServerError(res, {message: err.message});
+                });
+        }).catch(err => {
+    });
+}
+
 module.exports = {
     createProduct,
     upload,
     searchProductImgById,
     searchFirstProductByCategory,
     getUserProductFromToken,
-    searchTopProducts
+    searchTopProducts,
+    getProductFromCategory
 }

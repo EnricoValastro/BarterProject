@@ -85,7 +85,6 @@ export default function ProductCard(props) {
     const handleClose = () => setOpen(false);
 
     function afterOpenModal(){
-        console.log("ciao");
         const modalImg = document.createElement("img")
         modalImg.src = "data:image/png;base64," + arrayBufferToBase64(img);
         modalImg.classList.add("modalImg");
@@ -108,7 +107,7 @@ export default function ProductCard(props) {
                         {description}
                     </span>
                     <div className="moreBtt">
-                        <BubblyButton onClick={handleOpen} name={"Scopri"}/>
+                        <div className="mbtt"><BubblyButton onClick={handleOpen} name={"Scopri"}/></div>
                     </div>
 
                 </div>
@@ -147,13 +146,13 @@ export default function ProductCard(props) {
                                         </div>
                                     </div>
                                     <div className="modalButton">
-                                        <select className="carouselCardOfferSelect" name="productSelect" id="productSelect">
+                                        <select className="modalOfferSelect" name="productSelect" id="productSelect">
                                             <option value="" selected disabled hidden>Seleziona un prodotto</option>
                                             {product.map((p) => (
                                                 <option value={p._id}>{p.name}</option>
                                             ))}
                                         </select>
-                                        <div className="carouselCardOfferBtt">
+                                        <div className="modalOfferBtt">
                                             <BubblyButton name={"Trade it!"} onClick={someFun}  />
                                         </div>
                                     </div>

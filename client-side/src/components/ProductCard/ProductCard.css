@@ -27,10 +27,12 @@
     transform: scale(1.06);
     transition: all 0.4s ease-out;
 }
+
 .productCard:hover .bttContainer{
     transform: translate(-50%, 50%);
     opacity: 1;
 }
+
 .productImage{
     display: flex;
     flex-direction: column;
@@ -41,11 +43,13 @@
     background: #343e4f;
     border-radius: 7px 7px 0 0;
 }
+
 .product-image{
     width: 100%;
     height: 100%;
     border-radius: 7px 7px 0 0;
 }
+
 .productDescription{
     width: 90%;
     height: 40%;
@@ -55,8 +59,8 @@
     border-radius: 0 0 7px 7px;
     display: flex;
     flex-direction: column;
-
 }
+
 .productName{
     height: 15%;
     margin: 5% 0 0 0;
@@ -65,6 +69,7 @@
     color: #317AC7;
     overflow-x: scroll;
 }
+
 .productText{
     height: 78%;
     max-height: 70%;
@@ -72,6 +77,7 @@
     color: gray;
     overflow: scroll;
 }
+
 .modal{
     width: 100vw;
     height: 100vh;
@@ -80,6 +86,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .modalviewContainer{
     width: 70%;
     height: 80%;
@@ -116,12 +123,14 @@
     align-items: center;
 }
 .modalviewLeftCont{
-    width: 100%;
     height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
+    border-radius: 7px ;
+    box-shadow: 0 10px 15px 0 #343e4f;
 
 }
 .modalImg{
@@ -131,6 +140,8 @@
 }
 
 .modalviewRightCont{
+    max-width: 50%;
+    width: 50%;
     height: 85%;
     margin-left: 2%;
     display: flex;
@@ -141,6 +152,8 @@
 .modalTitle{
     font-size: 30px;
     color: #317AC7 ;
+    max-height: 9%;
+    overflow: scroll;
 }
 .modalCategory{
     font-size: 14px;
@@ -148,7 +161,7 @@
 }
 .modalText{
     width: 100%;
-    height: 80%;
+    max-height: 80%;
     color: black;
     padding: 0  ;
     margin: 2% 0 0 0;
@@ -158,27 +171,40 @@
     margin-bottom: 1%;
 }
 .modalDescription{
-    max-height: 50%;
+    max-height: 80%;
     overflow: scroll;
 }
 .modalValAndStatus{
     color: gray;
     margin-top: 2%;
 }
+
 .modalButton{
     width: 100%;
     height: 10%;
     display: flex;
     flex-direction: row;
     align-items: center;
-
 }
-
+.modalOfferBtt{
+    height: 80%;
+    width: 30%;
+    margin-left: 5%;
+}
+.modalOfferSelect{
+    height: 80%;
+    width: 70%;
+    margin-top: 2%;
+}
 
 .moreBtt{
     display: none;
 }
 
+.mbtt{
+    width: 40%;
+    height: 100%;
+}
 @media screen and (max-width: 800px){
     .bttContainer{
         display: none;
@@ -190,6 +216,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        margin-bottom: 1%;
     }
     .productDescription{
         margin: 0 5% 2% 5%;
@@ -231,11 +258,18 @@
         height: 43%;
         max-height: 45%;
     }
+
     .modalviewContainer{
         width:100%;
         height: 100%;
     }
     .modalviewContentContainer{
         flex-direction: column;
+    }
+
+    .modalviewRightCont{
+        margin-top: 4%;
+        width: 100%;
+        max-width: 100%;
     }
 }

@@ -1,21 +1,5 @@
-.imga{
-    width: 90%;
-    height: 90%;
-
-}
-.categoryTitle{
-    width: 90%;
-    height: 10%;
-    margin-top: 2%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    color: white;
-    font-size: 24px;
-}
 .category{
-    width: 95%;
+    width: 24%;
     height: 95%;
     display: flex;
     flex-direction: column;
@@ -31,4 +15,51 @@
 .category:hover .imga{
     transform: scale(1.16);
     transition: all 0.4s ease-out;
+}
+
+.categoryTitle{
+    width: 90%;
+    height: 10%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    font-size: 24px;
+}
+
+.imga{
+    width: 90%;
+    height: 88%;
+}
+
+@media screen and (min-width: 300px) {
+    .category{
+        width: 48%;
+        height: 82%;
+        margin-top: 5%;
+    }
+    .categoryTitle{
+        font-size: 16px;
+    }
+}
+@media screen and (min-width: 800px) {
+    .category{
+        width: 48%;
+        height: 82%;
+        margin-top: 5%;
+    }
+    .categoryTitle{
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .category{
+        width: 24%;
+        height: 95%;
+        margin-top: 0;
+    }
+
 }

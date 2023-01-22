@@ -110,7 +110,10 @@ export default function SignIn({setToken}) {
                             </div>
 
                             <div className="SubmitSignin">
-                                <BubblyButton name={"Sign in"} onClick={SubmitHandler} />
+                                <div className="signinbtt">
+                                    <BubblyButton name={"Sign in"} onClick={SubmitHandler} />
+                                </div>
+
                             </div>
                         </form>
                     </div>

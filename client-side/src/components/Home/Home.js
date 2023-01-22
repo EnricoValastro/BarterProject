@@ -38,7 +38,7 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/firstincategory/informatica/'+token)
+        axios.get('http://localhost:4000/api/product/search/firstincategory/Informatica/'+token)
             .then(response => {
                 setInfProducts(response.data);
             })
@@ -47,7 +47,7 @@ export default function Home() {
             })
     }, []);
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/firstincategory/arredamento/'+token)
+        axios.get('http://localhost:4000/api/product/search/firstincategory/Arredamento/'+token)
             .then(response => {
                 setArrProducts(response.data);
             })
@@ -56,7 +56,7 @@ export default function Home() {
             })
     }, []);
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/firstincategory/sport/'+token)
+        axios.get('http://localhost:4000/api/product/search/firstincategory/Sport/'+token)
             .then(response => {
                 setSportProducts(response.data);
             })
@@ -65,7 +65,7 @@ export default function Home() {
             })
     }, []);
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/firstincategory/abbigliamento/'+token)
+        axios.get('http://localhost:4000/api/product/search/firstincategory/Abbigliamento/'+token)
             .then(response => {
                 setAbbProducts(response.data);
             })
@@ -82,16 +82,11 @@ export default function Home() {
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
-                    autoplay={{
-                        delay: 5000,
-                        disableOnInteraction: false,
-                        pauseOnMouseEnter: true,
-                    }}
                     pagination={{
                         clickable: true,
                     }}
                     navigation={true}
-                    modules={[Autoplay, Pagination, Navigation]}
+                    modules={[ Pagination, Navigation]}
                     className="mySwiper"
                 >
                     {topProducts.map((p) => (

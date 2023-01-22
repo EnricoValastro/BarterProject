@@ -31,6 +31,7 @@ function App() {
                     </Route>
                     <Route path="/search" element={<SearchPage />}>
                     </Route>
+                    <Route path="/search/result/" element={<HomePage />}></Route>
                     <Route path="/profile" element={<ProfilePage />}>
                     </Route>
                     <Route path="/marketplace" element={<MarketplacePage />}>

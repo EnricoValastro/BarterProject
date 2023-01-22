@@ -119,14 +119,171 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
-.categoryItem{
-    width: 24%;
+
+.hidden{
+    display: none;
+}
+
+/* Category product view */
+
+.productOfCategory{
+    width: 100%;
     height: 100%;
-    margin-bottom: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
+.navigation{
+    width: 90%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2% 0;
+}
+.navigationText{
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+.navigationIcon{
+    color: white;
+    cursor: pointer;
+}
+.res{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.pr{
+    width: 25%;
+    height: 55%;
+    margin-bottom: 5%;
+}
+.emptyPage{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.emptyPageTitle{
+    color: white;
+    font-size: 1.8em;
+    font-weight: 600;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
 
+}
+.emptyPageImg{
+    width: 30%;
+    height: 80%;
+}
+@media screen and (min-width: 300px) {
+    .pr{
+        width: 100%;
+        height: 60%;
+        margin: 0;
+    }
+    .emptyPageTitle{
+        color: white;
+        font-size: 1.2em;
+        margin-top: 25%;
+    }
+    .emptyPageImg{
+        width: 90%;
+        height: 80%;
+    }
+}
+@media screen and (min-width: 700px) {
+    .pr{
+        width: 50%;
+        height: 50%;
+        margin: 0;
+    }
+    .res{
+        justify-content: space-evenly;
+    }
+    .emptyPageTitle{
+        color: white;
+        font-size: 1.6em;
+        margin-top: 5%;
+    }
+    .emptyPageImg{
+        width: 50%;
+        height: 75%;
+    }
 
+}
+@media screen and (min-width: 990px) {
+    .pr{
+        width: 33%;
+        height: 40%;
+        margin-bottom: 2%;
+    }
+
+    .res{
+        justify-content: flex-start;
+    }
+    .emptyPageTitle{
+        color: white;
+        font-size: 1.8em;
+        margin-top: 5%;
+    }
+    .emptyPageImg{
+        width: 30%;
+        height: 80%;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .pr{
+        width: 25%;
+        height: 55%;
+        margin-bottom: 5%;
+    }
+}
+@media screen and (max-width: 1400px) {
+    .searchBarContainer{
+        width: 90%;
+        margin: 0 5%;
+    }
+    .searchBar{
+        width: 100%;
+        height: 40%;
+        margin: 0 ;
+    }
+    .searchBar:hover{
+        width: 100%;
+    }
+    .focused{
+        width: 100%;
+        border: none;
+    }
+    .categoryListTitle{
+        width: 90%;
+        height: 5%;
+        margin: 0 5%;
+        color: white;
+        font-size: 1.9em;
+        font-weight: 600;
+    }
+    .categoryListRow{
+        height: auto;
+    }
+
+}
 
 
 

@@ -155,6 +155,9 @@
     align-items: center;
     justify-content: center;
 }
+.signupbtt{
+    width: 30%;
+}
 .errorMsg{
     display: flex;
     flex-direction: row;

@@ -56,7 +56,7 @@
     position: absolute;
     width: 0%;
     height: 2px;
-    background-color: white;
+    background-color: #317AC7;
     transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
     transition-duration: 800ms;
     transition-property: width, left;

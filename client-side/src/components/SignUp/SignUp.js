@@ -220,7 +220,10 @@ function Signup(){
                                 </div>
 
                                 <div id="subButton" className="subButton hidden">
-                                    <BubblyButton name={"Signup"} onClick={SubmitHandler}/>
+                                    <div className="signupbtt">
+                                        <BubblyButton name={"Signup"} onClick={SubmitHandler}/>
+                                    </div>
+
                                 </div>
 
                             </form>

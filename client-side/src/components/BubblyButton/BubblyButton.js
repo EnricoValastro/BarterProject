@@ -17,9 +17,7 @@ function BubblyButton(props) {
     }
 
     return (
-        <div>
-          <button className="bubblyButton" onClick={animateButton}>{props.name}</button>
-        </div>
+        <button className="bubblyButton" onClick={animateButton}>{props.name}</button>
     );
 }
 
