@@ -1,17 +1,3 @@
-.bttContainer{
-    transform: translate(-50%, 125%);
-    width: 60%;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    opacity: 0;
-    transition: 0.3s ease-out;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
 .productCard{
     width: 96%;
     height: 96%;
@@ -21,16 +7,12 @@
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 10px 15px 0 #343e4f;
+    cursor: pointer;
 }
 
 .productCard:hover{
     transform: scale(1.06);
     transition: all 0.4s ease-out;
-}
-
-.productCard:hover .bttContainer{
-    transform: translate(-50%, 50%);
-    opacity: 1;
 }
 
 .productImage{
@@ -52,9 +34,9 @@
 
 .productDescription{
     width: 90%;
-    height: 40%;
-    max-height: 40%;
-    margin: 0 5% 5% 5%;
+    height: 43%;
+    max-height: 43%;
+    margin: 0 5% 2% 5%;
     background: white;
     border-radius: 0 0 7px 7px;
     display: flex;
@@ -62,8 +44,8 @@
 }
 
 .productName{
-    height: 15%;
-    margin: 5% 0 0 0;
+    height: 20%;
+    margin: 2% 0 0 0;
     padding: 0;
     font-size: 24px;
     color: #317AC7;
@@ -71,8 +53,8 @@
 }
 
 .productText{
-    height: 78%;
-    max-height: 70%;
+    height: 76%;
+    max-height: 76%;
     margin-top: 2%;
     color: gray;
     overflow: scroll;
@@ -206,9 +188,6 @@
     height: 100%;
 }
 @media screen and (max-width: 800px){
-    .bttContainer{
-        display: none;
-    }
     .moreBtt{
         display: flex;
         height: 20%;
@@ -216,20 +195,19 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        margin-bottom: 1%;
     }
     .productDescription{
         margin: 0 5% 2% 5%;
         height: 43%;
-        max-height: 45%;
+        max-height: 43%;
     }
     .productName{
         height: 15%;
         margin: 2% 0 0 0;
     }
     .productText{
-        height: 70%;
-        max-height: 70%;
+        height: 63%;
+        max-height: 63%;
         margin-top: 0;
     }
     .productCard:hover{
@@ -239,9 +217,6 @@
 
 }
 @media screen and (max-width: 880px){
-    .bttContainer{
-        display: none;
-    }
     .moreBtt{
         display: flex;
         height: 20%;
@@ -256,7 +231,7 @@
     .productDescription{
         margin: 0 5% 2% 5%;
         height: 43%;
-        max-height: 45%;
+        max-height: 43%;
     }
 
     .modalviewContainer{

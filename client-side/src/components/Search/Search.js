@@ -17,6 +17,8 @@ export default function Search() {
 
     const {token, setToken} = useToken();
     const [catProduct, setCatProduct] = useState([])
+    const [searchProduct, setSearchProduct] = useState([])
+
     function focus(){
         document.getElementById("searchInput").focus();
         document.getElementById("searchBar").classList.add("focused");
@@ -30,15 +32,38 @@ export default function Search() {
     }
     function clearInput(){
         document.getElementById("searchInput").value = "";
+        document.getElementById("noProduct2").classList.add("hidden");
+        document.getElementById("t").classList.add("hidden");
         document.getElementById("cancelIcon").classList.add("hidden");
+        setCatProduct([]);
+        document.getElementById("x").classList.remove("hidden");
     }
-    function showDet(event){
+    function searchForProduct(event){
         event.preventDefault();
+        document.getElementById("noProduct2").classList.add("hidden");
+        setSearchProduct([]);
+        const name = document.getElementById("searchInput").value;
+        document.getElementById("x").classList.add("hidden");
+        document.getElementById("t").classList.remove("hidden");
+        axios.get("http://localhost:4000/api/product/search/getproductbyname/"+name+"/"+token)
+            .then(response => {
+                console.log(response.data);
+                if(response.data.length === 0){
+                    document.getElementById("noProduct2").classList.remove("hidden");
+                }
+                setSearchProduct(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     function showCategoryProduct (category)  {
         setCatProduct([]);
-        axios.get("http://localhost:4000/api/product/search/bycategory/"+category+"/"+token)
+        document.getElementById("x").classList.add("hidden");
+        document.getElementById("y").classList.add("hidden");
+        document.getElementById("z").classList.remove("hidden");
+        axios.get("http://localhost:4000/api/product/search/getproductbycategory/"+category+"/"+token)
             .then(response => {
                 if(response.data.length === 0){
                     document.getElementById("noProduct").classList.remove("hidden");
@@ -48,16 +73,10 @@ export default function Search() {
             .catch(error => {
                 console.log(error);
             });
-        const x = document.getElementById("x");
-        const y = document.getElementById("y");
-        const z = document.getElementById("z");
-        x.classList.add("hidden");
-        y.classList.add("hidden");
-        z.classList.remove("hidden");
-
     }
 
     function resumeSearchPage(){
+        setCatProduct([]);
         const x = document.getElementById("x");
         const y = document.getElementById("y");
         const z = document.getElementById("z");
@@ -78,7 +97,7 @@ export default function Search() {
                     <div className="searchIconContainer">
                         <SearchIcon className="searchIcon" />
                     </div>
-                    <form className="search-form" onSubmit={showDet}>
+                    <form className="search-form" onSubmit={searchForProduct}>
                         <input id="searchInput" type="text" placeholder="Cerca su Barter" className="searchInput" onChange={showCancelBtt}/>
                     </form>
 
@@ -144,7 +163,25 @@ export default function Search() {
                     <Footer />
                 </div>
 
+
             </div>
+
+            <div id="t" className="searchResultContainer hidden">
+                <div id="noProduct2" className="emptyPage hidden">
+                    <div className="emptyPageTitle">Sembra che non ci sia ancora nulla qui !</div>
+                    <img  className="emptyPageImg" src={"img/EmptyPage.png"} alt=""/>
+                </div>
+                <div className="res">
+                    {searchProduct.map((p) => (
+                        <div key={"search"+p._id} className="pr">
+                            <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
+                        </div>
+                    ))}
+                    <Footer />
+                </div>
+
+            </div>
+
         </div>
     );
 }

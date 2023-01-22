@@ -28,7 +28,7 @@ export default function Home() {
     const [topProducts, setTopProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/topproducts/'+token)
+        axios.get('http://localhost:4000/api/product/home/gettopproducts/'+token)
             .then(response => {
                 setTopProducts(response.data);
             })
@@ -38,7 +38,7 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/firstincategory/Informatica/'+token)
+        axios.get('http://localhost:4000/api/product/home/getfirstproductincategory/Informatica/'+token)
             .then(response => {
                 setInfProducts(response.data);
             })
@@ -47,7 +47,7 @@ export default function Home() {
             })
     }, []);
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/firstincategory/Arredamento/'+token)
+        axios.get('http://localhost:4000/api/product/home/getfirstproductincategory/Arredamento/'+token)
             .then(response => {
                 setArrProducts(response.data);
             })
@@ -56,7 +56,7 @@ export default function Home() {
             })
     }, []);
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/firstincategory/Sport/'+token)
+        axios.get('http://localhost:4000/api/product/home/getfirstproductincategory/Sport/'+token)
             .then(response => {
                 setSportProducts(response.data);
             })
@@ -65,7 +65,7 @@ export default function Home() {
             })
     }, []);
     useEffect(() => {
-        axios.get('http://localhost:4000/api/product/search/firstincategory/Abbigliamento/'+token)
+        axios.get('http://localhost:4000/api/product/home/getfirstproductincategory/Abbigliamento/'+token)
             .then(response => {
                 setAbbProducts(response.data);
             })

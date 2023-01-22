@@ -3,7 +3,6 @@ import {Box, Modal} from "@mui/material";
 import axios from "axios";
 import CloseIcon from '@mui/icons-material/Close';
 
-import MoreButton from "../MoreButton/MoreButton";
 import BubblyButton from "../BubblyButton/BubblyButton";
 import useToken from "../App/useToken";
 
@@ -40,7 +39,7 @@ export default function ProductCard(props) {
     }, [props.id, props.name, props.value, props.desc, props.category, props.status, props.location, props.date, props.user]);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/product/search/imgbyid/"+props.id)
+        axios.get("http://localhost:4000/api/product/getimgbyid/"+props.id)
             .then(response => {
                 setImg(response.data[0].image.data.data);
                 const imgTag = document.createElement("img");
@@ -56,7 +55,7 @@ export default function ProductCard(props) {
     }, []);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/product/getuserproductfromtoken/"+token)
+        axios.get("http://localhost:4000/api/product/getuserproductbytoken/"+token)
             .then(response => {
                 setProduct(response.data);
             })
@@ -95,7 +94,7 @@ export default function ProductCard(props) {
 
     return (
         <>
-            <div className="productCard">
+            <div className="productCard" onClick={handleOpen}>
                 <div id={props.id} className="productImage">
 
                 </div>
@@ -110,9 +109,6 @@ export default function ProductCard(props) {
                         <div className="mbtt"><BubblyButton onClick={handleOpen} name={"Scopri"}/></div>
                     </div>
 
-                </div>
-                <div className="bttContainer">
-                    <MoreButton onClick={handleOpen}/>
                 </div>
             </div>
 

@@ -34,7 +34,7 @@ export default function CarouselProductCard(props) {
     }, [props.id, props.name, props.value, props.desc, props.category, props.status, props.location, props.date, props.user]);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/product/search/imgbyid/"+props.id)
+        axios.get("http://localhost:4000/api/product/getimgbyid/"+props.id)
             .then(response => {
                 let imgTag = document.createElement("img");
                 imgTag.src = "data:image/png;base64," + arrayBufferToBase64(response.data[0].image.data.data);
@@ -49,7 +49,7 @@ export default function CarouselProductCard(props) {
     }, []);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/product/getuserproductfromtoken/"+token)
+        axios.get("http://localhost:4000/api/product/getuserproductbytoken/"+token)
             .then(response => {
                 setProduct(response.data);
             })

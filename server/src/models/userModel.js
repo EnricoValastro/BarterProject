@@ -1,5 +1,3 @@
-const bcrypt = require('bcryptjs');
-
 module.exports = function(mongoose) {
     const userSchema = new mongoose.Schema({
         email: {
@@ -30,15 +28,5 @@ module.exports = function(mongoose) {
         }]
     });
 
-    userSchema.pre('save',  function(next) {
-        let user = this;
-        bcrypt.hash(user.password, 10, function(err, hash) {
-            if (err) {
-                next(err);
-            }
-            user.password = hash;
-            next();
-        });
-    });
     return mongoose.model('User', userSchema);
 };

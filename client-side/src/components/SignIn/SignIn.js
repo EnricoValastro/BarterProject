@@ -52,7 +52,6 @@ export default function SignIn({setToken}) {
         }
         else {
             document.getElementById('errorBoxSignin').classList.remove('hidden');
-
         }
     }
 

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const User = require('../models/userModel')(mongoose);
 const responses = require('./responses/response');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const signup = async (req, res) => {
-    const newUser = new User(req.body);
-     await User.findOne({email: newUser.email}).then(profile => {
+    const newUser = new User(req.body)
+    await User.findOne({email: newUser.email}).then(profile => {
         if (!profile) {
             // Token
             const token = jwt.sign(
@@ -33,27 +32,28 @@ const login =  (req, res) =>{
     try {
         // Get user input
         const { email, password } = req.body;
+        console.log(email);
+        console.log(password)
         // Validate user input
         if (!(email && password)) {
             responses.BadRequestError(res, {message: 'All input is required'});
         }
-        const user =  User.findOne({ email });
-        User.find({email: email}).select("password token -_id").then(result => {
-
-            if (user && ( bcrypt.compare(password, result[0].password))) {
+        User.find({ email: email, password: password})
+            .then(result =>{
                 res.send({
-                    token: result[0].token,
+                    token: result[0].token
                 });
-            } else {
+            })
+            .catch(err =>{
                 responses.BadRequestError(res, {message: 'Invalid credentials'});
-            }
-        });
+            })
+
     } catch (err) {
         console.log(err);
     }
 }
 
-const email =  (req, res) => {
+const emailValidation =  (req, res) => {
     const { email } = req.body;
     User.findOne({email: email}).then( profile => {
         if (profile) {
@@ -83,6 +83,6 @@ const getUserFromToken = (req, res) => {
 module.exports = {
     signup,
     login,
-    email,
+    emailValidation,
     getUserFromToken
 }

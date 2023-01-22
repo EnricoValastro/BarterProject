@@ -56,7 +56,7 @@ const createProduct = (req, res) => {
 }
 
 /* Ritrovare l'immagine di un prodotto dato l'id del prodotto */
-const searchProductImgById = (req, res) => {
+const getProductImgFromId = (req, res) => {
      Product.find({_id: req.params.id}).select("image -_id")
         .then(result => {
             res.send(result)
@@ -68,7 +68,7 @@ const searchProductImgById = (req, res) => {
 }
 
 /* Ritrovare i primi 8 prodotti (- image) data una categoria */
-const searchFirstProductByCategory =  (req,res) =>{
+const getFirstProducFromCategory =  (req,res) =>{
 
     User.find({token: req.params.token}).select("_id")
         .then(result => {
@@ -109,7 +109,7 @@ const getUserProductFromToken = (req, res) => {
 }
 
 /* Ritrova i dati (-image) degli ultimi 8 prodotti aggiunti */
-const searchTopProducts = (req, res) => {
+const getTopProducts = (req, res) => {
 
     User.find({token: req.params.token}).select("_id")
         .then(result => {
@@ -147,12 +147,30 @@ const getProductFromCategory = (req, res) => {
     });
 }
 
+const getProductFromName = (req, res) => {
+    User.find({token: req.params.token}).select("_id")
+        .then(result => {
+            Product.find({name: { "$regex": req.params.name, "$options": "i" }, userID: {$ne: result[0]._id.toString()}}).select("-image")
+                .then(result => {
+                    res.send(result);
+                })
+                .catch(err => {
+                    res.send(err)
+                })
+                .catch(err => {
+                    responses.InternalServerError(res, {message: err.message});
+                });
+        }).catch(err => {
+    });
+}
+
 module.exports = {
     createProduct,
     upload,
-    searchProductImgById,
-    searchFirstProductByCategory,
+    getProductImgFromId,
+    getFirstProducFromCategory,
     getUserProductFromToken,
-    searchTopProducts,
-    getProductFromCategory
+    getTopProducts,
+    getProductFromCategory,
+    getProductFromName
 }
