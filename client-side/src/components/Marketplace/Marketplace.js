@@ -6,6 +6,7 @@ import Navbar from "../Navbar/Navbar";
 import './Marketplace.css';
 
 export default function Marketplace() {
+
     const { token, setToken } = useToken();
 
     const [name, setName] = useState("");
@@ -22,11 +23,6 @@ export default function Marketplace() {
     }).catch(err => {
         console.log(err);
     });
-
-
-    if(!token){
-        window.location.href = '/signin';
-    }
 
     function handleName(e){
         setName(e.target.value)
