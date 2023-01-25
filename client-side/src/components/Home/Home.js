@@ -15,6 +15,7 @@ import './Home.css';
 
 import axios from "axios";
 import useToken from "../App/useToken";
+import {ToastContainer} from "react-toastify";
 
 export default function Home() {
 
@@ -99,7 +100,6 @@ export default function Home() {
             </div>
 
             <div className="secContainer">
-
                 <div className="productSection">
                     <div className="secTitle">
                         Informatica
@@ -263,9 +263,9 @@ export default function Home() {
 
                     </div>
                 </div>
-
                 <Footer />
             </div>
+
         </div>
     );
 }

@@ -32,8 +32,6 @@ const login =  (req, res) =>{
     try {
         // Get user input
         const { email, password } = req.body;
-        console.log(email);
-        console.log(password)
         // Validate user input
         if (!(email && password)) {
             responses.BadRequestError(res, {message: 'All input is required'});

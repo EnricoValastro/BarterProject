@@ -2,6 +2,7 @@ import React from "react";
 
 import useToken from '../../components/App/useToken';
 import Marketplace from "../../components/Marketplace/Marketplace";
+import Market from "../../components/Market/Market";
 
 export default function MarketplacePage() {
 
@@ -12,8 +13,6 @@ export default function MarketplacePage() {
     }
 
     return(
-
-        <Marketplace />
-
+        <Market />
     )
 }

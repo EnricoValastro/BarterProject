@@ -12,6 +12,7 @@ import ProfilePage from "../../Pages/ProfilePage/ProfilePage";
 import MarketplacePage from "../../Pages/MarketplacePage/MarketplacePage";
 import SignupPage from "../../Pages/SignupPage/SignupPage";
 import SigninPage from "../../Pages/SigninPage/SigninPage";
+import {ToastContainer} from "react-toastify";
 function App() {
 
     const { token, setToken } = useToken();
@@ -40,6 +41,8 @@ function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
+
+            <ToastContainer />
         </div>
 
     );

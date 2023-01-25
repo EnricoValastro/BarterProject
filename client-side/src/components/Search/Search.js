@@ -12,6 +12,7 @@ import ProductCard from "../ProductCard/ProductCard";
 
 import axios from "axios";
 import useToken from "../App/useToken";
+import {ToastContainer} from "react-toastify";
 
 export default function Search() {
 
@@ -179,9 +180,7 @@ export default function Search() {
                     ))}
                     <Footer />
                 </div>
-
             </div>
-
         </div>
     );
 }

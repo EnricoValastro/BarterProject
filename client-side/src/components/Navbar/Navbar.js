@@ -63,13 +63,13 @@ export default function Navbar(props) {
                     <div id="iconSearch" className="navItem">
                         <Link to="/search" className="icons">
                             <span><Search className="Icon"/></span>
-                            <span>Search</span>
+                            <span>Cerca</span>
                         </Link>
                     </div>
                     <div className="navItem" id="iconMarket">
                         <Link  to="/marketplace" className="icons">
                             <span><Storefront className="Icon"/></span>
-                            <span>Marketplace</span>
+                            <span>La tua vetrina</span>
                         </Link>
 
                     </div>

@@ -4,6 +4,8 @@ import './CarouselProductCard.css';
 import BubblyButton from "../BubblyButton/BubblyButton";
 import useToken from "../App/useToken";
 import axios from "axios";
+import {toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CarouselProductCard(props) {
 
@@ -68,17 +70,25 @@ export default function CarouselProductCard(props) {
         return window.btoa( binary );
     }
 
-
     /* Funzione per inviare notifica di scambio prodotto ad un altro utente, necessita recuperare valore della select */
     function someFun(){
-        console.log("someFun");
+        toast.success('Trattativa avviata !', {
+            position: "bottom-left",
+            autoClose: 6000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     }
 
     return (
        <div id="CarouselProductCard">
+
            <div className="leftContent">
-               <div id={props.count} className="carouselBottomContentImg">
-               </div>
+               <div id={props.count} className="carouselBottomContentImg"></div>
            </div>
 
            <div className="rightContent">
@@ -113,8 +123,10 @@ export default function CarouselProductCard(props) {
                    <div className="carouselCardOfferBtt">
                        <BubblyButton name={"Trade it!"} onClick={someFun} />
                    </div>
+
                </div>
            </div>
+
        </div>
     );
 }

@@ -14,7 +14,7 @@
 }
 .category:hover .imga{
     transform: scale(1.16);
-    transition: all 0.4s ease-out;
+
 }
 
 .categoryTitle{
@@ -32,6 +32,7 @@
 .imga{
     width: 90%;
     height: 88%;
+    transition: all 0.8s ease-out;
 }
 
 @media screen and (min-width: 300px) {

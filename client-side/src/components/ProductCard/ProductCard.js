@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
+import {toast} from "react-toastify";
 import {Box, Modal} from "@mui/material";
 import axios from "axios";
 import CloseIcon from '@mui/icons-material/Close';
@@ -7,6 +8,8 @@ import BubblyButton from "../BubblyButton/BubblyButton";
 import useToken from "../App/useToken";
 
 import "./ProductCard.css";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function ProductCard(props) {
 
@@ -56,6 +59,7 @@ export default function ProductCard(props) {
 
     useEffect(() => {
         axios.get("http://localhost:4000/api/product/getuserproductbytoken/"+token)
+
             .then(response => {
                 setProduct(response.data);
             })
@@ -66,7 +70,17 @@ export default function ProductCard(props) {
 
     /* Funzione per inviare notifica di scambio prodotto ad un altro utente, necessita recuperare valore della select */
     function someFun(){
-        console.log("someFun");
+        handleClose();
+        toast.success('Trattativa avviata !', {
+            position: "bottom-left",
+            autoClose: 6000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     }
 
     function arrayBufferToBase64( buffer ) {
@@ -85,9 +99,9 @@ export default function ProductCard(props) {
 
     function afterOpenModal(){
         const modalImg = document.createElement("img")
+        const modIm = document.getElementById("modalview"+id);
         modalImg.src = "data:image/png;base64," + arrayBufferToBase64(img);
         modalImg.classList.add("modalImg");
-        const modIm = document.getElementById("modalview"+id);
         modIm.innerHTML = "";
         modIm.appendChild(modalImg);
     }
@@ -95,21 +109,16 @@ export default function ProductCard(props) {
     return (
         <>
             <div className="productCard" onClick={handleOpen}>
-                <div id={props.id} className="productImage">
 
-                </div>
+                <div id={props.id} className="productImage"></div>
                 <div className="productDescription">
-                    <p className="productName">
-                        {name}
-                    </p>
-                    <span className="productText" >
-                        {description}
-                    </span>
+                    <p className="productName"> {name} </p>
+                    <span className="productText" > {description} </span>
                     <div className="moreBtt">
                         <div className="mbtt"><BubblyButton onClick={handleOpen} name={"Scopri"}/></div>
                     </div>
-
                 </div>
+
             </div>
 
             <Modal
