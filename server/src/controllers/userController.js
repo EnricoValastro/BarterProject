@@ -9,7 +9,7 @@ const signup = async (req, res) => {
         if (!profile) {
             // Token
             const token = jwt.sign(
-                { user_id: newUser._id, email },
+                { user_id: newUser._id, email: newUser.email },
                 process.env.TOKEN_KEY,
                 {
                     algorithm: "HS512",

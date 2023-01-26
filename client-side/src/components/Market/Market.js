@@ -14,6 +14,8 @@ import {toast, ToastContainer} from "react-toastify";
 import axios from "axios";
 import useToken from "../App/useToken";
 import MyProductCard from "../MyProductCard/MyProductCard";
+import {SwiperSlide} from "swiper/react";
+import ProductCard from "../ProductCard/ProductCard";
 
 export default function Market(){
 
@@ -36,11 +38,14 @@ export default function Market(){
     const [newProductCategory, setNewProductCategory] = useState("");
     const [newProductStatus, setNewProductStatus] = useState("");
 
+    /* My product */
+    const [myProd, setMyProd] = useState([]);
+
     /* Select option list */
     const category = ["Informatica", "Smartphone", "Console&Game", "Arredamento", "Elettrodomestici", "Arte", "Antiquariato", "Fotografia", "Sport", "Libri", "Musica", "Pelletteria", "Abbigliamento", "Gioielleria", "Orologi"];
     const status = ["Nuovo", "Ottimo", "Buono", "Discreto", "Pessimo"];
 
-    /* Retrive userId from Token */
+    /* Retrieve userId from Token */
     useEffect(() => {
         axios.get("http://localhost:4000/api/user/" + token).then(data => {
             setUserId(data.data._id);
@@ -49,6 +54,15 @@ export default function Market(){
         });
     }, []);
 
+    /* Retrieve user product from id */
+    useEffect(() => {
+        axios.get("http://localhost:4000/api/product/market/getmyproductyid/" + token).then(data => {
+            console.log(data.data);
+            setMyProd(data.data);
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
 
     /* Modal state controllers */
     const handleNewProductOpen = () => {
@@ -243,19 +257,22 @@ export default function Market(){
                     </Box>
                 </Modal>
 
-
-
-
-
+            </div>
+            <div className="myProductTitle">
+                La tua vetrina
             </div>
             <div className="myProduct">
-                <div className="myProductC"><MyProductCard /></div>
-                <div className="myProductC"><MyProductCard /></div>
-                <div className="myProductC"><MyProductCard /></div>
-                <div className="myProductC"><MyProductCard /></div>
-                <div className="myProductC"><MyProductCard /></div>
+                {
+                    myProd.map((p) => (
+                        <div className="myProductC">
+                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status}  id={p._id} />
+                        </div>
+                    ))
+                }
+                <Footer />
+
             </div>
-            <Footer />
+
         </div>
     )
 

@@ -145,7 +145,8 @@
 }
 .navigationText{
     color: white;
-    font-size: 22px;
+    font-size: 1.9em;
+    font-weight: 600;
     cursor: pointer;
 }
 .navigationIcon{

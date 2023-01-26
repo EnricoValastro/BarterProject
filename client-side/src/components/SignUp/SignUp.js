@@ -31,6 +31,7 @@ function Signup(){
             password: password
         }).then((response)=>{
             if(response.data.error){
+
                 console.log(response.data.error, {type: "error"});
             }
             else{

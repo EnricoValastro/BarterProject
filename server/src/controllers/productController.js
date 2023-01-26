@@ -164,6 +164,21 @@ const getProductFromName = (req, res) => {
     });
 }
 
+const getMyProductFromToken = (req, res) => {
+    User.find({token: req.params.token}).select("_id")
+        .then(result => {
+
+            Product.find({userID: result[0]._id}).select("-image")
+                .then(result => {
+                    res.send(result);
+                })
+                .catch(err => {
+                    responses.InternalServerError(res, {message: err.message});
+                });
+        }).catch(err => {
+        });
+}
+
 module.exports = {
     createProduct,
     upload,
@@ -172,5 +187,6 @@ module.exports = {
     getUserProductFromToken,
     getTopProducts,
     getProductFromCategory,
-    getProductFromName
+    getProductFromName,
+    getMyProductFromToken
 }
