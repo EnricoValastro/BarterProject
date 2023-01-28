@@ -179,6 +179,51 @@ const getMyProductFromToken = (req, res) => {
         });
 }
 
+const deleteProductFromId = (req, res) => {
+
+    User.find({token: req.params.token}).select("products -_id").then(
+        result => {
+            result[0].products.remove(req.params.id);
+            User.findOneAndUpdate({token: req.params.token}, {products: result[0].products}, {new: true}).then(
+                result => {
+                    Product.findOneAndDelete({_id: req.params.id}).then(
+                        result => {
+                            responses.OkResponse(res, {message: "Product deleted successfully"});
+                        }
+                    ).catch(err => {
+                        responses.InternalServerError(res, {message: err.message});
+                    })
+                })
+    })
+}
+
+const editProductWithImgFromId = (req, res) => {
+    console.log(req.body);
+    const newP = {
+        name: req.body.name,
+        description: req.body.description,
+        value: req.body.value,
+        category: req.body.category,
+        image: {
+            data: fs.readFileSync(path.resolve(__dirname, "../../static/uploads/" + req.body.image.filename)),
+            contentType: req.body.image.type
+        },
+        location: req.body.location,
+        status: req.body.status
+    }
+    Product.findOneAndUpdate({_id: req.params.id}, newP,{new: true}).then(
+        result => {
+            responses.OkResponse(res, {message: "Product edited successfully"});
+        })
+        .catch(err => {
+            responses.InternalServerError(res, {message: err.message});
+        });
+
+}
+const response = (req, res) => {
+    res.send("ok");
+}
+
 module.exports = {
     createProduct,
     upload,
@@ -188,5 +233,8 @@ module.exports = {
     getTopProducts,
     getProductFromCategory,
     getProductFromName,
-    getMyProductFromToken
+    getMyProductFromToken,
+    deleteProductFromId,
+    editProductWithImgFromId,
+    response
 }

@@ -111,3 +111,102 @@
 .myProductIcon {
     color: white;
 }
+
+
+.deleteModalContainer{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.deleteModal{
+    width: 45%;
+    height: 35%;
+    background-color: rgba(217, 227, 231, 0.9);
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.deleteModalText{
+    width: 90%;
+    height: 40%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.9em;
+    font-family: Ubuntu;
+    color: #343e4f;
+}
+.deleteModalBtt{
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.deleteModalBttOk{
+    width: 25%;
+    height: 35%;
+    font-family: Ubuntu;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 0 #343e4f;
+    color: white;
+    background-color: #EE6C4D;
+    transition: ease-out 0.5s;
+    cursor: pointer;
+}
+.deleteModalBttOk:hover{
+    background-color: white;
+    color: #EE6C4D;
+    transform: scale(1.01);
+}
+.deleteModalBttKo{
+    width: 25%;
+    height: 35%;
+    font-family: Ubuntu;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 0 #343e4f;
+    background-color: white;
+    color: #317AC7;
+    transition: ease-out 0.5s;
+    cursor: pointer;
+}
+.deleteModalBttKo:hover{
+    color: white;
+    background-color: #317AC7;
+    transform: scale(1.01);
+}
+
+@media screen and (max-width: 900px){
+    .sideBar{
+        opacity: 1;
+    }
+    .deleteModal {
+        width: 90%;
+        height: 50%;
+    }
+    .deleteModalBttKo{
+        width: 45%;
+        height: 25%;
+    }
+    .deleteModalBttOk{
+        width: 45%;
+        height: 25%;
+    }
+}

@@ -8,11 +8,11 @@
     background-color: white;
     box-shadow: 0 10px 15px 0 #343e4f;
     cursor: pointer;
+    transition: all 0.6s ease-out;
 }
 
 .productCard:hover{
     transform: scale(1.06);
-    transition: all 0.4s ease-out;
 }
 
 .productImage{
@@ -124,8 +124,8 @@
 }
 
 .modalviewRightCont{
-    max-width: 50%;
-    width: 50%;
+    max-width: 55%;
+    width: 55%;
     height: 85%;
     margin-left: 2%;
     display: flex;
@@ -179,6 +179,7 @@
     height: 80%;
     width: 70%;
     margin-top: 2%;
+    box-shadow: 0 5px 10px 0 #343e4f;
 }
 
 .moreBtt{

@@ -120,7 +120,7 @@ export default function Search() {
                     <CategoryCard name={"Pc.png"} category={"Informatica"} onClick={showCategoryProduct} />
                     <CategoryCard name={"Smartphone.png"} category={"Smartphone"} onClick={showCategoryProduct} />
                     <CategoryCard name={"Tablet.png"} category={"Tablet"} onClick={showCategoryProduct} />
-                    <CategoryCard name={"Games.png"} category={"Console & Game"} onClick={showCategoryProduct} />
+                    <CategoryCard name={"Games.png"} category={"Console-Game"} onClick={showCategoryProduct} />
                 </div>
                 <div className="categoryListRow">
                     <CategoryCard name={"House.png"} category={"Arredamento"} onClick={showCategoryProduct} />

@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import {toast, ToastContainer} from "react-toastify";
+import axios from "axios";
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CloseIcon from "@mui/icons-material/Close";
@@ -7,15 +9,11 @@ import {Box, Modal} from "@mui/material";
 
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
+import BubblyButton from "../BubblyButton/BubblyButton";
+import MyProductCard from "../MyProductCard/MyProductCard";
+import useToken from "../App/useToken";
 
 import './Market.css';
-import BubblyButton from "../BubblyButton/BubblyButton";
-import {toast, ToastContainer} from "react-toastify";
-import axios from "axios";
-import useToken from "../App/useToken";
-import MyProductCard from "../MyProductCard/MyProductCard";
-import {SwiperSlide} from "swiper/react";
-import ProductCard from "../ProductCard/ProductCard";
 
 export default function Market(){
 
@@ -23,11 +21,8 @@ export default function Market(){
     const { token, setToken } = useToken();
     const [userId, setUserId] = useState();
 
-
     /* Modals state  */
     const [newProductOpen, setNewProductOpen] = useState(false);
-    const [editProductOpen, setEditProductOpen] = useState(false);
-    const [deleteProductOpen, setDeleteProductOpen] = useState(false);
 
     /* New product data */
     const [newProductName, setNewProductName] = useState("");
@@ -42,7 +37,7 @@ export default function Market(){
     const [myProd, setMyProd] = useState([]);
 
     /* Select option list */
-    const category = ["Informatica", "Smartphone", "Console&Game", "Arredamento", "Elettrodomestici", "Arte", "Antiquariato", "Fotografia", "Sport", "Libri", "Musica", "Pelletteria", "Abbigliamento", "Gioielleria", "Orologi"];
+    const category = ["Informatica", "Smartphone", "Console-Game", "Arredamento", "Elettrodomestici", "Arte", "Antiquariato", "Fotografia", "Sport", "Libri", "Musica", "Pelletteria", "Abbigliamento", "Gioielleria", "Orologi"];
     const status = ["Nuovo", "Ottimo", "Buono", "Discreto", "Pessimo"];
 
     /* Retrieve userId from Token */
@@ -54,10 +49,9 @@ export default function Market(){
         });
     }, []);
 
-    /* Retrieve user product from id */
+    /* Retrieve user product from token */
     useEffect(() => {
         axios.get("http://localhost:4000/api/product/market/getmyproductyid/" + token).then(data => {
-            console.log(data.data);
             setMyProd(data.data);
         }).catch(err => {
             console.log(err);
@@ -114,9 +108,8 @@ export default function Market(){
 
     /* Submit handler */
     const newProdSubmitHandler = (event) => {
-        console.log(userId);
         if(newProductName.length === 0 || newProductDescription.length === 0 || newProductValue.length === 0 || newProductLocation.length === 0 || newProductCategory.length === 0 || newProductStatus.length === 0 ){
-            toast.error('Ops! Sembra che tu non abbia compilato tutti i campi.', {
+            toast.error('Ops! Sembra che tu non abbia compilato tutti i campi. 🤔', {
                 position: "bottom-left",
                 autoClose: 6000,
                 hideProgressBar: false,
@@ -139,7 +132,7 @@ export default function Market(){
             formData.append("userID", userId);
             axios.post('http://localhost:4000/api/product/upload', formData)
                 .then(res => {
-                    toast.success(newProductName +' è stato aggiunto alla tua vetrina!', {
+                    toast.success(newProductName +' è stato aggiunto alla tua vetrina! 🥳', {
                         position: "bottom-left",
                         autoClose: 6000,
                         hideProgressBar: false,
@@ -263,8 +256,8 @@ export default function Market(){
             </div>
             <div className="myProduct">
                 {
-                    myProd.map((p) => (
-                        <div className="myProductC">
+                    myProd.map((p, index) => (
+                        <div key={index} className="myProductC">
                             <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status}  id={p._id} />
                         </div>
                     ))

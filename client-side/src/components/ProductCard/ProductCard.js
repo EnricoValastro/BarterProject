@@ -71,7 +71,7 @@ export default function ProductCard(props) {
     /* Funzione per inviare notifica di scambio prodotto ad un altro utente, necessita recuperare valore della select */
     function someFun(){
         handleClose();
-        toast.success('Trattativa avviata !', {
+        toast.success('Offerta inviata! 📬', {
             position: "bottom-left",
             autoClose: 6000,
             hideProgressBar: false,

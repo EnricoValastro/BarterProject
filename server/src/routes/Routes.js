@@ -2,6 +2,8 @@ const userController = require('../controllers/userController');
 const productController = require("../controllers/productController");
 
 module.exports = (app) => {
+    app.route('/api/product/update')
+        .post(productController.upload.single('image'), productController.response);
     app.route('/api/user/emailValidation')
         .post(userController.emailValidation);
     app.route('/api/user/signup')
@@ -26,4 +28,8 @@ module.exports = (app) => {
         .get(productController.getProductFromName);
     app.route('/api/product/market/getmyproductyid/:token')
         .get(productController.getMyProductFromToken);
+    app.route('/api/product/market/deleteproduct/:id/:token')
+        .delete(productController.deleteProductFromId);
+    app.route('/api/product/market/editproductwithimg/:id')
+        .put(productController.editProductWithImgFromId);
 }
