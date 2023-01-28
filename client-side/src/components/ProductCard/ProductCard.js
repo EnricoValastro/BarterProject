@@ -1,9 +1,11 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {toast} from "react-toastify";
-import {Box, Modal} from "@mui/material";
 import axios from "axios";
+
+import {Box, Modal} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
+import arrayBufferToBase64, {getUserProducts} from "../../Utility/Utils";
 import BubblyButton from "../BubblyButton/BubblyButton";
 import useToken from "../App/useToken";
 
@@ -11,11 +13,28 @@ import "./ProductCard.css";
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 export default function ProductCard(props) {
 
+    /* User's token */
     const {token, setToken} = useToken();
-    const [product, setProduct] = useState([]); //I prodotti dell'utente attivo
 
+    /* This user's product list*/
+    const [product, setProduct] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState();
+
+    /* Other user's products details */
+    const [pr, setPr] = useState({
+        id: "",
+        name: "",
+        value: "",
+        description: "",
+        category: "",
+        status: "",
+        location: "",
+        date: "",
+        user: ""
+    });
     const [id, setId] = useState();
     const [name, setName] = useState();
     const [value, setValue] = useState();
@@ -27,26 +46,35 @@ export default function ProductCard(props) {
     const [user, setUser] = useState();
     const [img, setImg] = useState([])
 
+    /* Product modal control */
     const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        setId(props.id);
-        setName(props.name);
-        setValue(props.value);
-        setDescription(props.desc);
-        setCategory(props.category);
-        setStatus(props.status);
-        setLocation(props.location);
-        setDate(props.date.split("T")[0]);
-        setUser(props.user);
-    }, [props.id, props.name, props.value, props.desc, props.category, props.status, props.location, props.date, props.user]);
+    const handleOpen = () => setOpen(true);
 
+    const handleClose = () => setOpen(false);
+
+    /* Set state from props */
+    useEffect(() => {
+        setPr({
+            id: props.id,
+            name: props.name,
+            value: props.value,
+            description: props.desc,
+            category: props.category,
+            status: props.status,
+            location: props.location,
+            date: props.date.split("T")[0],
+            user: props.user
+        });
+    }, [props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value]);
+
+    /* Retrieves image from database */
     useEffect(() => {
         axios.get("http://localhost:4000/api/product/getimgbyid/"+props.id)
             .then(response => {
                 setImg(response.data[0].image.data.data);
                 const imgTag = document.createElement("img");
-                imgTag.src = "data:image/png;base64," + arrayBufferToBase64(response.data[0].image.data.data);
+                imgTag.src = "data:"+response.data[0].image.contentType+";base64," + arrayBufferToBase64(response.data[0].image.data.data);
                 imgTag.classList.add("product-image");
                 const im = document.getElementById(props.id);
                 im.innerHTML = "";
@@ -55,48 +83,49 @@ export default function ProductCard(props) {
             .catch(error => {
                 console.log(error);
             })
-    }, []);
+    }, [props.id]);
 
+    /* Retrieves this user's products */
     useEffect(() => {
-        axios.get("http://localhost:4000/api/product/getuserproductbytoken/"+token)
-
-            .then(response => {
-                setProduct(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        getUserProducts(setProduct, token);
     }, []);
 
-    /* Funzione per inviare notifica di scambio prodotto ad un altro utente, necessita recuperare valore della select */
+    /* Handle selection from select */
+    const handleSelectedProduct = () => {
+        setSelectedProduct(document.getElementById("productSelect").value);
+    }
+
+    /* Send notification to product owner */
     function someFun(){
-        handleClose();
-        toast.success('Offerta inviata! 📬', {
-            position: "bottom-left",
-            autoClose: 6000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-    }
-
-    function arrayBufferToBase64( buffer ) {
-        let binary = '';
-        let bytes = new Uint8Array( buffer );
-        let len = bytes.byteLength;
-        for (let i = 0; i < len; i++) {
-            binary += String.fromCharCode( bytes[ i ] );
+        if(selectedProduct === undefined){
+            toast.error('Per fare un\' offerta devi selezionare un prodotto! 😅', {
+                position: "bottom-left",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
-        return window.btoa( binary );
+        else{
+            handleClose();
+            toast.success('Offerta inviata! 📬', {
+                position: "bottom-left",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+
     }
 
-    const handleOpen = () => setOpen(true);
-
-    const handleClose = () => setOpen(false);
-
+    /* Add image on madal */
     function afterOpenModal(){
         const modalImg = document.createElement("img")
         const modIm = document.getElementById("modalview"+id);
@@ -112,8 +141,8 @@ export default function ProductCard(props) {
 
                 <div id={props.id} className="productImage"></div>
                 <div className="productDescription">
-                    <p className="productName"> {name} </p>
-                    <span className="productText" > {description} </span>
+                    <p className="productName"> {pr.name} </p>
+                    <span className="productText" > {pr.description} </span>
                     <div className="moreBtt">
                         <div className="mbtt"><BubblyButton onClick={handleOpen} name={"Scopri"}/></div>
                     </div>
@@ -139,19 +168,19 @@ export default function ProductCard(props) {
 
                                 </div>
                                 <div className="modalviewRightCont">
-                                    <div className="modalTitle">{name}</div>
-                                    <div className="modalCategory">{category}</div>
+                                    <div className="modalTitle">{pr.name}</div>
+                                    <div className="modalCategory">{pr.category}</div>
                                     <div className="modalText">
-                                        <div className="modalLocAndDate">{location} - {date}</div>
-                                        <div className="modalDescription">{description}</div>
+                                        <div className="modalLocAndDate">{pr.location} - {pr.date}</div>
+                                        <div className="modalDescription">{pr.description}</div>
                                         <div className="modalValAndStatus">
-                                            Valore commerciale: {value} €
+                                            Valore commerciale: {pr.value} €
                                             <br/>
                                             Stato: {status}
                                         </div>
                                     </div>
                                     <div className="modalButton">
-                                        <select className="modalOfferSelect" name="productSelect" id="productSelect">
+                                        <select className="modalOfferSelect" name="productSelect" id="productSelect" onChange={handleSelectedProduct}>
                                             <option value="" selected disabled hidden>Seleziona un prodotto</option>
                                             {product.map((p) => (
                                                 <option value={p._id}>{p.name}</option>

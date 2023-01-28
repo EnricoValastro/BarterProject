@@ -32,4 +32,6 @@ module.exports = (app) => {
         .delete(productController.deleteProductFromId);
     app.route('/api/product/market/editproductwithimg/:id')
         .put(productController.editProductWithImgFromId);
+    app.route('/api/product/market/editproductwithoutimg/:id')
+        .put(productController.editProductWithoutImgFromId);
 }

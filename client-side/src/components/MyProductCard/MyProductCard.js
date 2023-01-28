@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from "react";
+import {toast} from "react-toastify";
+import axios from "axios";
 
+import {Box, Modal} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-import './MyProductCard.css';
-import axios from "axios";
-import {Box, Modal} from "@mui/material";
-import BubblyButton from "../BubblyButton/BubblyButton";
-import {toast} from "react-toastify";
-import useToken from "../App/useToken";
 import CloseIcon from "@mui/icons-material/Close";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import {Description} from "@mui/icons-material";
+
+import './MyProductCard.css';
+
+import BubblyButton from "../BubblyButton/BubblyButton";
+import useToken from "../App/useToken";
+
 
 export default function MyProductCard(props) {
     const { token, setToken } = useToken();
@@ -30,24 +31,35 @@ export default function MyProductCard(props) {
     const [category, setCategory] = useState();
     const [status, setStatus] = useState();
     const [location, setLocation] = useState();
-    const [date, setDate] = useState();
-    const [user, setUser] = useState();
     const [img, setImg] = useState([]);
+
     const [editImg, setEditImg] = useState("");
 
     useEffect(() => {
         setId(props.id);
         setName(props.name);
-        setValue(props.value);
-        setDescription(props.description);
-        setCategory(props.category);
-        setStatus(props.status);
-        setLocation(props.location);
-        setDate(props.date);
-        setUser(props.user);
-    }, [props.id, props.name, props.value, props.description, props.category, props.status, props.location, props.date, props.user]);
+        setValue(props.val);
+        setDescription(props.desc);
+        setCategory(props.cat);
+        setStatus(props.stat);
+        setLocation(props.loc);
+    }, []);
 
     useEffect(() => {
+        getImg();
+    }, []);
+
+    function arrayBufferToBase64( buffer ) {
+        let binary = '';
+        let bytes = new Uint8Array( buffer );
+        let len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode( bytes[ i ] );
+        }
+        return window.btoa( binary );
+    }
+
+    const getImg = () => {
         axios.get("http://localhost:4000/api/product/getimgbyid/"+props.id)
             .then(response => {
                 setImg(response.data[0].image.data.data);
@@ -61,16 +73,6 @@ export default function MyProductCard(props) {
             .catch(error => {
                 console.log(error);
             })
-    }, []);
-
-    function arrayBufferToBase64( buffer ) {
-        let binary = '';
-        let bytes = new Uint8Array( buffer );
-        let len = bytes.byteLength;
-        for (let i = 0; i < len; i++) {
-            binary += String.fromCharCode( bytes[ i ] );
-        }
-        return window.btoa( binary );
     }
 
     const handleDelProductOpen = () => {
@@ -101,6 +103,7 @@ export default function MyProductCard(props) {
                     progress: undefined,
                     theme: "light",
                 });
+                props.reload();
             })
             .catch(error => {
                 console.log(error);
@@ -145,13 +148,11 @@ export default function MyProductCard(props) {
             preview.appendChild(para);
         }
         else{
-            console.log(curFiles[0]);
             const image = document.createElement('img');
             image.src = URL.createObjectURL(curFiles[0]);
             image.classList.add("imgPreviewImg");
             preview.appendChild(image);
             setEditImg(curFiles[0]);
-            console.log(editImg);
         }
     }
 
@@ -161,7 +162,6 @@ export default function MyProductCard(props) {
             formD.append("image", editImg);
             axios.post("http://localhost:4000/api/product/update", formD )
                 .then(response => {
-                    console.log(editImg.name);
                     let ima = {
                         filename: editImg.name,
                         type: editImg.type
@@ -177,7 +177,7 @@ export default function MyProductCard(props) {
                     })
                         .then(response => {
                             handleEditProductClose();
-                            toast.success('Prodotto modificato correttamente.', {
+                            toast.success('Prodotto modificato correttamente. 🎯', {
                                 position: "bottom-left",
                                 autoClose: 6000,
                                 hideProgressBar: false,
@@ -187,6 +187,7 @@ export default function MyProductCard(props) {
                                 progress: undefined,
                                 theme: "light",
                             });
+                            getImg();
                         })
                         .catch(error => {
                             console.log(error);
@@ -196,50 +197,45 @@ export default function MyProductCard(props) {
                     console.log(error);
                 })
         }
-/*
-        axios.put("http://localhost:4000/api/product/market/editproduct/"+props.id, {
-            name: name,
-            description: description,
-            category: category,
-            status: status,
-            value: value,
-            location: location
-        })
-            .then(response => {
-                handleEditProductClose();
-                toast.success('Prodotto modificato correttamente.', {
-                    position: "bottom-left",
-                    autoClose: 6000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+        else{
+            axios.put("http://localhost:4000/api/product/market/editproductwithoutimg/"+props.id, {
+                name: name,
+                description: description,
+                category: category,
+                status: status,
+                value: value,
+                location: location
             })
-            .catch(error => {
-                console.log(error);
-            })
-*/
+                .then(response => {
+                    handleEditProductClose();
+                    toast.success('Prodotto modificato correttamente. 🎯', {
+                        position: "bottom-left",
+                        autoClose: 6000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
     }
 
   return (
-
       <>
           <div className="myProductCardContainer">
               <div className="myProductCardContainerLeft">
                   <div className="myProductCard">
-
                       <div id={props.id} className="myProductCardImg">
-
                       </div>
                       <div className="myProductCardName">
                           {name}
                       </div>
-
                   </div>
-
               </div>
               <div className="myProductCardContainerRight">
                   <div className="sideBar">
@@ -250,7 +246,6 @@ export default function MyProductCard(props) {
                           <DeleteIcon className="myProductIcon" />
                       </div>
                   </div>
-
               </div>
           </div>
 
@@ -290,24 +285,24 @@ export default function MyProductCard(props) {
                               <div className="newProductModalLeftContent">
                                   <div className="modalFormGroup">
                                       <label htmlFor="nameField" className="modalLabel">Nome</label>
-                                      <input id="editNameField" type="input" required name="nome" placeholder="Inserisci il nome del prodotto"  className="modalFormField modalNameInput" onChange={editNameProductHandler} />
+                                      <input id="editNameField" type="input" required value={name} name="nome" placeholder="Inserisci il nome del prodotto"  className="modalFormField modalNameInput" onChange={editNameProductHandler} />
                                   </div>
                                   <div className="modalFormGroup">
                                       <label htmlFor="descField" className="modalLabel">Descrizione</label>
-                                      <textarea id="editDescField"  required placeholder="Descrivi brevemente il prodotto" name="desc" rows={3} className="modalFormField modalDescInput" onChange={editDescProductHandler} />
+                                      <textarea id="editDescField" value={description} required placeholder="Descrivi brevemente il prodotto" name="desc" rows={3} className="modalFormField modalDescInput" onChange={editDescProductHandler} />
                                   </div>
                                   <div className="modalFormGroup">
                                       <label htmlFor="valField" className="modalLabel">Valore</label>
-                                      <input id="editValueField" type="input" required name="val" placeholder="Dai un valore al prodotto" className="modalFormField modalValInput" onChange={editValueProductHandler} />
+                                      <input id="editValueField" value={value} type="input" required name="val" placeholder="Dai un valore al prodotto" className="modalFormField modalValInput" onChange={editValueProductHandler} />
                                   </div>
                                   <div className="modalFormGroup ">
                                       <label htmlFor="locField" className="modalLabel">Località</label>
-                                      <input id="editLocationField" type="input" required name="loc" placeholder="Dove si trova il prodotto" className="modalFormField modalLocInput" onChange={editLocationProductHandler} />
+                                      <input id="editLocationField" value={location} type="input" required name="loc" placeholder="Dove si trova il prodotto" className="modalFormField modalLocInput" onChange={editLocationProductHandler} />
                                   </div>
                                   <div className="modalFormGroup">
                                       <label htmlFor="categoryField" className="modalLabel">Categoria</label>
                                       <select id="editCategoryField" placeholder="Scegli la categoria" name="category" className="modalFormField modalCategoryInput" onChange={editCategoryProductHandler}>
-                                          <option value="" selected disabled hidden >Scegli una categoria</option>
+                                          <option value="" selected disabled hidden >{category}</option>
                                           {category2.map((item, index) => (
                                               <option key={index} value={item}>{item}</option>
                                           ))}
@@ -316,7 +311,7 @@ export default function MyProductCard(props) {
                                   <div className="modalFormGroup">
                                       <label htmlFor="statusField" className="modalLabel">Stato</label>
                                       <select id="editStatusField" placeholder="Scegli lo stato" name="status" className="modalFormField modalStatusInput" onChange={editStatusProductHandler} >
-                                          <option  value="" selected disabled hidden>Scegli lo stato</option>
+                                          <option  value="" selected disabled hidden>{status}</option>
                                           {status2.map((item, index) => (
                                               <option key={index} value={item}>{item}</option>
                                           ))}

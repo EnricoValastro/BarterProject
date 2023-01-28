@@ -19,7 +19,7 @@
 .myProductCard{
     width: 100%;
     height: 100%;
-    background-color: #343e4f;
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 8px ;
     display: flex;
     flex-direction: column;
@@ -67,7 +67,7 @@
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    color: white ;
+    color: #343e4f ;
     overflow: scroll;
 }
 .myProductCardContainerRight{

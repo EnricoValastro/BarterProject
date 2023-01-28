@@ -198,7 +198,6 @@ const deleteProductFromId = (req, res) => {
 }
 
 const editProductWithImgFromId = (req, res) => {
-    console.log(req.body);
     const newP = {
         name: req.body.name,
         description: req.body.description,
@@ -220,6 +219,11 @@ const editProductWithImgFromId = (req, res) => {
         });
 
 }
+
+const editProductWithoutImgFromId = (req, res) => {
+
+}
+
 const response = (req, res) => {
     res.send("ok");
 }
@@ -236,5 +240,6 @@ module.exports = {
     getMyProductFromToken,
     deleteProductFromId,
     editProductWithImgFromId,
+    editProductWithoutImgFromId,
     response
 }

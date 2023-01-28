@@ -1,21 +1,19 @@
 import React, {useEffect, useState} from 'react';
+import axios from "axios";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Autoplay, Navigation, Pagination} from "swiper";
 
 import Navbar from "../Navbar/Navbar";
 import ProductCard from "../ProductCard/ProductCard";
 import Footer from "../Footer/Footer";
 import CarouselProductCard from "../CarouselProductCard/CarouselProductCard";
 
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay, Navigation, Pagination} from "swiper";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import './Home.css';
 
-import axios from "axios";
 import useToken from "../App/useToken";
-import {ToastContainer} from "react-toastify";
 
 export default function Home() {
 
@@ -28,6 +26,7 @@ export default function Home() {
     const [abbProducts, setAbbProducts] = useState([]);
     const [topProducts, setTopProducts] = useState([]);
 
+    /* Fetch most recent product from DB */
     useEffect(() => {
         axios.get('http://localhost:4000/api/product/home/gettopproducts/'+token)
             .then(response => {
@@ -38,6 +37,7 @@ export default function Home() {
             })
     }, []);
 
+    /* Fetch first product from each category */
     useEffect(() => {
         axios.get('http://localhost:4000/api/product/home/getfirstproductincategory/Informatica/'+token)
             .then(response => {
@@ -47,6 +47,7 @@ export default function Home() {
                 console.log(error);
             })
     }, []);
+
     useEffect(() => {
         axios.get('http://localhost:4000/api/product/home/getfirstproductincategory/Arredamento/'+token)
             .then(response => {
@@ -56,6 +57,7 @@ export default function Home() {
                 console.log(error);
             })
     }, []);
+
     useEffect(() => {
         axios.get('http://localhost:4000/api/product/home/getfirstproductincategory/Sport/'+token)
             .then(response => {
@@ -65,6 +67,7 @@ export default function Home() {
                 console.log(error);
             })
     }, []);
+
     useEffect(() => {
         axios.get('http://localhost:4000/api/product/home/getfirstproductincategory/Abbigliamento/'+token)
             .then(response => {
@@ -90,9 +93,9 @@ export default function Home() {
                     modules={[ Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    {topProducts.map((p) => (
+                    {topProducts.map((p, index) => (
                         count++,
-                        <SwiperSlide key={p._id} >
+                        <SwiperSlide key={"carousel"+index} >
                             <CarouselProductCard count={count} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                         </SwiperSlide>
                     ))}
@@ -105,7 +108,6 @@ export default function Home() {
                         Informatica
                     </div>
                     <div className="carouselNew">
-
                         <Swiper
                             breakpoints={{
                                 300: {
@@ -131,8 +133,8 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {infProducts.map((p) => (
-                                    <SwiperSlide key={p._id} >
+                            {infProducts.map((p, index) => (
+                                    <SwiperSlide key={"inf"+index} >
                                         <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                     </SwiperSlide>
                             ))}
@@ -171,8 +173,8 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {arrProducts.map((p) => (
-                                <SwiperSlide key={p._id}>
+                            {arrProducts.map((p, index) => (
+                                <SwiperSlide key={"arr"+index}>
                                     <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                 </SwiperSlide>
                             ))}
@@ -212,8 +214,8 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {sportProducts.map((p) => (
-                                <SwiperSlide key={p._id}>
+                            {sportProducts.map((p, index) => (
+                                <SwiperSlide key={"sport"+index}>
                                     <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                 </SwiperSlide>
                             ))}
@@ -253,8 +255,8 @@ export default function Home() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
                         >
-                            {abbProducts.map((p) => (
-                                <SwiperSlide key={p._id} >
+                            {abbProducts.map((p, index) => (
+                                <SwiperSlide key={"abb"+index} >
                                     <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                                 </SwiperSlide>
                             ))}

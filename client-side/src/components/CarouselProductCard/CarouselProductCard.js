@@ -1,45 +1,57 @@
 import React, {useEffect, useState} from 'react';
+import {toast} from "react-toastify";
+import axios from "axios";
 
-import './CarouselProductCard.css';
+import arrayBufferToBase64, {getUserProducts} from "../../Utility/Utils";
 import BubblyButton from "../BubblyButton/BubblyButton";
 import useToken from "../App/useToken";
-import axios from "axios";
-import {toast} from "react-toastify";
+
 import 'react-toastify/dist/ReactToastify.css';
+import './CarouselProductCard.css';
 
 export default function CarouselProductCard(props) {
 
-    const {token, setToken} = useToken();
-    const [product, setProduct] = useState([]); //I prodotti dell'utente attivo
+    /* User's token */
+    const {token} = useToken();
 
-    /* Dati di ogni card */
-    const [id, setId] = useState();
-    const [name, setName] = useState();
-    const [value, setValue] = useState();
-    const [description, setDescription] = useState();
-    const [category, setCategory] = useState();
-    const [status, setStatus] = useState();
-    const [location, setLocation] = useState();
-    const [date, setDate] = useState();
-    const [user, setUser] = useState();
+    /* This user's product list */
+    const [product, setProduct] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState();
 
+    /* Other user's products details */
+    const [pr, setPr] = useState({
+        id: "",
+        name: "",
+        value: "",
+        description: "",
+        category: "",
+        status: "",
+        location: "",
+        date: "",
+        user: ""
+    });
+
+    /* Set state from props */
     useEffect(() => {
-        setId(props.id);
-        setName(props.name);
-        setValue(props.value);
-        setDescription(props.desc);
-        setCategory(props.category);
-        setStatus(props.status);
-        setLocation(props.location);
-        setDate(props.date.split("T")[0]);
-        setUser(props.user);
-    }, [props.id, props.name, props.value, props.desc, props.category, props.status, props.location, props.date, props.user]);
+        setPr({
+            id: props.id,
+            name: props.name,
+            value: props.value,
+            description: props.desc,
+            category: props.category,
+            status: props.status,
+            location: props.location,
+            date: props.date.split("T")[0],
+            user: props.user
+        });
+    }, [props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value]);
 
+    /* Retrieves image from database */
     useEffect(() => {
         axios.get("http://localhost:4000/api/product/getimgbyid/"+props.id)
             .then(response => {
                 let imgTag = document.createElement("img");
-                imgTag.src = "data:image/png;base64," + arrayBufferToBase64(response.data[0].image.data.data);
+                imgTag.src = "data:"+response.data[0].image.contentType+";base64," + arrayBufferToBase64(response.data[0].image.data.data);
                 imgTag.classList.add("carousel-product-image");
                 let im = document.getElementById(props.count);
                 im.innerHTML = "";
@@ -48,40 +60,44 @@ export default function CarouselProductCard(props) {
             .catch(error => {
                 console.log(error);
             })
-    }, []);
+    }, [props.count, props.id]);
 
+    /* Retrieves this user's products */
     useEffect(() => {
-        axios.get("http://localhost:4000/api/product/getuserproductbytoken/"+token)
-            .then(response => {
-                setProduct(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, []);
+        getUserProducts(setProduct, token);
+    }, [token]);
 
-    function arrayBufferToBase64( buffer ) {
-        let binary = '';
-        let bytes = new Uint8Array( buffer );
-        let len = bytes.byteLength;
-        for (let i = 0; i < len; i++) {
-            binary += String.fromCharCode( bytes[ i ] );
-        }
-        return window.btoa( binary );
+    /* Handle selection from select */
+    const handleSelectedProduct = () => {
+        setSelectedProduct(document.getElementById("productSelect").value);
     }
 
-    /* Funzione per inviare notifica di scambio prodotto ad un altro utente, necessita recuperare valore della select */
+    /* Send notification to product owner */
     function someFun(){
-        toast.success('Trattativa avviata !', {
-            position: "bottom-left",
-            autoClose: 6000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        if(selectedProduct === undefined){
+            toast.error('Per fare un\' offerta devi selezionare un prodotto! 😅' , {
+                position: "bottom-left",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        else{
+            toast.success('Offerta inviata! 📬', {
+                position: "bottom-left",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     }
 
     return (
@@ -90,34 +106,33 @@ export default function CarouselProductCard(props) {
            <div className="leftContent">
                <div id={props.count} className="carouselBottomContentImg"></div>
            </div>
-
            <div className="rightContent">
                <div className="ctitle">
                    <div className="carouselRightContentTitle">
-                       {name}
+                       {pr.name}
                    </div>
                    <div className="carouselRightContentCategory">
-                       {category}
+                       {pr.category}
                    </div>
                </div>
                <div className="ccontent">
                    <div className="carouselBottomContentLocationTime">
-                       {location} - {date}
+                       {pr.location} - {pr.date}
                    </div>
                    <div className="carouselBottomContentDescription">
-                       {description}
+                       {pr.description}
                    </div>
                    <div className="carouselBottomContentValueState">
-                       Valore commerciale: {value} €
+                       Valore commerciale: {pr.value} €
                        <br/>
-                       Stato: {status}
+                       Stato: {pr.status}
                    </div>
                </div>
                <div className="cbtt">
-                   <select className="carouselCardOfferSelect" name="productSelect" id="productSelect">
+                   <select className="carouselCardOfferSelect" name="productSelect" id="productSelect" onChange={handleSelectedProduct}>
                        <option value="" selected disabled hidden>Seleziona un prodotto</option>
-                       {product.map((p) => (
-                           <option value={p._id}>{p.name}</option>
+                       {product.map((p, index) => (
+                           <option key={"carouselSel"+index} value={p._id}>{p.name}</option>
                        ))}
                    </select>
                    <div className="carouselCardOfferBtt">

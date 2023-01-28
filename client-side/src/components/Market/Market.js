@@ -51,12 +51,16 @@ export default function Market(){
 
     /* Retrieve user product from token */
     useEffect(() => {
+        getMyProductList();
+    }, []);
+
+    const getMyProductList = () => {
         axios.get("http://localhost:4000/api/product/market/getmyproductyid/" + token).then(data => {
             setMyProd(data.data);
         }).catch(err => {
             console.log(err);
         });
-    }, []);
+    }
 
     /* Modal state controllers */
     const handleNewProductOpen = () => {
@@ -143,9 +147,10 @@ export default function Market(){
                         theme: "light",
                     });
                     handleNewProductClose();
+                    getMyProductList();
                 })
                 .catch(err => {
-                    toast.error( 'Ops! Qualcosa è andato storto, riprova più tardi.', {
+                    toast.error( 'Ops! Qualcosa è andato storto, riprova più tardi. 😱', {
                         position: "bottom-left",
                         autoClose: 6000,
                         hideProgressBar: false,
@@ -258,7 +263,7 @@ export default function Market(){
                 {
                     myProd.map((p, index) => (
                         <div key={index} className="myProductC">
-                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status}  id={p._id} />
+                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status} id={p._id} reload={getMyProductList}/>
                         </div>
                     ))
                 }
