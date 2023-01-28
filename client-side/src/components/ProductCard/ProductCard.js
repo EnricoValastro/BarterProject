@@ -20,7 +20,7 @@ export default function ProductCard(props) {
     const {token, setToken} = useToken();
 
     /* This user's product list*/
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState([""]);
     const [selectedProduct, setSelectedProduct] = useState();
 
     /* Other user's products details */
@@ -35,15 +35,6 @@ export default function ProductCard(props) {
         date: "",
         user: ""
     });
-    const [id, setId] = useState();
-    const [name, setName] = useState();
-    const [value, setValue] = useState();
-    const [description, setDescription] = useState();
-    const [category, setCategory] = useState();
-    const [status, setStatus] = useState();
-    const [location, setLocation] = useState();
-    const [date, setDate] = useState();
-    const [user, setUser] = useState();
     const [img, setImg] = useState([])
 
     /* Product modal control */
@@ -66,7 +57,8 @@ export default function ProductCard(props) {
             date: props.date.split("T")[0],
             user: props.user
         });
-    }, [props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value]);
+        setProduct(props.product);
+    }, [props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value, props.product]);
 
     /* Retrieves image from database */
     useEffect(() => {
@@ -85,14 +77,9 @@ export default function ProductCard(props) {
             })
     }, [props.id]);
 
-    /* Retrieves this user's products */
-    useEffect(() => {
-        getUserProducts(setProduct, token);
-    }, []);
-
     /* Handle selection from select */
-    const handleSelectedProduct = () => {
-        setSelectedProduct(document.getElementById("productSelect").value);
+    const handleSelectedProduct = (event) => {
+        setSelectedProduct(event.target.value);
     }
 
     /* Send notification to product owner */
@@ -110,6 +97,14 @@ export default function ProductCard(props) {
             });
         }
         else{
+            axios.put("http://localhost:4000/api/product/setbusy/"+selectedProduct, {
+                busy: true
+            }).then(response => {
+
+            }).catch(error => {
+               console.log(error);
+            });
+            props.setNum(props.num+1);
             handleClose();
             toast.success('Offerta inviata! 📬', {
                 position: "bottom-left",
@@ -128,7 +123,7 @@ export default function ProductCard(props) {
     /* Add image on madal */
     function afterOpenModal(){
         const modalImg = document.createElement("img")
-        const modIm = document.getElementById("modalview"+id);
+        const modIm = document.getElementById("modalview"+pr.id);
         modalImg.src = "data:image/png;base64," + arrayBufferToBase64(img);
         modalImg.classList.add("modalImg");
         modIm.innerHTML = "";
@@ -164,7 +159,7 @@ export default function ProductCard(props) {
                                 <CloseIcon className="xIcon" onClick={handleClose}></CloseIcon>
                             </div>
                             <div className="modalviewContentContainer">
-                                <div id={"modalview"+id} className="modalviewLeftCont">
+                                <div id={"modalview"+pr.id} className="modalviewLeftCont">
 
                                 </div>
                                 <div className="modalviewRightCont">
@@ -176,14 +171,14 @@ export default function ProductCard(props) {
                                         <div className="modalValAndStatus">
                                             Valore commerciale: {pr.value} €
                                             <br/>
-                                            Stato: {status}
+                                            Stato: {pr.status}
                                         </div>
                                     </div>
                                     <div className="modalButton">
-                                        <select className="modalOfferSelect" name="productSelect" id="productSelect" onChange={handleSelectedProduct}>
+                                        <select className="modalOfferSelect" name="productSelect" id="productCardSelect" onChange={handleSelectedProduct}>
                                             <option value="" selected disabled hidden>Seleziona un prodotto</option>
-                                            {product.map((p) => (
-                                                <option value={p._id}>{p.name}</option>
+                                            {product.map((p, index) => (
+                                                <option key={"prodCard"+index} value={p._id} disabled={p.busy}>{p.name}</option>
                                             ))}
                                         </select>
                                         <div className="modalOfferBtt">
@@ -197,6 +192,5 @@ export default function ProductCard(props) {
                 </Box>
             </Modal>
         </>
-
     );
 }

@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    background: #343e4f;
+    background: rgba(217, 227, 231, 0.9);
     box-shadow: 0 10px 15px 0 #343e4f;
 }
 .category:hover{
@@ -14,9 +14,7 @@
 }
 .category:hover .imga{
     transform: scale(1.16);
-
 }
-
 .categoryTitle{
     width: 90%;
     height: 10%;
@@ -25,7 +23,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    color: white;
+    color: #343e4f;
     font-size: 24px;
 }
 

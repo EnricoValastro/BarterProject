@@ -1,29 +1,35 @@
 import React, {useState} from "react";
+import axios from "axios";
 
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import "./Search.css";
 
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import CategoryCard from "../CategoryCard/CategoryCard";
 import ProductCard from "../ProductCard/ProductCard";
-
-import axios from "axios";
 import useToken from "../App/useToken";
-import {ToastContainer} from "react-toastify";
+
+import "./Search.css";
 
 export default function Search() {
 
+    /* User's token */
     const {token, setToken} = useToken();
+
+    /* List of products founded by category */
     const [catProduct, setCatProduct] = useState([])
+
+    /* List of products founded by research */
     const [searchProduct, setSearchProduct] = useState([])
 
+    /* Search bar style and behavior manager */
     function focus(){
         document.getElementById("searchInput").focus();
         document.getElementById("searchBar").classList.add("focused");
     }
+
     function unfocus(){
         document.getElementById("searchBar").classList.remove("focused");
     }
@@ -31,6 +37,8 @@ export default function Search() {
     function showCancelBtt(){
         document.getElementById("cancelIcon").classList.remove("hidden");
     }
+
+    /* x icon handler clear search bar and search result */
     function clearInput(){
         document.getElementById("searchInput").value = "";
         document.getElementById("noProduct2").classList.add("hidden");
@@ -39,6 +47,8 @@ export default function Search() {
         setCatProduct([]);
         document.getElementById("x").classList.remove("hidden");
     }
+
+
     function searchForProduct(event){
         event.preventDefault();
         document.getElementById("noProduct2").classList.add("hidden");
@@ -52,7 +62,9 @@ export default function Search() {
                 if(response.data.length === 0){
                     document.getElementById("noProduct2").classList.remove("hidden");
                 }
-                setSearchProduct(response.data);
+                else {
+                    setSearchProduct(response.data);
+                }
             })
             .catch(error => {
                 console.log(error);
@@ -106,7 +118,6 @@ export default function Search() {
                         <span id="cancelIcon" className="cancelSpan hidden">
                             <HighlightOffIcon className="cancelIcon" />
                         </span>
-
                     </div>
                 </div>
 
@@ -156,8 +167,8 @@ export default function Search() {
                     <img  className="emptyPageImg" src={"img/EmptyPage.png"} alt=""/>
                 </div>
                 <div className="res">
-                    {catProduct.map((p) => (
-                        <div key={p._id} className="pr">
+                    {catProduct.map((p,index) => (
+                        <div key={"cat"+index} className="pr">
                             <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                         </div>
                     ))}
@@ -173,8 +184,8 @@ export default function Search() {
                     <img  className="emptyPageImg" src={"img/EmptyPage.png"} alt=""/>
                 </div>
                 <div className="res">
-                    {searchProduct.map((p) => (
-                        <div key={"search"+p._id} className="pr">
+                    {searchProduct.map((p, index) => (
+                        <div key={"search"+index} className="pr">
                             <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
                         </div>
                     ))}

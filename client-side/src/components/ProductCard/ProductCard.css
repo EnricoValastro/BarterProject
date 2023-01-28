@@ -113,7 +113,7 @@
     align-items: center;
     background-color: transparent;
     border-radius: 7px ;
-    box-shadow: 0 10px 15px 0 #343e4f;
+    box-shadow: 0 5px 10px 0 #343e4f;
 
 }
 .modalImg{
@@ -179,6 +179,9 @@
     height: 80%;
     width: 70%;
     margin-top: 2%;
+    padding: 5px 5px;
+    font-size: 16px;
+    font-family: Ubuntu;
     box-shadow: 0 5px 10px 0 #343e4f;
 }
 

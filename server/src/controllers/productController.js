@@ -42,6 +42,7 @@ const createProduct = (req, res) => {
         status: req.body.status,
         value: parseFloat(req.body.value),
         location: req.body.location,
+        busy: false,
         userID: req.body.userID
     });
     newProduct.save().then(result => {
@@ -93,7 +94,7 @@ const getUserProductFromToken = (req, res) => {
     User.find({token: req.params.token}).select("_id")
         .then(result => {
 
-            Product.find({userID: result[0]._id.toString()}).select("name")
+            Product.find({userID: result[0]._id.toString()}).select("name busy")
                 .then(result => {
                     res.json(result);
                 }).catch(err => {
@@ -221,7 +222,23 @@ const editProductWithImgFromId = (req, res) => {
 }
 
 const editProductWithoutImgFromId = (req, res) => {
+    Product.findOneAndUpdate({_id: req.params.id}, req.body,{new: true}).then(
+        result => {
+            responses.OkResponse(res, {message: "Product edited successfully"});
+        })
+        .catch(err => {
+            responses.InternalServerError(res, {message: err.message});
+        });
+}
 
+const setBusy = (req, res) => {
+    Product.findOneAndUpdate({_id: req.params.id}, req.body,{new: true})
+        .then(result => {
+            responses.OkResponse(res, {message: "Product edited successfully"});
+        })
+        .catch(err => {
+            responses.InternalServerError(res, {message: err.message});
+        });
 }
 
 const response = (req, res) => {
@@ -241,5 +258,6 @@ module.exports = {
     deleteProductFromId,
     editProductWithImgFromId,
     editProductWithoutImgFromId,
+    setBusy,
     response
 }

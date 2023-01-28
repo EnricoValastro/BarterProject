@@ -19,7 +19,7 @@
 .myProductCard{
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(217, 227, 231, 0.9);
     border-radius: 8px ;
     display: flex;
     flex-direction: column;

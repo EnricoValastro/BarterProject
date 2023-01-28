@@ -30,21 +30,17 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background: #343e4f;
-    transition: 0.4s ease-in-out;
+    background: rgba(217, 227, 231, 0.9);
+    transition: 0.8s ease-in-out;
 
 }
 .searchBar:hover{
-    border: 2px solid #EE6C4D;
-    box-shadow: 0 0 10px #EE6C4D;
     width: 40%;
-    transition: 0.4s ease-in-out;
+    transition: 0.8s ease-in-out;
 }
 .focused{
-    border: 2px solid #EE6C4D;
-    box-shadow: 0 0 10px #EE6C4D;
     width: 40%;
-    transition: 0.4s ease-in-out;
+    transition: 0.8s ease-in-out;
 }
 .searchIconContainer{
     width: 10%;
@@ -58,7 +54,7 @@
     width: 24px;
     height: 24px;
     margin-top: 10%;
-    color: white;
+    color: #343e4f;
 }
 .search-form{
     height: 70%;
@@ -71,10 +67,10 @@
     outline: none;
     background: transparent;
     font-size: 20px;
-    color: white;
+    color: #343e4f;
 }
 .searchInput::placeholder{
-    color: white;
+    color: #343e4f;
 }
 .cIconContainer{
     width: 10%;
@@ -91,7 +87,7 @@
 .cancelIcon{
     width: 24px;
     height: 24px;
-    color: white;
+    color: #343e4f;
 }
 .hidden{
     display: none;
@@ -293,8 +289,3 @@
     }
 
 }
-
-
-
-
-

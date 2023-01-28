@@ -34,4 +34,6 @@ module.exports = (app) => {
         .put(productController.editProductWithImgFromId);
     app.route('/api/product/market/editproductwithoutimg/:id')
         .put(productController.editProductWithoutImgFromId);
+    app.route('/api/product/setbusy/:id')
+        .put(productController.setBusy);
 }

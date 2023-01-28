@@ -34,6 +34,10 @@ module.exports = function (mongoose) {
             type: String,
             required: true
         },
+        busy:{
+            type: Boolean,
+            default: false,
+        },
         userID: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',

@@ -44,7 +44,8 @@ export default function CarouselProductCard(props) {
             date: props.date.split("T")[0],
             user: props.user
         });
-    }, [props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value]);
+        setProduct(props.product);
+    }, [props.product, props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value]);
 
     /* Retrieves image from database */
     useEffect(() => {
@@ -61,11 +62,6 @@ export default function CarouselProductCard(props) {
                 console.log(error);
             })
     }, [props.count, props.id]);
-
-    /* Retrieves this user's products */
-    useEffect(() => {
-        getUserProducts(setProduct, token);
-    }, [token]);
 
     /* Handle selection from select */
     const handleSelectedProduct = () => {
@@ -87,6 +83,14 @@ export default function CarouselProductCard(props) {
             });
         }
         else{
+            axios.put("http://localhost:4000/api/product/setbusy/"+selectedProduct, {
+                busy: true
+            }).then(response => {
+
+            }).catch(error => {
+                console.log(error);
+            });
+            props.setNum(props.num+1);
             toast.success('Offerta inviata! 📬', {
                 position: "bottom-left",
                 autoClose: 6000,
@@ -132,7 +136,7 @@ export default function CarouselProductCard(props) {
                    <select className="carouselCardOfferSelect" name="productSelect" id="productSelect" onChange={handleSelectedProduct}>
                        <option value="" selected disabled hidden>Seleziona un prodotto</option>
                        {product.map((p, index) => (
-                           <option key={"carouselSel"+index} value={p._id}>{p.name}</option>
+                           <option key={"carouselSel"+index} value={p._id} disabled={p.busy}>{p.name}</option>
                        ))}
                    </select>
                    <div className="carouselCardOfferBtt">
