@@ -26,7 +26,7 @@ module.exports = (app) => {
         .get(productController.getProductFromCategory);
     app.route('/api/product/search/getproductbyname/:name/:token')
         .get(productController.getProductFromName);
-    app.route('/api/product/market/getmyproductyid/:token')
+    app.route('/api/product/market/getmyproductbyid/:token')
         .get(productController.getMyProductFromToken);
     app.route('/api/product/market/deleteproduct/:id/:token')
         .delete(productController.deleteProductFromId);

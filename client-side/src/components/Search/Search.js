@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -12,6 +12,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import useToken from "../App/useToken";
 
 import "./Search.css";
+import {getUserProducts} from "../../Utility/Utils";
 
 export default function Search() {
 
@@ -23,6 +24,14 @@ export default function Search() {
 
     /* List of products founded by research */
     const [searchProduct, setSearchProduct] = useState([])
+
+    /* List of my products */
+    const [num, setNum] = useState(0);
+    const [product, setProduct] = useState([]);
+
+    useEffect(() => {
+        getUserProducts(setProduct, token);
+    }, [num]);
 
     /* Search bar style and behavior manager */
     function focus(){
@@ -72,6 +81,7 @@ export default function Search() {
     }
 
     function showCategoryProduct (category)  {
+        console.log("ciao")
         setCatProduct([]);
         document.getElementById("x").classList.add("hidden");
         document.getElementById("y").classList.add("hidden");
@@ -169,7 +179,7 @@ export default function Search() {
                 <div className="res">
                     {catProduct.map((p,index) => (
                         <div key={"cat"+index} className="pr">
-                            <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
+                            <ProductCard product={product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={num} setNum={setNum} />
                         </div>
                     ))}
                     <Footer />
@@ -186,7 +196,7 @@ export default function Search() {
                 <div className="res">
                     {searchProduct.map((p, index) => (
                         <div key={"search"+index} className="pr">
-                            <ProductCard id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} />
+                            <ProductCard product={product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={num} setNum={setNum} />
                         </div>
                     ))}
                     <Footer />

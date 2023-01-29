@@ -12,52 +12,108 @@ import './MyProductCard.css';
 
 import BubblyButton from "../BubblyButton/BubblyButton";
 import useToken from "../App/useToken";
+import arrayBufferToBase64 from "../../Utility/Utils";
 
 
 export default function MyProductCard(props) {
+    /* User's token */
     const { token, setToken } = useToken();
 
     const [flag, setFlag] = useState(false);
+
+    /* Catagory and status predefined list */
     const category2 = ["Informatica", "Smartphone", "Console-Game", "Arredamento", "Elettrodomestici", "Arte", "Antiquariato", "Fotografia", "Sport", "Libri", "Musica", "Pelletteria", "Abbigliamento", "Gioielleria", "Orologi"];
     const status2 = ["Nuovo", "Ottimo", "Buono", "Discreto", "Pessimo"];
 
+    /* Edit and Delete modals control */
     const [editProductOpen, setEditProductOpen] = useState(false);
     const [deleteProductOpen, setDeleteProductOpen] = useState(false);
 
-    const [id, setId] = useState();
-    const [name, setName] = useState();
-    const [value, setValue] = useState();
-    const [description, setDescription] = useState();
-    const [category, setCategory] = useState();
-    const [status, setStatus] = useState();
-    const [location, setLocation] = useState();
-    const [img, setImg] = useState([]);
+    const handleDelProductOpen = () => {
+        if(pr.busy){
+            toast.error('Attenzione! 🚨 Non puoi eliminare prodotti offerti ad altri clienti.', {
+                position: "bottom-left",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        else{
+            setDeleteProductOpen(true);
+        }
+    };
 
+    const handleDelProductClose = () => {
+        setDeleteProductOpen(false);
+    };
+
+    const handleEditProductOpen = () => {
+        if(pr.busy){
+            toast.error('Attenzione! 🚨 Non puoi modificare prodotti offerti ad altri clienti.', {
+                position: "bottom-left",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        else {
+            setEditProductOpen(true);
+        }
+    };
+
+    const handleEditProductClose = () => {
+        setEditProductOpen(false);
+    };
+
+    /* My product details */
+    const [pr, setPr] = useState({
+        id: "",
+        name: "",
+        value: "",
+        description: "",
+        category: "",
+        status: "",
+        location: "",
+        busy: ""
+    });
+
+    const [img, setImg] = useState([]);
     const [editImg, setEditImg] = useState("");
 
+    /* Set state from props */
     useEffect(() => {
-        setId(props.id);
-        setName(props.name);
-        setValue(props.val);
-        setDescription(props.desc);
-        setCategory(props.cat);
-        setStatus(props.stat);
-        setLocation(props.loc);
-    }, []);
+        setPr({
+            id: props.id,
+            name: props.name,
+            value: props.val,
+            description: props.desc,
+            category: props.cat,
+            status: props.stat,
+            location: props.loc,
+            busy: props.busy
+        });
+    }, [props.busy, props.cat,  props.desc, props.id, props.loc, props.name, props.stat, props.val]);
 
+    /* Retrieve image from db */
     useEffect(() => {
         getImg();
     }, []);
 
-    function arrayBufferToBase64( buffer ) {
-        let binary = '';
-        let bytes = new Uint8Array( buffer );
-        let len = bytes.byteLength;
-        for (let i = 0; i < len; i++) {
-            binary += String.fromCharCode( bytes[ i ] );
+    /* Add border to busy products */
+    useEffect(() =>{
+        if(props.busy){
+            const card = document.getElementById("myPCContainerLeft"+props.id)
+            card.classList.add("busyProduct");
         }
-        return window.btoa( binary );
-    }
+    }, [props.busy])
 
     const getImg = () => {
         axios.get("http://localhost:4000/api/product/getimgbyid/"+props.id)
@@ -75,63 +131,41 @@ export default function MyProductCard(props) {
             })
     }
 
-    const handleDelProductOpen = () => {
-        setDeleteProductOpen(true);
-    };
-    const handleDelProductClose = () => {
-        setDeleteProductOpen(false);
-    };
-
-    const handleEditProductOpen = () => {
-        setEditProductOpen(true);
-    };
-    const handleEditProductClose = () => {
-        setEditProductOpen(false);
-    };
-
-    const deleteProduct = () => {
-        axios.delete("http://localhost:4000/api/product/market/deleteproduct/"+id+"/"+token)
-            .then(response => {
-                handleDelProductClose();
-                toast.success('Prodotto eliminato correttamente. 👍🏼', {
-                    position: "bottom-left",
-                    autoClose: 6000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-                props.reload();
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }
-
+    /* Update product's details after editing */
     const editNameProductHandler =  () => {
-        setName(document.getElementById("editNameField").value);
+        setPr(previousState => {
+            return {...previousState, name: document.getElementById("editNameField").value }
+        });
     }
 
     const editDescProductHandler = () =>{
-        setDescription(document.getElementById("editDescField").value);
+        setPr(previousState => {
+            return {...previousState, description: document.getElementById("editDescField").value }
+        });
     }
 
     const editValueProductHandler = () =>{
-        setValue(document.getElementById("editValueField").value);
+        setPr(previousState => {
+            return {...previousState, value: document.getElementById("editValueField").value }
+        });
     }
 
     const editCategoryProductHandler = () =>{
-        setCategory(document.getElementById("editCategoryField").value);
+        setPr(previousState => {
+            return {...previousState, category: document.getElementById("editCategoryField").value }
+        });
     }
 
     const editStatusProductHandler = () =>{
-        setStatus(document.getElementById("editStatusField").value);
+        setPr(previousState => {
+            return {...previousState, status: document.getElementById("editStatusField").value }
+        });
     }
 
     const editLocationProductHandler = () =>{
-        setLocation(document.getElementById("editLocationField").value);
+        setPr(previousState => {
+            return {...previousState, location: document.getElementById("editLocationField").value }
+        });
     }
 
     const editImgProductHandler = (event) =>{
@@ -158,6 +192,7 @@ export default function MyProductCard(props) {
 
     const editProduct = () => {
         if(flag){
+            setFlag(false);
             const formD = new FormData();
             formD.append("image", editImg);
             axios.post("http://localhost:4000/api/product/update", formD )
@@ -167,17 +202,17 @@ export default function MyProductCard(props) {
                         type: editImg.type
                     }
                     axios.put("http://localhost:4000/api/product/market/editproductwithimg/"+props.id, {
-                        name: name,
-                        description: description,
-                        category: category,
-                        status: status,
-                        value: value,
-                        location: location,
+                        name: pr.name,
+                        description: pr.description,
+                        category: pr.category,
+                        status: pr.status,
+                        value: pr.value,
+                        location: pr.location,
                         image: ima
                     })
                         .then(response => {
                             handleEditProductClose();
-                            toast.success('Prodotto modificato correttamente. 🎯', {
+                            toast.success('Prodotto modificato correttamente. ✏️', {
                                 position: "bottom-left",
                                 autoClose: 6000,
                                 hideProgressBar: false,
@@ -199,16 +234,16 @@ export default function MyProductCard(props) {
         }
         else{
             axios.put("http://localhost:4000/api/product/market/editproductwithoutimg/"+props.id, {
-                name: name,
-                description: description,
-                category: category,
-                status: status,
-                value: value,
-                location: location
+                name: pr.name,
+                description: pr.description,
+                category: pr.category,
+                status: pr.status,
+                value: pr.value,
+                location: pr.location
             })
                 .then(response => {
                     handleEditProductClose();
-                    toast.success('Prodotto modificato correttamente. 🎯', {
+                    toast.success('Prodotto modificato correttamente. ✏️', {
                         position: "bottom-left",
                         autoClose: 6000,
                         hideProgressBar: false,
@@ -225,15 +260,37 @@ export default function MyProductCard(props) {
         }
     }
 
+    const deleteProduct = () => {
+        axios.delete("http://localhost:4000/api/product/market/deleteproduct/"+pr.id+"/"+token)
+            .then(response => {
+                handleDelProductClose();
+                toast.success('Prodotto eliminato correttamente. 🗑️', {
+                    position: "bottom-left",
+                    autoClose: 6000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                props.reload();
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+
   return (
       <>
           <div className="myProductCardContainer">
-              <div className="myProductCardContainerLeft">
+              <div id={"myPCContainerLeft"+props.id} className="myProductCardContainerLeft">
                   <div className="myProductCard">
                       <div id={props.id} className="myProductCardImg">
                       </div>
                       <div className="myProductCardName">
-                          {name}
+                          {pr.name}
                       </div>
                   </div>
               </div>
@@ -285,24 +342,24 @@ export default function MyProductCard(props) {
                               <div className="newProductModalLeftContent">
                                   <div className="modalFormGroup">
                                       <label htmlFor="nameField" className="modalLabel">Nome</label>
-                                      <input id="editNameField" type="input" required value={name} name="nome" placeholder="Inserisci il nome del prodotto"  className="modalFormField modalNameInput" onChange={editNameProductHandler} />
+                                      <input id="editNameField" type="input" required value={pr.name} name="nome" placeholder="Inserisci il nome del prodotto"  className="modalFormField modalNameInput" onChange={editNameProductHandler} />
                                   </div>
                                   <div className="modalFormGroup">
                                       <label htmlFor="descField" className="modalLabel">Descrizione</label>
-                                      <textarea id="editDescField" value={description} required placeholder="Descrivi brevemente il prodotto" name="desc" rows={3} className="modalFormField modalDescInput" onChange={editDescProductHandler} />
+                                      <textarea id="editDescField" value={pr.description} required placeholder="Descrivi brevemente il prodotto" name="desc" rows={3} className="modalFormField modalDescInput" onChange={editDescProductHandler} />
                                   </div>
                                   <div className="modalFormGroup">
                                       <label htmlFor="valField" className="modalLabel">Valore</label>
-                                      <input id="editValueField" value={value} type="input" required name="val" placeholder="Dai un valore al prodotto" className="modalFormField modalValInput" onChange={editValueProductHandler} />
+                                      <input id="editValueField" value={pr.value} type="input" required name="val" placeholder="Dai un valore al prodotto" className="modalFormField modalValInput" onChange={editValueProductHandler} />
                                   </div>
                                   <div className="modalFormGroup ">
                                       <label htmlFor="locField" className="modalLabel">Località</label>
-                                      <input id="editLocationField" value={location} type="input" required name="loc" placeholder="Dove si trova il prodotto" className="modalFormField modalLocInput" onChange={editLocationProductHandler} />
+                                      <input id="editLocationField" value={pr.location} type="input" required name="loc" placeholder="Dove si trova il prodotto" className="modalFormField modalLocInput" onChange={editLocationProductHandler} />
                                   </div>
                                   <div className="modalFormGroup">
                                       <label htmlFor="categoryField" className="modalLabel">Categoria</label>
                                       <select id="editCategoryField" placeholder="Scegli la categoria" name="category" className="modalFormField modalCategoryInput" onChange={editCategoryProductHandler}>
-                                          <option value="" selected disabled hidden >{category}</option>
+                                          <option value="" selected disabled hidden >{pr.category}</option>
                                           {category2.map((item, index) => (
                                               <option key={index} value={item}>{item}</option>
                                           ))}
@@ -311,7 +368,7 @@ export default function MyProductCard(props) {
                                   <div className="modalFormGroup">
                                       <label htmlFor="statusField" className="modalLabel">Stato</label>
                                       <select id="editStatusField" placeholder="Scegli lo stato" name="status" className="modalFormField modalStatusInput" onChange={editStatusProductHandler} >
-                                          <option  value="" selected disabled hidden>{status}</option>
+                                          <option  value="" selected disabled hidden>{pr.status}</option>
                                           {status2.map((item, index) => (
                                               <option key={index} value={item}>{item}</option>
                                           ))}

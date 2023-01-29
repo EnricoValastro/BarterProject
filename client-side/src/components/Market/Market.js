@@ -55,7 +55,7 @@ export default function Market(){
     }, []);
 
     const getMyProductList = () => {
-        axios.get("http://localhost:4000/api/product/market/getmyproductyid/" + token).then(data => {
+        axios.get("http://localhost:4000/api/product/market/getmyproductbyid/" + token).then(data => {
             setMyProd(data.data);
         }).catch(err => {
             console.log(err);
@@ -113,7 +113,7 @@ export default function Market(){
     /* Submit handler */
     const newProdSubmitHandler = (event) => {
         if(newProductName.length === 0 || newProductDescription.length === 0 || newProductValue.length === 0 || newProductLocation.length === 0 || newProductCategory.length === 0 || newProductStatus.length === 0 ){
-            toast.error('Ops! Sembra che tu non abbia compilato tutti i campi. 🤔', {
+            toast.error('Ops! 🤔 Sembra che tu non abbia compilato tutti i campi.', {
                 position: "bottom-left",
                 autoClose: 6000,
                 hideProgressBar: false,
@@ -150,7 +150,7 @@ export default function Market(){
                     getMyProductList();
                 })
                 .catch(err => {
-                    toast.error( 'Ops! Qualcosa è andato storto, riprova più tardi. 😱', {
+                    toast.error( 'Ops! Qualcosa è andato storto 😱, riprova più tardi.', {
                         position: "bottom-left",
                         autoClose: 6000,
                         hideProgressBar: false,
@@ -263,7 +263,7 @@ export default function Market(){
                 {
                     myProd.map((p, index) => (
                         <div key={index} className="myProductC">
-                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status} id={p._id} reload={getMyProductList}/>
+                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status} busy={p.busy} id={p._id} reload={getMyProductList}/>
                         </div>
                     ))
                 }
