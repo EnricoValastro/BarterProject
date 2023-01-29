@@ -10,7 +10,7 @@ export default function arrayBufferToBase64( buffer ) {
     return window.btoa( binary );
 }
 
-export  function getUserProducts (setProduct,token){
+export  function getUserProducts (setProduct, token){
     axios.get("http://localhost:4000/api/product/getuserproductbytoken/"+token)
         .then(response => {
             setProduct(response.data);
@@ -18,4 +18,16 @@ export  function getUserProducts (setProduct,token){
         .catch(error => {
             console.log(error);
         })
+}
+
+export function getUserTransactions(setTransactions, userId){
+    if(userId !== undefined){
+        axios.get("http://localhost:4000/api/transactions/getpendingtransactions/"+userId)
+            .then(response => {
+                setTransactions(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 }

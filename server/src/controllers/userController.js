@@ -28,7 +28,7 @@ const signup = async (req, res) => {
     });
 }
 
-const login =  (req, res) =>{
+const signin =  (req, res) =>{
     try {
         // Get user input
         const { email, password } = req.body;
@@ -78,9 +78,23 @@ const getUserFromToken = (req, res) => {
     })
 }
 
+const getUserIdFromToken = (req, res) => {
+    User.findOne({token: req.params.token}).then( profile => {
+        if (profile) {
+            res.send(profile._id);
+        }
+        else {
+            res.send(false);
+        }
+    }).catch(err => {
+        responses.InternalServerError(res, {message: err.message});
+    })
+}
+
 module.exports = {
     signup,
-    login,
+    signin,
     emailValidation,
+    getUserIdFromToken,
     getUserFromToken
 }

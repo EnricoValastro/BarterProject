@@ -15,7 +15,7 @@ import useToken from "../App/useToken";
 
 import './Market.css';
 
-export default function Market(){
+export default function Market(props){
 
     /* Token & userId */
     const { token, setToken } = useToken();
@@ -24,7 +24,7 @@ export default function Market(){
     /* Modals state  */
     const [newProductOpen, setNewProductOpen] = useState(false);
 
-    /* New product data */
+    /* New product data TODO change with structure... */
     const [newProductName, setNewProductName] = useState("");
     const [newProductDescription, setNewProductDescription] = useState("");
     const [newProductImage, setNewProductImage] = useState("");
@@ -40,13 +40,9 @@ export default function Market(){
     const category = ["Informatica", "Smartphone", "Console-Game", "Arredamento", "Elettrodomestici", "Arte", "Antiquariato", "Fotografia", "Sport", "Libri", "Musica", "Pelletteria", "Abbigliamento", "Gioielleria", "Orologi"];
     const status = ["Nuovo", "Ottimo", "Buono", "Discreto", "Pessimo"];
 
-    /* Retrieve userId from Token */
+
     useEffect(() => {
-        axios.get("http://localhost:4000/api/user/" + token).then(data => {
-            setUserId(data.data._id);
-        }).catch(err => {
-            console.log(err);
-        });
+        setUserId(props.userId);
     }, []);
 
     /* Retrieve user product from token */
@@ -62,7 +58,7 @@ export default function Market(){
         });
     }
 
-    /* Modal state controllers */
+    /* Modal controllers */
     const handleNewProductOpen = () => {
         setNewProductOpen(true);
     };
@@ -108,7 +104,7 @@ export default function Market(){
             preview.appendChild(image);
             setNewProductImage(curFiles[0]);
         }
-    } //Show image preview
+    }
 
     /* Submit handler */
     const newProdSubmitHandler = (event) => {

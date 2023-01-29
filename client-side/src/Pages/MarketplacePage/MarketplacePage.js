@@ -3,7 +3,7 @@ import React from "react";
 import useToken from '../../components/App/useToken';
 import Market from "../../components/Market/Market";
 
-export default function MarketplacePage() {
+export default function MarketplacePage(props) {
 
     const {token, setToken} = useToken();
 
@@ -12,6 +12,6 @@ export default function MarketplacePage() {
     }
 
     return(
-        <Market />
+        <Market userId={props.userId} product={props.product} num={props.num} setNum={props.setNum} transactions={props.transactions} />
     )
 }

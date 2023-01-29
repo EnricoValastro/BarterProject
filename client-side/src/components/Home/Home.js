@@ -15,24 +15,24 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import './Home.css';
 
-export default function Home() {
+export default function Home(props) {
 
     let count = 0;
+    /* User's token and id */
     const {token, setToken} = useToken();
+    const [userId, setUserId] = useState("");
 
-    const [infProducts, setInfProducts] = useState([]);
-    const [arrProducts, setArrProducts] = useState([]);
+    /* Product list for category and carousel */
+    const [infProducts, setInfProducts]     = useState([]);
+    const [arrProducts, setArrProducts]     = useState([]);
     const [sportProducts, setSportProducts] = useState([]);
-    const [abbProducts, setAbbProducts] = useState([]);
-    const [topProducts, setTopProducts] = useState([]);
-
-    /* Retrieve user's product list & trigger updates */
-    const [num, setNum] = useState(0);
-    const [product, setProduct] = useState([]);
+    const [abbProducts, setAbbProducts]     = useState([]);
+    const [topProducts, setTopProducts]     = useState([]);
 
     useEffect(() => {
-        getUserProducts(setProduct, token);
-    }, [num]);
+        setUserId(props.userId);
+    }, []);
+
 
     /* Fetch most recent product from DB */
     useEffect(() => {
@@ -104,7 +104,7 @@ export default function Home() {
                     {topProducts.map((p, index) => (
                         count++,
                         <SwiperSlide key={"carousel"+index} >
-                            <CarouselProductCard count={count} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} product={product} num={num} setNum={setNum} />
+                            <CarouselProductCard count={count} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} product={props.product} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -143,7 +143,7 @@ export default function Home() {
                         >
                             {infProducts.map((p, index) => (
                                     <SwiperSlide key={"inf"+index} >
-                                        <ProductCard product={product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={num} setNum={setNum} />
+                                        <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
                                     </SwiperSlide>
                             ))}
                         </Swiper>
@@ -183,7 +183,7 @@ export default function Home() {
                         >
                             {arrProducts.map((p, index) => (
                                 <SwiperSlide key={"arr"+index}>
-                                    <ProductCard product={product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={num} setNum={setNum} />
+                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -224,7 +224,7 @@ export default function Home() {
                         >
                             {sportProducts.map((p, index) => (
                                 <SwiperSlide key={"sport"+index}>
-                                    <ProductCard product={product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={num} setNum={setNum} />
+                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -265,7 +265,7 @@ export default function Home() {
                         >
                             {abbProducts.map((p, index) => (
                                 <SwiperSlide key={"abb"+index} >
-                                    <ProductCard product={product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={num} setNum={setNum} />
+                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

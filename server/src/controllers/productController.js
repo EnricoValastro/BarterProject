@@ -88,13 +88,13 @@ const getFirstProducFromCategory =  (req,res) =>{
     });
 }
 
-/* Ritrovare tutti i prodotti (solo nome & _id) dato il token di un utente */
+/* Ritrovare tutti i prodotti (-image) dell'utente attivo dato il token */
 const getUserProductFromToken = (req, res) => {
 
     User.find({token: req.params.token}).select("_id")
         .then(result => {
 
-            Product.find({userID: result[0]._id.toString()}).select("name busy")
+            Product.find({userID: result[0]._id.toString()}).select("-image")
                 .then(result => {
                     res.json(result);
                 }).catch(err => {

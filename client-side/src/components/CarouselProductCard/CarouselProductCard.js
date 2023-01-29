@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {toast} from "react-toastify";
 import axios from "axios";
 
-import arrayBufferToBase64, {getUserProducts} from "../../Utility/Utils";
+import arrayBufferToBase64 from "../../Utility/Utils";
 import BubblyButton from "../BubblyButton/BubblyButton";
 import useToken from "../App/useToken";
 
@@ -13,10 +13,13 @@ export default function CarouselProductCard(props) {
 
     /* User's token */
     const {token} = useToken();
+    const [userId, setUserId] = useState("");
 
     /* This user's product list */
     const [product, setProduct] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState();
+
+    const [transactions, setTransactions] = useState([]);
 
     /* Other user's products details */
     const [pr, setPr] = useState({
@@ -45,6 +48,8 @@ export default function CarouselProductCard(props) {
             user: props.user
         });
         setProduct(props.product);
+        setUserId(props.myId);
+        setTransactions(props.transactions);
     }, [props.product, props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value]);
 
     /* Retrieves image from database */
@@ -64,14 +69,21 @@ export default function CarouselProductCard(props) {
     }, [props.count, props.id]);
 
     /* Handle selection from select */
-    const handleSelectedProduct = () => {
-        setSelectedProduct(document.getElementById("productSelect").value);
+    const handleSelectedProduct = (event) => {
+        setSelectedProduct(event.target.value);
     }
 
     /* Send notification to product owner */
     function someFun(){
-        if(selectedProduct === undefined){
-            toast.error('Per fare un\' offerta devi selezionare un prodotto! 😅' , {
+        let free = false;
+        transactions.forEach(tr => {
+            if(tr.receiverProductId === pr.id){
+                free= true;
+                return
+            }
+        })
+        if(free){
+            toast.error('Perfavore attendi che l\'offerta che hai già fatto venga accettata o rifiutata! 🙏🏻', {
                 position: "bottom-left",
                 autoClose: 6000,
                 hideProgressBar: false,
@@ -83,24 +95,47 @@ export default function CarouselProductCard(props) {
             });
         }
         else{
-            axios.put("http://localhost:4000/api/product/setbusy/"+selectedProduct, {
-                busy: true
-            }).then(response => {
+            if(selectedProduct === undefined){
+                toast.error('Per fare un\' offerta devi selezionare un prodotto! 😅' , {
+                    position: "bottom-left",
+                    autoClose: 6000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
+            else{
+                axios.put("http://localhost:4000/api/product/setbusy/"+selectedProduct, {
+                    busy: true
+                }).then(response => {
 
-            }).catch(error => {
-                console.log(error);
-            });
-            props.setNum(props.num+1);
-            toast.success('Offerta inviata! 📬', {
-                position: "bottom-left",
-                autoClose: 6000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+                }).catch(error => {
+                    console.log(error);
+                });
+                axios.post("http://localhost:4000/api/transactions/addnewpendingtransaction", {
+                    senderId: userId,
+                    senderProductId: selectedProduct,
+                    receiverId: pr.user,
+                    receiverProductId: pr.id
+                }).then(response => {
+                    props.setNum(props.num+1);
+                }).catch(error => {
+                    console.log(error);
+                });
+                toast.success('Offerta inviata! 📬', {
+                    position: "bottom-left",
+                    autoClose: 6000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
         }
     }
 

@@ -18,10 +18,14 @@ export default function ProductCard(props) {
 
     /* User's token */
     const {token, setToken} = useToken();
+    const [userId, setUserId] = useState("");
 
-    /* This user's product list*/
-    const [product, setProduct] = useState([""]);
+    /* This user's product list & transactions list */
+    const [product, setProduct] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState();
+
+    const[free, setFree] = useState(false);
+    const [transactions, setTransactions] = useState([]);
 
     /* Other user's products details */
     const [pr, setPr] = useState({
@@ -58,7 +62,10 @@ export default function ProductCard(props) {
             user: props.user
         });
         setProduct(props.product);
-    }, [props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value, props.product]);
+        setUserId(props.myId);
+        setTransactions(props.transactions);
+        console.log(props.transactions);
+    }, [props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value, props.product, props.transactions]);
 
     /* Retrieves image from database */
     useEffect(() => {
@@ -77,13 +84,29 @@ export default function ProductCard(props) {
             })
     }, [props.id]);
 
+    useEffect(() => {
+
+
+    }, [transactions]);
+
     /* Handle selection from select */
     const handleSelectedProduct = (event) => {
         setSelectedProduct(event.target.value);
     }
 
-    /* Send notification to product owner */
+    /* Trade product  */
     function someFun(){
+        toast.error('Perfavore attendi che l\'offerta che hai già fatto venga accettata o rifiutata! 🙏🏻', {
+            position: "bottom-left",
+            autoClose: 6000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+        handleClose();
         if(selectedProduct === undefined){
             toast.error('Per fare un\' offerta devi selezionare un prodotto! 😅', {
                 position: "bottom-left",
@@ -96,15 +119,24 @@ export default function ProductCard(props) {
                 theme: "light",
             });
         }
-        else{
+        else {
             axios.put("http://localhost:4000/api/product/setbusy/"+selectedProduct, {
                 busy: true
             }).then(response => {
 
             }).catch(error => {
-               console.log(error);
+                console.log(error);
             });
-            props.setNum(props.num+1);
+            axios.post("http://localhost:4000/api/transactions/addnewpendingtransaction", {
+                senderId: userId,
+                senderProductId: selectedProduct,
+                receiverId: pr.user,
+                receiverProductId: pr.id
+            }).then(response => {
+                props.setNum(props.num+1);
+            }).catch(error => {
+                console.log(error);
+            });
             handleClose();
             toast.success('Offerta inviata! 📬', {
                 position: "bottom-left",
@@ -117,7 +149,6 @@ export default function ProductCard(props) {
                 theme: "light",
             });
         }
-
     }
 
     /* Add image on madal */

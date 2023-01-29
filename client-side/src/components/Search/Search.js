@@ -14,10 +14,11 @@ import useToken from "../App/useToken";
 import "./Search.css";
 import {getUserProducts} from "../../Utility/Utils";
 
-export default function Search() {
+export default function Search(props) {
 
     /* User's token */
     const {token, setToken} = useToken();
+    const [userId, setUserId] = useState("");
 
     /* List of products founded by category */
     const [catProduct, setCatProduct] = useState([])
@@ -25,13 +26,9 @@ export default function Search() {
     /* List of products founded by research */
     const [searchProduct, setSearchProduct] = useState([])
 
-    /* List of my products */
-    const [num, setNum] = useState(0);
-    const [product, setProduct] = useState([]);
-
     useEffect(() => {
-        getUserProducts(setProduct, token);
-    }, [num]);
+        setUserId(props.userId);
+    }, []);
 
     /* Search bar style and behavior manager */
     function focus(){
@@ -81,7 +78,6 @@ export default function Search() {
     }
 
     function showCategoryProduct (category)  {
-        console.log("ciao")
         setCatProduct([]);
         document.getElementById("x").classList.add("hidden");
         document.getElementById("y").classList.add("hidden");
@@ -179,7 +175,7 @@ export default function Search() {
                 <div className="res">
                     {catProduct.map((p,index) => (
                         <div key={"cat"+index} className="pr">
-                            <ProductCard product={product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={num} setNum={setNum} />
+                            <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
                         </div>
                     ))}
                     <Footer />
@@ -196,7 +192,7 @@ export default function Search() {
                 <div className="res">
                     {searchProduct.map((p, index) => (
                         <div key={"search"+index} className="pr">
-                            <ProductCard product={product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={num} setNum={setNum} />
+                            <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
                         </div>
                     ))}
                     <Footer />
