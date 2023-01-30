@@ -19,6 +19,21 @@ export default function MyProductCard(props) {
     /* User's token */
     const { token, setToken } = useToken();
 
+    /* My product details */
+    const [pr, setPr] = useState({
+        id: "",
+        name: "",
+        value: "",
+        description: "",
+        category: "",
+        status: "",
+        location: "",
+        busy: ""
+    });
+
+    const [img, setImg] = useState([]);
+    const [editImg, setEditImg] = useState("");
+
     const [flag, setFlag] = useState(false);
 
     /* Catagory and status predefined list */
@@ -73,21 +88,6 @@ export default function MyProductCard(props) {
         setEditProductOpen(false);
     };
 
-    /* My product details */
-    const [pr, setPr] = useState({
-        id: "",
-        name: "",
-        value: "",
-        description: "",
-        category: "",
-        status: "",
-        location: "",
-        busy: ""
-    });
-
-    const [img, setImg] = useState([]);
-    const [editImg, setEditImg] = useState("");
-
     /* Set state from props */
     useEffect(() => {
         setPr({
@@ -115,6 +115,7 @@ export default function MyProductCard(props) {
         }
     }, [props.busy])
 
+    /* Retrieve image from db */
     const getImg = () => {
         axios.get("http://localhost:4000/api/product/getimgbyid/"+props.id)
             .then(response => {
@@ -190,6 +191,8 @@ export default function MyProductCard(props) {
         }
     }
 
+
+    /* Edit product */
     const editProduct = () => {
         if(flag){
             setFlag(false);
@@ -260,9 +263,11 @@ export default function MyProductCard(props) {
         }
     }
 
+    /* Delete product */
     const deleteProduct = () => {
         axios.delete("http://localhost:4000/api/product/market/deleteproduct/"+pr.id+"/"+token)
             .then(response => {
+                props.setNum(props.num+1);
                 handleDelProductClose();
                 toast.success('Prodotto eliminato correttamente. 🗑️', {
                     position: "bottom-left",
@@ -274,13 +279,11 @@ export default function MyProductCard(props) {
                     progress: undefined,
                     theme: "light",
                 });
-                props.reload();
             })
             .catch(error => {
                 console.log(error);
             })
     }
-
 
   return (
       <>

@@ -238,6 +238,50 @@
     align-items: center;
 }
 
+.hidden {
+    display: none;
+}
+
+.myProductEmpty{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myTransactionTitle{
+    width: 90%;
+    height: 10%;
+    margin: 0 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.9em;
+    font-weight: 600;
+    color: white;
+}
+.myTransaction{
+    width: 90%;
+    height: 100%;
+    margin: 2% 5%;
+    display: flex;
+    flex-direction: column;
+}
+.myTransactionC{
+    width: 100%;
+    height: 15%;
+    margin-bottom: 1%;
+    background-color: rgba(217, 227, 231, 0.9);
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* Media Query */
 @media screen and (max-width: 900px){

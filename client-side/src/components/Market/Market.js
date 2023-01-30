@@ -33,31 +33,40 @@ export default function Market(props){
     const [newProductCategory, setNewProductCategory] = useState("");
     const [newProductStatus, setNewProductStatus] = useState("");
 
-    /* My product */
+    /* My product and transactions */
     const [myProd, setMyProd] = useState([]);
+    const [myTransactions, setMyTransactions] = useState([]);
 
     /* Select option list */
-    const category = ["Informatica", "Smartphone", "Console-Game", "Arredamento", "Elettrodomestici", "Arte", "Antiquariato", "Fotografia", "Sport", "Libri", "Musica", "Pelletteria", "Abbigliamento", "Gioielleria", "Orologi"];
+    const category = ["Informatica", "Smartphone", "Tablet", "Console-Game", "Arredamento", "Elettrodomestici", "Arte", "Antiquariato", "Fotografia", "Sport", "Libri", "Musica", "Pelletteria", "Abbigliamento", "Gioielleria", "Orologi"];
     const status = ["Nuovo", "Ottimo", "Buono", "Discreto", "Pessimo"];
 
 
     useEffect(() => {
         setMyProd(props.product);
+        setMyTransactions(props.transactions);
         setUserId(props.userId);
-    }, [props.product]);
+    }, [props.product, props.transactions]);
 
-    /* Retrieve user product from token */
-    /*useEffect(() => {
-        getMyProductList();
-    }, []);
+    useEffect(() => {
+        if(props.product.length === 0){
+            document.getElementById("myProduct").classList.add("hidden");
+            document.getElementById("myProductEmpty").classList.remove("hidden");
+        }
+        else{
+            document.getElementById("myProduct").classList.remove("hidden");
+            document.getElementById("myProductEmpty").classList.add("hidden");
+        }
+        if(props.transactions.length===0){
+            document.getElementById("myTransaction").classList.add("hidden");
+            document.getElementById("myTransactionEmpty").classList.remove("hidden");
+        }
+        else{
+            document.getElementById("myTransaction").classList.remove("hidden");
+            document.getElementById("myTransactionEmpty").classList.add("hidden");
+        }
 
-    const getMyProductList = () => {
-        axios.get("http://localhost:4000/api/product/market/getmyproductbyid/" + token).then(data => {
-            setMyProd(data.data);
-        }).catch(err => {
-            console.log(err);
-        });
-    }*/
+    },[props.product, props.transactions])
 
     /* Modal controllers */
     const handleNewProductOpen = () => {
@@ -256,7 +265,11 @@ export default function Market(props){
             <div className="myProductTitle">
                 La tua vetrina
             </div>
-            <div className="myProduct">
+            <div id="myProductEmpty" className="myProductEmpty hidden">
+                <div className="emptyPageTitle">Inizia subito, metti il tuo primo prodotto in vetrina!</div>
+                <img  className="emptyPageImg" src={"img/EmptyPage.png"} alt=""/>
+            </div>
+            <div id="myProduct" className="myProduct">
                 {
                     myProd.map((p, index) => (
                         <div key={index} className="myProductC">
@@ -264,8 +277,22 @@ export default function Market(props){
                         </div>
                     ))
                 }
+            </div>
+            <div className="myTransactionTitle">
+                Le tue transazioni
+            </div>
+            <div id="myTransaction" className="myTransaction">
+                {
+                    myTransactions.map((p, index) => (
+                        <div key={index} className="myTransactionC">
+                            {p.senderId}
+                        </div>
+                    ))
+                }
                 <Footer />
-
+            </div>
+            <div id="myTransactionEmpty" className="myTransactionEmpty hidden">
+                <Footer />
             </div>
 
         </div>
