@@ -11,18 +11,20 @@ export default function arrayBufferToBase64( buffer ) {
 }
 
 export  function getUserProducts (setProduct, token){
-    axios.get("http://localhost:4000/api/product/getuserproductbytoken/"+token)
-        .then(response => {
-            setProduct(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+    if(token !== null){
+        axios.get("http://localhost:4000/api/product/getuserproductbytoken/"+token)
+            .then(response => {
+                setProduct(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 }
 
-export function getUserTransactions(setTransactions, userId){
-    if(userId !== undefined){
-        axios.get("http://localhost:4000/api/transactions/getpendingtransactions/"+userId)
+export function getUserTransactions(setTransactions, token){
+    if(token !== null){
+        axios.get("http://localhost:4000/api/transactions/getpendingtransactions/"+token)
             .then(response => {
                 setTransactions(response.data);
             })

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay, Navigation, Pagination} from "swiper";
+import {Navigation, Pagination} from "swiper";
 
 import Navbar from "../Navbar/Navbar";
 import ProductCard from "../ProductCard/ProductCard";
 import Footer from "../Footer/Footer";
 import CarouselProductCard from "../CarouselProductCard/CarouselProductCard";
 import useToken from "../App/useToken";
-import {getUserProducts} from "../../Utility/Utils";
+
 
 import "swiper/css";
 import "swiper/css/pagination";

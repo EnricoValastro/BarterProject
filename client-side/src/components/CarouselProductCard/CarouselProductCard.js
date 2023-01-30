@@ -49,8 +49,7 @@ export default function CarouselProductCard(props) {
         });
         setProduct(props.product);
         setUserId(props.myId);
-        setTransactions(props.transactions);
-    }, [props.product, props.category, props.date, props.desc, props.id, props.location, props.name, props.status, props.user, props.value]);
+    }, [props.product]);
 
     /* Retrieves image from database */
     useEffect(() => {
@@ -68,6 +67,15 @@ export default function CarouselProductCard(props) {
             })
     }, [props.count, props.id]);
 
+    /* Retrieves user's transactions */
+    useEffect(() => {
+        const arr = [];
+        props.transactions.forEach((transaction) => {
+            arr.push(transaction.receiverProductId);
+        });
+        setTransactions(arr);
+    }, [props.transactions]);
+
     /* Handle selection from select */
     const handleSelectedProduct = (event) => {
         setSelectedProduct(event.target.value);
@@ -75,14 +83,7 @@ export default function CarouselProductCard(props) {
 
     /* Send notification to product owner */
     function someFun(){
-        let free = false;
-        transactions.forEach(tr => {
-            if(tr.receiverProductId === pr.id){
-                free= true;
-                return
-            }
-        })
-        if(free){
+        if(transactions.includes(pr.id)){
             toast.error('Perfavore attendi che l\'offerta che hai già fatto venga accettata o rifiutata! 🙏🏻', {
                 position: "bottom-left",
                 autoClose: 6000,

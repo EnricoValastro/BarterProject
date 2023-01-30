@@ -28,22 +28,24 @@ function App() {
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() =>{
-        console.log("ok");
+        if(token === null){
+            return;
+        }
         getUserProducts(setProduct, token);
+        getUserTransactions(setTransactions, token);
     }, [num]);
 
     useEffect(() =>{
-        console.log("ok1");
-        getUserTransactions(setTransactions, userId);
-    }, [num, userId]);
-
-    useEffect(() =>{
+        if(token === null){
+            return;
+        }
         axios.get('http://localhost:4000/api/user/getuserid/'+token)
             .then(res => {
+                setNum(num+1);
                 setUserId(res.data);
             })
             .catch(err => console.log(err))
-    }, []);
+    }, [token]);
 
     return (
         <div className="wrapper">

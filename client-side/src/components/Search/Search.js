@@ -12,7 +12,6 @@ import ProductCard from "../ProductCard/ProductCard";
 import useToken from "../App/useToken";
 
 import "./Search.css";
-import {getUserProducts} from "../../Utility/Utils";
 
 export default function Search(props) {
 
@@ -54,7 +53,7 @@ export default function Search(props) {
         document.getElementById("x").classList.remove("hidden");
     }
 
-
+    /* Search product by name */
     function searchForProduct(event){
         event.preventDefault();
         document.getElementById("noProduct2").classList.add("hidden");
@@ -77,6 +76,7 @@ export default function Search(props) {
             })
     }
 
+    /* Show product by category */
     function showCategoryProduct (category)  {
         setCatProduct([]);
         document.getElementById("x").classList.add("hidden");

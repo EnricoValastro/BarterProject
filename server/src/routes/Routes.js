@@ -45,7 +45,7 @@ module.exports = (app) => {
     app.route('/api/product/market/editproductwithoutimg/:id')
         .put(productController.editProductWithoutImgFromId);
 
-    app.route('/api/transactions/getpendingtransactions/:senderid')
+    app.route('/api/transactions/getpendingtransactions/:token')
         .get(pendingTransactionsController.getPendingTransactions);
     app.route('/api/transactions/addnewpendingtransaction')
         .post(pendingTransactionsController.addNewPendingTransaction);

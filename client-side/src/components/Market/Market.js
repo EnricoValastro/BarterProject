@@ -24,7 +24,7 @@ export default function Market(props){
     /* Modals state  */
     const [newProductOpen, setNewProductOpen] = useState(false);
 
-    /* New product data TODO change with structure... */
+    /* New product data */
     const [newProductName, setNewProductName] = useState("");
     const [newProductDescription, setNewProductDescription] = useState("");
     const [newProductImage, setNewProductImage] = useState("");
@@ -42,11 +42,12 @@ export default function Market(props){
 
 
     useEffect(() => {
+        setMyProd(props.product);
         setUserId(props.userId);
-    }, []);
+    }, [props.product]);
 
     /* Retrieve user product from token */
-    useEffect(() => {
+    /*useEffect(() => {
         getMyProductList();
     }, []);
 
@@ -56,7 +57,7 @@ export default function Market(props){
         }).catch(err => {
             console.log(err);
         });
-    }
+    }*/
 
     /* Modal controllers */
     const handleNewProductOpen = () => {
@@ -142,8 +143,8 @@ export default function Market(props){
                         progress: undefined,
                         theme: "light",
                     });
+                    props.setNum(props.num + 1);
                     handleNewProductClose();
-                    getMyProductList();
                 })
                 .catch(err => {
                     toast.error( 'Ops! Qualcosa è andato storto 😱, riprova più tardi.', {
@@ -259,7 +260,7 @@ export default function Market(props){
                 {
                     myProd.map((p, index) => (
                         <div key={index} className="myProductC">
-                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status} busy={p.busy} id={p._id} reload={getMyProductList}/>
+                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status} busy={p.busy} id={p._id} num={props.num} setNum={props.setNum} />
                         </div>
                     ))
                 }

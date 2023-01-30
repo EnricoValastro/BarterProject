@@ -1,13 +1,20 @@
 const mongoose = require('mongoose');
 const PendingTransaction = require('../models/pendingTransactions')(mongoose);
+const User = mongoose.model('User');
 const responses = require('./responses/response');
 
 const getPendingTransactions = (req, res) => {
-    PendingTransaction.find({senderId: req.params.senderid})
-        .then(result =>{
-            res.json(result);
+    User.find({token: req.params.token}).select("_id")
+        .then(result => {
+            PendingTransaction.find({senderId: result[0]._id.toString()})
+                .then(result =>{
+                    res.json(result);
+                })
+                .catch(err =>{
+                    responses.InternalServerError(res, {message: "Error: "+err.message});
+                });
         })
-        .catch(err =>{
+        .catch(err => {
             responses.InternalServerError(res, {message: "Error: "+err.message});
         });
 }
