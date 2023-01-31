@@ -1,6 +1,7 @@
 const userController = require('../controllers/userController');
 const productController = require("../controllers/productController");
 const pendingTransactionsController = require("../controllers/pendingTransactionsController");
+const notifyController = require("../controllers/notifyController");
 
 module.exports = (app) => {
 
@@ -12,8 +13,7 @@ module.exports = (app) => {
         .post(userController.signin);
     app.route('/api/user/getuseridname/:token')
         .get(userController.getUserIdFromToken);
-    app.route('/api/user/:token')
-        .get(userController.getUserFromToken);
+
 
     app.route('/api/product/upload')
         .post(productController.upload.single('image'), productController.createProduct);
@@ -32,14 +32,11 @@ module.exports = (app) => {
         .get(productController.getTopProducts);
     app.route('/api/product/home/getfirstproductincategory/:category/:token')
         .get(productController.getFirstProducFromCategory)
-
     app.route('/api/product/search/getproductbycategory/:category/:token')
         .get(productController.getProductFromCategory);
     app.route('/api/product/search/getproductbyname/:name/:token')
         .get(productController.getProductFromName);
 
-    app.route('/api/product/market/getmyproductbyid/:token')
-        .get(productController.getMyProductFromToken);
     app.route('/api/product/market/deleteproduct/:id/:token')
         .delete(productController.deleteProductFromId);
     app.route('/api/product/market/editproductwithimg/:id')
@@ -54,7 +51,15 @@ module.exports = (app) => {
     app.route('/api/transactions/removependingtransaction/:senderpid')
         .delete(pendingTransactionsController.removePendingTransaction);
 
+    /* Used by myTransactionCard */
     app.route('/api/product/market/getproductbyid/:id')
         .get(productController.getProductFromId);
 
+    /* Used for notifications */
+    app.route('/api/notify/update/:id')
+        .put(notifyController.updateNotify);
+    app.route('/api/notify/getnotify/:token')
+        .get(notifyController.getNotifyFromUserToken);
+    app.route('/api/notify/deletenotify/:senderProductId/:receiverProductId')
+        .delete(notifyController.deleteNotify);
 }

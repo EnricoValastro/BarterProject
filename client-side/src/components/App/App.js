@@ -30,8 +30,13 @@ function App() {
     const [num, setNum] = useState(0);
     const [product, setProduct] = useState([]);
 
+    /* User's transactions and notifications and triggers */
     const [transactions, setTransactions] = useState([]);
+    const [notifications, setNotifications] = useState([]);
+    const [unreadNotifications, setUnreadNotifications] = useState();
+    const [num2, setNum2] = useState(0);
 
+    /* Fetch user's transaction & products */
     useEffect(() =>{
         if(token === null){
             return;
@@ -40,6 +45,7 @@ function App() {
         getUserTransactions(setTransactions, token);
     }, [num]);
 
+    /* Fetch user's id & name and send id to socket */
     useEffect(() =>{
         if(token === null){
             return;
@@ -47,6 +53,7 @@ function App() {
         axios.get('http://localhost:4000/api/user/getuseridname/'+token)
             .then(res => {
                 setNum(num+1);
+                setNum2(num2+1);
                 setUserId(res.data._id);
                 setUserName(res.data.name);
                 socket.emit('newUser', res.data._id);
@@ -54,9 +61,10 @@ function App() {
             .catch(err => console.log(err))
     }, [token]);
 
+    /* Receives real time notifications from socket */
     useEffect(() =>{
         socket.on('getNotification', (data) => {
-            toast.info(data.senderName+" ha fatto un offerta per "+data.productNameDest, {
+            toast.info(data.senderName+" ha fatto un offerta per "+data.receiverProductName, {
                 position: "bottom-left",
                 autoClose: 6000,
                 hideProgressBar: false,
@@ -66,11 +74,27 @@ function App() {
                 progress: undefined,
                 theme: "light",
             });
+            setNum2(num2+1);
         });
         return () => {
             socket.off('getNotification');
         }
-    }, []);
+    } );
+
+    /* Fetch user's notifications  */
+    useEffect(() =>{
+        if(token === null){
+            return;
+        }
+        axios.get('http://localhost:4000/api/notify/getnotify/'+token)
+            .then(res => {
+                setNotifications(res.data.sort((a, b) => (!b.read) - (!a.read)));
+                setUnreadNotifications(res.data.filter((item) => !item.read).length);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [num2]);
 
 
     return (
@@ -84,11 +108,11 @@ function App() {
                     </Route>
                     <Route path="/signin" element={<SigninPage setToken={setToken} socket={socket} />}>
                     </Route>
-                    <Route path="/home" element={<HomePage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} />}>
+                    <Route path="/home" element={<HomePage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} />}>
                     </Route>
-                    <Route path="/search" element={<SearchPage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} />}>
+                    <Route path="/search" element={<SearchPage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} />}>
                     </Route>
-                    <Route path="/marketplace" element={<MarketplacePage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} />}>
+                    <Route path="/marketplace" element={<MarketplacePage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} />}>
                     </Route>
                     <Route path="*" element={<NotFound />}>
                     </Route>

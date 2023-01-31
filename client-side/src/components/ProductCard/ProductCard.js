@@ -146,9 +146,9 @@ export default function ProductCard(props) {
                     senderId: userId,
                     receiverId: pr.user,
                     senderName: userName,
-                    productNameDest: pr.name,
-                    idProductOffered: selectedProduct,
-                    idProductRequested: pr.id
+                    receiverProductName: pr.name,
+                    senderProductId: selectedProduct,
+                    receiverProductId: pr.id
                 });
                 handleClose();
                 toast.success('Offerta inviata! 📬', {

@@ -10,7 +10,7 @@ const httpServer = require('http').createServer(app);
 const { Server } = require("socket.io");
 
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
+const notifyController = require("./src/controllers/notifyController");
 
 const PORT = process.env.PORT;
 
@@ -47,20 +47,19 @@ io.on('connection', (socket) => {
         addNewUser(id, socket.id);
     });
 
-    socket.on('sendNotification', ({ senderId, receiverId, senderName, productNameDest, idProductOffered, idProductRequested }) => {
-        console.log('send notification: ' + senderId + ' ' + receiverId + ' ' + senderName + ' ' + productNameDest + ' ' + idProductOffered + ' ' + idProductRequested)
+    socket.on('sendNotification', ({ senderId, receiverId, senderName, receiverProductName, senderProductId, receiverProductId }) => {
         const receiver = getUser(receiverId);
         if(receiver !== undefined){
             io.to(receiver.socketId).emit('getNotification', {
                 senderId,
                 receiverId,
                 senderName,
-                productNameDest,
-                idProductOffered,
-                idProductRequested
+                receiverProductName,
+                senderProductId,
+                receiverProductId
             });
         }
-        //Todo: save notification in database
+        notifyController.addNewNotify(senderId, receiverId, senderName, receiverProductName, senderProductId, receiverProductId);
     });
 
     socket.on('disconnect', () => {

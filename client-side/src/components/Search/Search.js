@@ -108,7 +108,7 @@ export default function Search(props) {
 
     return (
         <div id="search">
-            <Navbar pagename={"Search"} />
+            <Navbar pagename={"Search"} notifications={props.notifications} unreadNotifications={props.unreadNotifications} num2={props.num2} setNum2={props.setNum2} />
 
             <div id="y" className="searchBarContainer ">
 

@@ -132,9 +132,9 @@ export default function CarouselProductCard(props) {
                     senderId: userId,
                     receiverId: pr.user,
                     senderName: userName,
-                    productNameDest: pr.name,
-                    idProductOffered: selectedProduct,
-                    idProductRequested: pr.id
+                    receiverProductName: pr.name,
+                    senderProductId: selectedProduct,
+                    receiverProductId: pr.id
                 });
                 toast.success('Offerta inviata! 📬', {
                     position: "bottom-left",

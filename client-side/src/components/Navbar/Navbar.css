@@ -127,27 +127,27 @@
     justify-content: flex-end;
     align-items: center;
     margin-right: 4%;
-
 }
 
 .navMobile-hidden{
     display: none;
 }
 
-@media screen and (max-width: 890px){
+@media screen and (max-width: 900px){
     .navCenter{
         display: none;
     }
     .navRight{
-        display: none;
+        width: 100%;
+        justify-content: flex-end;
+        align-items: center;
     }
     .navMobile-hidden{
         display: flex;
+        width: 10%;
     }
     .navLeft{
-        width: 46%;
-        justify-content: flex-start;
+        display: none;
+
     }
-
-
 }

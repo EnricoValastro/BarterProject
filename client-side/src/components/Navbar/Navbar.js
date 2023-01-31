@@ -1,14 +1,47 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {Notifications, Person, Search} from "@mui/icons-material";
-import {Home} from "@mui/icons-material";
+
+import {Person, Search} from "@mui/icons-material";
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import {Storefront} from "@mui/icons-material";
-import './Navbar.css'
 import MenuIcon from "@mui/icons-material/Menu";
-import Menu from "../Menu/Menu";
+import {Badge, IconButton, Menu, MenuItem, styled, Tooltip} from "@mui/material";
+
+import Notification from "../Notification/Notification";
+import MenuMobile from "../MenuMobile/MenuMobile";
+import './Navbar.css'
+
 export default function Navbar(props) {
     //Hamburger menu
-    const [isOpen, setOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    /* Notifications dropdown */
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [notificationDropdown, setNotificationDropdown] = useState(false);
+
+    /* Styled notifications badge */
+    const StyledBadge = styled(Badge)(({ theme }) => ({
+        '& .MuiBadge-badge': {
+            right: 55,
+            top: 13,
+            border: `2px solid ${theme.palette.background.paper}`,
+            padding: '0 5px',
+            color: 'white',
+            backgroundColor: '#EE6C4D',
+        },
+    }));
+
+    /* Notifications dropdown controller */
+    const handleDropdownOpen = (event) =>{
+        setAnchorEl(event.currentTarget);
+        setNotificationDropdown(true);
+    }
+
+    const handleDropdownClose = () =>{
+        setNotificationDropdown(false);
+        props.setNum2(props.num2 + 1);
+    }
 
    useEffect(() => {
        const PageControl =  () => {
@@ -16,25 +49,16 @@ export default function Navbar(props) {
                 document.getElementById('iconHome').classList.add('selected');
                 document.getElementById('iconSearch').classList.remove('selected');
                 document.getElementById('iconMarket').classList.remove('selected');
-                document.getElementById('iconProfile').classList.remove('selected');
            }
            else if(props.pagename === "Search"){
                 document.getElementById('iconSearch').classList.add('selected');
                 document.getElementById('iconHome').classList.remove('selected');
                 document.getElementById('iconMarket').classList.remove('selected');
-                document.getElementById('iconProfile').classList.remove('selected');
            }
-           else if(props.pagename === "Profile"){
-                document.getElementById('iconProfile').classList.add('selected');
-                document.getElementById('iconHome').classList.remove('selected');
-                document.getElementById('iconSearch').classList.remove('selected');
-                document.getElementById('iconMarket').classList.remove('selected');
-           }
-              else if(props.pagename === "Marketplace"){
+           else {
                 document.getElementById('iconMarket').classList.add('selected');
                 document.getElementById('iconHome').classList.remove('selected');
                 document.getElementById('iconSearch').classList.remove('selected');
-                document.getElementById('iconProfile').classList.remove('selected');
            }
 
        }
@@ -53,10 +77,14 @@ export default function Navbar(props) {
                 <div className="navLeft">
                     <Link to="/home" className="linknav">Barter</Link>
                 </div>
+                <div className="navMobile navMobile-hidden">
+                    <MenuIcon className="menu-btn" onClick={()=>setMenuOpen(true)} />
+                    <MenuMobile isOpen={menuOpen} onChange={setMenuOpen}></MenuMobile>
+                </div>
                 <div className="navCenter">
                     <div id="iconHome"className="navItem">
                         <Link to="/home" className="icons">
-                            <span><Home className="Icon"/></span>
+                            <span><HomeRoundedIcon className="Icon"/></span>
                             <span>Home</span>
                         </Link>
                     </div>
@@ -77,16 +105,79 @@ export default function Navbar(props) {
                 </div>
                 <div className="navRight">
                     <div className="navItem">
-                        <span><Notifications className="Icon"/></span>
+
+                        <Tooltip title={`You have ${props.unreadNotifications} notifications`}>
+                            <IconButton
+                                aria-label="more"
+                                onClick={handleDropdownOpen}
+                                size="small"
+                                id="long-button"
+                                aria-controls={notificationDropdown ? 'long-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={notificationDropdown ? 'true' : undefined}
+                                disableRipple={true}
+                            >
+                                <StyledBadge badgeContent={props.unreadNotifications} showZero={false} color="error">
+                                    <NotificationsRoundedIcon className="Icon" />
+                                </StyledBadge>
+                            </IconButton>
+
+                        </Tooltip>
+
+                        <Menu
+                            id="long-menu"
+                            anchorEl={anchorEl}
+                            open={notificationDropdown && props.notifications.length > 0}
+                            onClose={handleDropdownClose}
+                            PaperProps={{
+                                elevation: 0,
+                                sx: {
+                                    overflow: 'visible',
+                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                    mt: 0.8,
+                                    '& .MuiSvgIcon-root': {
+                                        width: 32,
+                                        height: 32,
+                                        ml: -0.5,
+                                        mr: 1,
+                                    },
+                                    '&:before': {
+                                        content: '""',
+                                        display: 'block',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 130,
+                                        width: 10,
+                                        height: 10,
+                                        backgroundColor: 'background.paper',
+                                        transform: 'translateY(-50%) rotate(45deg)',
+                                        zIndex: 0,
+                                    },
+                                },
+                            }}
+                            MenuListProps={{
+                                'aria-labelledby': 'long-button',
+                            }}
+                            transformOrigin={{ horizontal: 'left', vertical: 'top' }}
+                            anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+                        >
+
+                            {
+                                props.notifications.map((notification, index) => (
+                                    <MenuItem key={index} divider={true} sx = {{backgroundColor: notification.read ? "white" : "gray"}}>
+                                        <Notification notification={notification} num2={props.num2} setNum2={props.setNum2}  />
+                                    </MenuItem>
+                                ))
+                            }
+
+                        </Menu>
+
                     </div>
                     <div className="navItem" id="iconProfile">
                         <span><Person className="Icon"/></span>
                     </div>
                 </div>
-                <div className="navMobile navMobile-hidden">
-                    <MenuIcon className="menu-btn" onClick={()=>setOpen(true)} />
-                    <Menu isOpen={isOpen} onChange={setOpen}></Menu>
-                </div>
+
 
             </div>
         </div>

@@ -65,19 +65,6 @@ const emailValidation =  (req, res) => {
     });
 }
 
-const getUserFromToken = (req, res) => {
-    User.findOne({token: req.params.token}).then( profile => {
-        if (profile) {
-            res.send(profile);
-        }
-        else {
-            res.send(false);
-        }
-    }).catch(err => {
-        responses.InternalServerError(res, {message: err.message});
-    })
-}
-
 const getUserIdFromToken = (req, res) => {
     User.findOne({token: req.params.token}).select('name')
         .then( profile => {
@@ -96,6 +83,5 @@ module.exports = {
     signup,
     signin,
     emailValidation,
-    getUserIdFromToken,
-    getUserFromToken
+    getUserIdFromToken
 }

@@ -61,29 +61,34 @@ export default function  MyTransactionCard(props){
 
     /* Withdraw the offer */
     const cancelOffer = () => {
-        axios.put("http://localhost:4000/api/product/unsetbusy/"+props.transaction.senderProductId, {
-            busy: false
-        }).then(response => {
-            axios.delete("http://localhost:4000/api/transactions/removependingtransaction/"+props.transaction.senderProductId)
-                .then(response => {
-                    props.setNum(props.num+1);
-                    handleDelProductClose();
-                    toast.success('La tua offerta è stata ritirata️! 📪', {
-                        position: "bottom-left",
-                        autoClose: 6000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
+        axios.delete("http://localhost:4000/api/notify/deletenotify/"+props.transaction.senderProductId+"/"+props.transaction.receiverProductId)
+            .then(response => {
+                axios.put("http://localhost:4000/api/product/unsetbusy/"+props.transaction.senderProductId, {
+                    busy: false
+                }).then(response => {
+                    axios.delete("http://localhost:4000/api/transactions/removependingtransaction/"+props.transaction.senderProductId)
+                        .then(response => {
+                            props.setNum(props.num+1);
+                            handleDelProductClose();
+                            toast.success('La tua offerta è stata ritirata️! 📪', {
+                                position: "bottom-left",
+                                autoClose: 6000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            });
+                        }).catch(error => {
+                        console.log(error);
                     });
                 }).catch(error => {
                     console.log(error);
-                });
-        }).catch(error => {
+                })
+            }).catch(error => {
                 console.log(error);
-        })
+            });
     }
 
     return(
