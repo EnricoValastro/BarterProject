@@ -25,6 +25,8 @@ module.exports = (app) => {
         .get(productController.getUserProductFromToken);
     app.route('/api/product/setbusy/:id')
         .put(productController.setBusy);
+    app.route('/api/product/unsetbusy/:id')
+        .put(productController.unsetBusy);
 
     app.route('/api/product/home/gettopproducts/:token')
         .get(productController.getTopProducts);
@@ -49,7 +51,8 @@ module.exports = (app) => {
         .get(pendingTransactionsController.getPendingTransactions);
     app.route('/api/transactions/addnewpendingtransaction')
         .post(pendingTransactionsController.addNewPendingTransaction);
-    /*app.route('/api/transactions/removependingtransaction/')*/
+    app.route('/api/transactions/removependingtransaction/:senderpid')
+        .delete(pendingTransactionsController.removePendingTransaction);
 
     app.route('/api/product/market/getproductbyid/:id')
         .get(productController.getProductFromId);

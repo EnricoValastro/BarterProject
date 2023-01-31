@@ -278,28 +278,27 @@ export default function Market(props){
                 {
                     myProd.map((p, index) => (
                         <div key={index} className="myProductC">
-                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status} busy={p.busy} id={p._id} num={props.num} setNum={props.setNum} />
+                            <MyProductCard name={p.name} desc={p.description} val={p.value} loc={p.location} cat={p.category} stat={p.status} busy={p.busy} id={p._id} num={props.num} setNum={props.setNum}  />
                         </div>
                     ))
                 }
+                <div id="myTTitle" className="myTransactionTitle">
+                    Transazioni pendenti
+                </div>
+                <div id="myTransaction" className="myTransaction">
+                    {
+                        myTransactions.map((t, index) => (
+                            count++,
+                                <div key={index} className="myTransactionC">
+                                    <MyTransactionCard transaction={t} count={count} num={props.num} setNum={props.setNum}/>
+                                </div>
+                        ))
+                    }
 
+                </div>
+                <Footer />
             </div>
-            <div id="myTTitle" className="myTransactionTitle">
-                Le tue transazioni
-            </div>
-            <div id="myTransaction" className="myTransaction">
-                {
-                    myTransactions.map((t, index) => (
-                        count++,
-                        <div key={index} className="myTransactionC">
-                            <MyTransactionCard transaction={t} count={count} />
-                            <button className="myTransactionBtt">Ritira l'offerta</button>
-                        </div>
-                    ))
-                }
 
-            </div>
-            <Footer />
         </div>
     )
 

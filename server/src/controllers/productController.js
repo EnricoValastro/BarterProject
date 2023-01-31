@@ -241,6 +241,16 @@ const setBusy = (req, res) => {
         });
 }
 
+const unsetBusy = (req, res) => {
+    Product.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
+        .then(result => {
+            responses.OkResponse(res, {message: "Product edited successfully"});
+        })
+        .catch(err => {
+            responses.InternalServerError(res, {message: err.message});
+        });
+}
+
 const getProductFromId = (req, res) => {
     Product.find({_id: req.params.id}).select("name image -_id" ).then(
         result => {
@@ -270,5 +280,6 @@ module.exports = {
     editProductWithoutImgFromId,
     getProductFromId,
     setBusy,
+    unsetBusy,
     response
 }

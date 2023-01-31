@@ -112,6 +112,14 @@ export default function MyProductCard(props) {
         if(props.busy){
             const card = document.getElementById("myPCContainerLeft"+props.id)
             card.classList.add("busyProduct");
+            document.getElementById("myPEdit"+props.id).classList.add("notAllowed");
+            document.getElementById("myPDel"+props.id).classList.add("notAllowed");
+        }
+        else{
+            const card = document.getElementById("myPCContainerLeft"+props.id)
+            card.classList.remove("busyProduct");
+            document.getElementById("myPEdit"+props.id).classList.remove("notAllowed");
+            document.getElementById("myPDel"+props.id).classList.remove("notAllowed");
         }
     }, [props.busy])
 
@@ -299,10 +307,10 @@ export default function MyProductCard(props) {
               </div>
               <div className="myProductCardContainerRight">
                   <div className="sideBar">
-                      <div className="myProductIconCont">
+                      <div id={"myPEdit"+props.id} className="myProductIconCont">
                           <EditIcon className="myProductIcon" onClick={handleEditProductOpen} />
                       </div>
-                      <div className="myProductIconCont" onClick={handleDelProductOpen}>
+                      <div id={"myPDel"+props.id} className="myProductIconCont" onClick={handleDelProductOpen}>
                           <DeleteIcon className="myProductIcon" />
                       </div>
                   </div>

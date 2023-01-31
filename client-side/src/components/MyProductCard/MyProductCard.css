@@ -20,6 +20,10 @@
 .busyProduct{
     border: 3px solid #EE6C4D;
 }
+.notAllowed{
+    cursor: not-allowed !important;
+}
+
 .myProductCard{
     width: 100%;
     height: 100%;

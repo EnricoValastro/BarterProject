@@ -29,7 +29,13 @@ const addNewPendingTransaction = (req, res) => {
 }
 
 const removePendingTransaction = (req, res) => {
-    //ToDo
+    PendingTransaction.findOneAndDelete({senderProductId: req.params.senderpid})
+        .then( result => {
+            responses.OkResponse(res, {message: "Transaction deleted."})
+        })
+        .catch(err => {
+            responses.InternalServerError(res, {message: "Error: "+err.message});
+        });
 }
 
 module.exports = {
