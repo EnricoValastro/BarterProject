@@ -10,6 +10,6 @@ export default function SearchPage(props) {
     }
 
     return (
-        <Search userId={props.userId} product={props.product} num={props.num} setNum={props.setNum} transactions={props.transactions} />
+        <Search userId={props.userId} product={props.product} num={props.num} setNum={props.setNum} transactions={props.transactions} socket={props.socket} userName={props.userName} />
     );
 }

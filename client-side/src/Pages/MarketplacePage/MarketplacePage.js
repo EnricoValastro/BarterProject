@@ -12,6 +12,6 @@ export default function MarketplacePage(props) {
     }
 
     return(
-        <Market userId={props.userId} product={props.product} num={props.num} setNum={props.setNum} transactions={props.transactions} />
+        <Market userId={props.userId} product={props.product} num={props.num} setNum={props.setNum} transactions={props.transactions} socket={props.socket} userName={props.userName} />
     )
 }

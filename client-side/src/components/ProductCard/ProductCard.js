@@ -18,6 +18,7 @@ export default function ProductCard(props) {
 
     /* User's id */
     const [userId, setUserId] = useState("");
+    const [userName, setUserName] = useState();
 
     /* This user's product list & transactions list */
     const [product, setProduct] = useState([]);
@@ -62,6 +63,7 @@ export default function ProductCard(props) {
         });
         setProduct(props.product);
         setUserId(props.myId);
+        setUserName(props.userName);
     }, [props.product]);
 
     /* Retrieves image from database */
@@ -95,7 +97,7 @@ export default function ProductCard(props) {
     }
 
     /* Trade product  */
-    function someFun(){
+    function tradeIt(){
         if(transactions.includes(pr.id)){
             toast.error('Perfavore attendi che l\'offerta che hai già fatto venga accettata o rifiutata! 🙏🏻', {
                 position: "bottom-left",
@@ -139,6 +141,14 @@ export default function ProductCard(props) {
                     props.setNum(props.num+1);
                 }).catch(error => {
                     console.log(error);
+                });
+                props.socket.emit('sendNotification', {
+                    senderId: userId,
+                    receiverId: pr.user,
+                    senderName: userName,
+                    productNameDest: pr.name,
+                    idProductOffered: selectedProduct,
+                    idProductRequested: pr.id
                 });
                 handleClose();
                 toast.success('Offerta inviata! 📬', {
@@ -218,7 +228,7 @@ export default function ProductCard(props) {
                                             ))}
                                         </select>
                                         <div className="modalOfferBtt">
-                                            <BubblyButton name={"Trade it!"} onClick={someFun}  />
+                                            <BubblyButton name={"Trade it!"} onClick={tradeIt}  />
                                         </div>
                                     </div>
                                 </div>

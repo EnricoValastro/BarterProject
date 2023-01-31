@@ -11,7 +11,7 @@ export default function HomePage(props) {
     }
 
     return (
-            <Home userId={props.userId} product={props.product} num={props.num} setNum={props.setNum} transactions={props.transactions} />
+            <Home userId={props.userId} product={props.product} num={props.num} setNum={props.setNum} transactions={props.transactions} socket={props.socket} userName={props.userName} />
     )
 }
 

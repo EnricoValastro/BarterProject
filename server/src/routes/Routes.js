@@ -10,7 +10,7 @@ module.exports = (app) => {
         .post(userController.signup);
     app.route('/api/user/signin')
         .post(userController.signin);
-    app.route('/api/user/getuserid/:token')
+    app.route('/api/user/getuseridname/:token')
         .get(userController.getUserIdFromToken);
     app.route('/api/user/:token')
         .get(userController.getUserFromToken);

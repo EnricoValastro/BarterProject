@@ -18,6 +18,7 @@ import './Home.css';
 export default function Home(props) {
 
     let count = 0;
+
     /* User's token and id */
     const {token, setToken} = useToken();
     const [userId, setUserId] = useState("");
@@ -31,7 +32,7 @@ export default function Home(props) {
 
     useEffect(() => {
         setUserId(props.userId);
-    }, []);
+    }, [props.userId]);
 
 
     /* Fetch most recent product from DB */
@@ -104,7 +105,7 @@ export default function Home(props) {
                     {topProducts.map((p, index) => (
                         count++,
                         <SwiperSlide key={"carousel"+index} >
-                            <CarouselProductCard count={count} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} product={props.product} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
+                            <CarouselProductCard count={count} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} product={props.product} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} socket={props.socket} userName={props.userName} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -143,7 +144,7 @@ export default function Home(props) {
                         >
                             {infProducts.map((p, index) => (
                                     <SwiperSlide key={"inf"+index} >
-                                        <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
+                                        <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} socket={props.socket} userName={props.userName} />
                                     </SwiperSlide>
                             ))}
                         </Swiper>
@@ -183,7 +184,7 @@ export default function Home(props) {
                         >
                             {arrProducts.map((p, index) => (
                                 <SwiperSlide key={"arr"+index}>
-                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
+                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} socket={props.socket} userName={props.userName} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -224,7 +225,7 @@ export default function Home(props) {
                         >
                             {sportProducts.map((p, index) => (
                                 <SwiperSlide key={"sport"+index}>
-                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
+                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} socket={props.socket} userName={props.userName} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -265,7 +266,7 @@ export default function Home(props) {
                         >
                             {abbProducts.map((p, index) => (
                                 <SwiperSlide key={"abb"+index} >
-                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
+                                    <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} socket={props.socket} userName={props.userName} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

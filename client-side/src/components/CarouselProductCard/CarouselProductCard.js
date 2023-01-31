@@ -11,9 +11,9 @@ import './CarouselProductCard.css';
 
 export default function CarouselProductCard(props) {
 
-    /* User's token */
-    const {token} = useToken();
+    /* User's id and name */
     const [userId, setUserId] = useState("");
+    const [userName, setUserName] = useState();
 
     /* This user's product list */
     const [product, setProduct] = useState([]);
@@ -49,6 +49,7 @@ export default function CarouselProductCard(props) {
         });
         setProduct(props.product);
         setUserId(props.myId);
+        setUserName(props.userName);
     }, [props.product]);
 
     /* Retrieves image from database */
@@ -82,7 +83,7 @@ export default function CarouselProductCard(props) {
     }
 
     /* Send notification to product owner */
-    function someFun(){
+    function tradeIt(){
         if(transactions.includes(pr.id)){
             toast.error('Perfavore attendi che l\'offerta che hai già fatto venga accettata o rifiutata! 🙏🏻', {
                 position: "bottom-left",
@@ -121,10 +122,19 @@ export default function CarouselProductCard(props) {
                     senderProductId: selectedProduct,
                     receiverId: pr.user,
                     receiverProductId: pr.id
-                }).then(response => {
-                    props.setNum(props.num+1);
-                }).catch(error => {
-                    console.log(error);
+                })
+                    .then(response => {
+                        props.setNum(props.num+1);
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                props.socket.emit('sendNotification', {
+                    senderId: userId,
+                    receiverId: pr.user,
+                    senderName: userName,
+                    productNameDest: pr.name,
+                    idProductOffered: selectedProduct,
+                    idProductRequested: pr.id
                 });
                 toast.success('Offerta inviata! 📬', {
                     position: "bottom-left",
@@ -176,7 +186,7 @@ export default function CarouselProductCard(props) {
                        ))}
                    </select>
                    <div className="carouselCardOfferBtt">
-                       <BubblyButton name={"Trade it!"} onClick={someFun} />
+                       <BubblyButton name={"Trade it!"} onClick={tradeIt} />
                    </div>
 
                </div>

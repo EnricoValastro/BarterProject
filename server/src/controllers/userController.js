@@ -79,16 +79,17 @@ const getUserFromToken = (req, res) => {
 }
 
 const getUserIdFromToken = (req, res) => {
-    User.findOne({token: req.params.token}).then( profile => {
-        if (profile) {
-            res.send(profile._id);
-        }
-        else {
-            res.send(false);
-        }
-    }).catch(err => {
-        responses.InternalServerError(res, {message: err.message});
-    })
+    User.findOne({token: req.params.token}).select('name')
+        .then( profile => {
+            if (profile) {
+                res.json(profile);
+            }
+            else {
+                res.send(false);
+            }
+        }).catch(err => {
+            responses.InternalServerError(res, {message: err.message});
+        })
 }
 
 module.exports = {

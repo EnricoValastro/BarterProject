@@ -27,7 +27,7 @@ export default function Search(props) {
 
     useEffect(() => {
         setUserId(props.userId);
-    }, []);
+    }, [props.userId]);
 
     /* Search bar style and behavior manager */
     function focus(){
@@ -175,7 +175,7 @@ export default function Search(props) {
                 <div className="res">
                     {catProduct.map((p,index) => (
                         <div key={"cat"+index} className="pr">
-                            <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
+                            <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} socket={props.socket} userName={props.userName} />
                         </div>
                     ))}
                     <Footer />
@@ -192,7 +192,7 @@ export default function Search(props) {
                 <div className="res">
                     {searchProduct.map((p, index) => (
                         <div key={"search"+index} className="pr">
-                            <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} />
+                            <ProductCard product={props.product} id={p._id} name={p.name} value = {p.value} desc={p.description} category={p.category} status={p.status} location={p.location} date={p.date} user={p.userID} num={props.num} setNum={props.setNum} myId={props.userId} transactions={props.transactions} socket={props.socket} userName={props.userName} />
                         </div>
                     ))}
                     <Footer />
