@@ -241,6 +241,16 @@ const setBusy = (req, res) => {
         });
 }
 
+const getProductFromId = (req, res) => {
+    Product.find({_id: req.params.id}).select("name image -_id" ).then(
+        result => {
+            res.json(result);
+        })
+        .catch(err => {
+            responses.InternalServerError(res, {message: err.message});
+        });
+}
+
 const response = (req, res) => {
     res.send("ok");
 }
@@ -258,6 +268,7 @@ module.exports = {
     deleteProductFromId,
     editProductWithImgFromId,
     editProductWithoutImgFromId,
+    getProductFromId,
     setBusy,
     response
 }

@@ -51,4 +51,7 @@ module.exports = (app) => {
         .post(pendingTransactionsController.addNewPendingTransaction);
     /*app.route('/api/transactions/removependingtransaction/')*/
 
+    app.route('/api/product/market/getproductbyid/:id')
+        .get(productController.getProductFromId);
+
 }

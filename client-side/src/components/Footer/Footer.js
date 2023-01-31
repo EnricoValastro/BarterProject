@@ -3,7 +3,7 @@ import './Footer.css';
 
 export default function Footer() {
     return (
-        <div id="appfooter">
+        <div id="appFooter">
             <div className="footerContainer">
                 <div className="footertitle">
                     Barter

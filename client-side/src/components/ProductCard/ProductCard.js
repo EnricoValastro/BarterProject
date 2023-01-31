@@ -170,7 +170,6 @@ export default function ProductCard(props) {
     return (
         <>
             <div className="productCard" onClick={handleOpen}>
-
                 <div id={props.id} className="productImage"></div>
                 <div className="productDescription">
                     <p className="productName"> {pr.name} </p>

@@ -14,12 +14,15 @@ import MyProductCard from "../MyProductCard/MyProductCard";
 import useToken from "../App/useToken";
 
 import './Market.css';
+import MyTransactionCard from "../MyTransactionCard/MyTransactionCard";
 
 export default function Market(props){
 
     /* Token & userId */
     const { token, setToken } = useToken();
     const [userId, setUserId] = useState();
+
+    let count = 0;
 
     /* Modals state  */
     const [newProductOpen, setNewProductOpen] = useState(false);
@@ -51,19 +54,21 @@ export default function Market(props){
     useEffect(() => {
         if(props.product.length === 0){
             document.getElementById("myProduct").classList.add("hidden");
+            document.getElementById("myPTitle").classList.add("hidden");
             document.getElementById("myProductEmpty").classList.remove("hidden");
         }
         else{
             document.getElementById("myProduct").classList.remove("hidden");
+            document.getElementById("myPTitle").classList.remove("hidden");
             document.getElementById("myProductEmpty").classList.add("hidden");
         }
         if(props.transactions.length===0){
             document.getElementById("myTransaction").classList.add("hidden");
-            document.getElementById("myTransactionEmpty").classList.remove("hidden");
+            document.getElementById("myTTitle").classList.add("hidden");
         }
         else{
             document.getElementById("myTransaction").classList.remove("hidden");
-            document.getElementById("myTransactionEmpty").classList.add("hidden");
+            document.getElementById("myTTitle").classList.remove("hidden");
         }
 
     },[props.product, props.transactions])
@@ -262,7 +267,7 @@ export default function Market(props){
                 </Modal>
 
             </div>
-            <div className="myProductTitle">
+            <div id="myPTitle" className="myProductTitle">
                 La tua vetrina
             </div>
             <div id="myProductEmpty" className="myProductEmpty hidden">
@@ -277,24 +282,24 @@ export default function Market(props){
                         </div>
                     ))
                 }
+
             </div>
-            <div className="myTransactionTitle">
+            <div id="myTTitle" className="myTransactionTitle">
                 Le tue transazioni
             </div>
             <div id="myTransaction" className="myTransaction">
                 {
-                    myTransactions.map((p, index) => (
+                    myTransactions.map((t, index) => (
+                        count++,
                         <div key={index} className="myTransactionC">
-                            {p.senderId}
+                            <MyTransactionCard transaction={t} count={count} />
+                            <button className="myTransactionBtt">Ritira l'offerta</button>
                         </div>
                     ))
                 }
-                <Footer />
-            </div>
-            <div id="myTransactionEmpty" className="myTransactionEmpty hidden">
-                <Footer />
-            </div>
 
+            </div>
+            <Footer />
         </div>
     )
 
