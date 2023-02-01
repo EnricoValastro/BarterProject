@@ -134,7 +134,8 @@ export default function Notification(props) {
         props.socket.emit('resOffer', {
             receiverId: props.notification.senderId,
             result: false,
-            productName: props.notification.receiverProductName
+            productName: props.notification.receiverProductName,
+            senderEmail: props.userEmail
         });
     }
     const acceptOffer = () =>{
@@ -166,7 +167,8 @@ export default function Notification(props) {
         props.socket.emit('resOffer', {
             receiverId: props.notification.senderId,
             result: true,
-            productName: props.notification.receiverProductName
+            productName: props.notification.receiverProductName,
+            senderEmail: props.userEmail
         });
     }
 

@@ -178,7 +178,7 @@ export default function Market(props){
 
     return (
         <div id="marketplace" className="marketplace">
-            <Navbar pagename={"Marketplace"} notifications={props.notifications} unreadNotifications={props.unreadNotifications} num2={props.num2} setNum2={props.setNum2} socket={props.socket} />
+            <Navbar pagename={"Marketplace"} notifications={props.notifications} unreadNotifications={props.unreadNotifications} num2={props.num2} setNum2={props.setNum2} socket={props.socket} userEmail={props.userEmail} />
             <div className="newProduct">
                 <button onClick={handleNewProductOpen} className="newProductButton">
                     <AddCircleOutlineIcon className="newProductIcon"/>

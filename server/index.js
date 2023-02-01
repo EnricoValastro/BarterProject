@@ -61,14 +61,16 @@ io.on('connection', (socket) => {
         notifyController.addNewNotify(senderId, receiverId, senderName, receiverProductName, senderProductId, receiverProductId);
     });
 
-    socket.on('resOffer', ({ receiverId, result, productName }) => {
+    socket.on('resOffer', ({ receiverId, result, productName,senderEmail }) => {
         const receiver = getUser(receiverId);
         if(receiver !== undefined){
             io.to(receiver.socketId).emit('response', {
                 result,
-                productName
+                productName,
+                senderEmail
             });
         }
+        
     });
 
     socket.on('disconnect', () => {

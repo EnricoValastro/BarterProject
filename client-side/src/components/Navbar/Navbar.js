@@ -15,7 +15,7 @@ import './Navbar.css'
 export default function Navbar(props) {
     //Hamburger menu
     const [menuOpen, setMenuOpen] = useState(false);
-
+    const arr = [1,2,3,4,5,6,7,8,9,10]
     /* Notifications dropdown */
     const [anchorEl, setAnchorEl] = useState(null);
     const [notificationDropdown, setNotificationDropdown] = useState(false);
@@ -150,14 +150,20 @@ export default function Navbar(props) {
                             anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
                         >
 
+
+                            { arr.map((n) => (
+                                <MenuItem key={n} divider={true} sx = {{backgroundColor: "rgba(217, 227, 231, 0.9)"}}>
+                                    <div>n</div>
+                                </MenuItem>
+                            ))
+                            }
                             {
                                 props.notifications.map((notification, index) => (
                                     <MenuItem key={index} divider={true} sx = {{backgroundColor: notification.read ? "rgba(217, 227, 231, 0.9)" : "rgba(49,122,199,0.8)"}}>
-                                        <Notification notification={notification} num2={props.num2} setNum2={props.setNum2} socket={props.socket} />
+                                        <Notification notification={notification} num2={props.num2} setNum2={props.setNum2} socket={props.socket} userEmail={props.userEmail} />
                                     </MenuItem>
                                 ))
                             }
-
                         </Menu>
 
                     </div>

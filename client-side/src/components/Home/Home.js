@@ -89,7 +89,7 @@ export default function Home(props) {
 
     return(
         <div id="home">
-            <Navbar pagename={"Home"} notifications={props.notifications} unreadNotifications={props.unreadNotifications} num2={props.num2} setNum2={props.setNum2} socket={props.socket} />
+            <Navbar pagename={"Home"} notifications={props.notifications} unreadNotifications={props.unreadNotifications} num2={props.num2} setNum2={props.setNum2} socket={props.socket} userEmail={props.userEmail} />
 
             <div className="carousel">
                 <Swiper

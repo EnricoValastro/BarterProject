@@ -66,7 +66,7 @@ const emailValidation =  (req, res) => {
 }
 
 const getUserIdFromToken = (req, res) => {
-    User.findOne({token: req.params.token}).select('name')
+    User.findOne({token: req.params.token}).select('name email')
         .then( profile => {
             if (profile) {
                 res.json(profile);

@@ -2,6 +2,7 @@ const userController = require('../controllers/userController');
 const productController = require("../controllers/productController");
 const pendingTransactionsController = require("../controllers/pendingTransactionsController");
 const notifyController = require("../controllers/notifyController");
+const tradeResultController = require("../controllers/tradeResultController");
 
 module.exports = (app) => {
 

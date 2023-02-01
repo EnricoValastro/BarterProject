@@ -25,6 +25,7 @@ function App() {
     const { token, setToken } = useToken();
     const [userId, setUserId] = useState();
     const [userName, setUserName] = useState();
+    const [userEmail, setUserEmail] = useState();
 
     /* User's product list & triggers var */
     const [num, setNum] = useState(0);
@@ -56,6 +57,7 @@ function App() {
                 setNum2(num2+1);
                 setUserId(res.data._id);
                 setUserName(res.data.name);
+                setUserEmail(res.data.email);
                 socket.emit('newUser', res.data._id);
             })
             .catch(err => console.log(err))
@@ -85,6 +87,16 @@ function App() {
         socket.on('response', (data) => {
             if(data.result){
                 toast("La tua offerta per "+data.productName+" è stata accettata. 🎉", {
+                    position: "bottom-left",
+                    autoClose: 6000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                toast("Contatta "+ data.senderEmail+" per ultimare lo scambio.", {
                     position: "bottom-left",
                     autoClose: 6000,
                     hideProgressBar: false,
@@ -151,11 +163,11 @@ function App() {
                     </Route>
                     <Route path="/signin" element={<SigninPage setToken={setToken} socket={socket} />}>
                     </Route>
-                    <Route path="/home" element={<HomePage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} />}>
+                    <Route path="/home" element={<HomePage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} email={userEmail} />}>
                     </Route>
-                    <Route path="/search" element={<SearchPage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} />}>
+                    <Route path="/search" element={<SearchPage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} email={userEmail} />}>
                     </Route>
-                    <Route path="/marketplace" element={<MarketplacePage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} />}>
+                    <Route path="/marketplace" element={<MarketplacePage userId={userId} product={product} num={num} setNum={setNum} transactions={transactions} socket={socket} userName={userName} notifications={notifications} unreadNotifications={unreadNotifications} num2={num2} setNum2={setNum2} email={userEmail} />}>
                     </Route>
                     <Route path="*" element={<NotFound />}>
                     </Route>
