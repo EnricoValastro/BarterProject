@@ -138,20 +138,8 @@ export default function Navbar(props) {
                                     '& .MuiSvgIcon-root': {
                                         width: 32,
                                         height: 32,
-                                        ml: -0.5,
+                                        ml: 1,
                                         mr: 1,
-                                    },
-                                    '&:before': {
-                                        content: '""',
-                                        display: 'block',
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 130,
-                                        width: 10,
-                                        height: 10,
-                                        backgroundColor: 'background.paper',
-                                        transform: 'translateY(-50%) rotate(45deg)',
-                                        zIndex: 0,
                                     },
                                 },
                             }}
@@ -164,8 +152,8 @@ export default function Navbar(props) {
 
                             {
                                 props.notifications.map((notification, index) => (
-                                    <MenuItem key={index} divider={true} sx = {{backgroundColor: notification.read ? "white" : "gray"}}>
-                                        <Notification notification={notification} num2={props.num2} setNum2={props.setNum2}  />
+                                    <MenuItem key={index} divider={true} sx = {{backgroundColor: notification.read ? "rgba(217, 227, 231, 0.9)" : "rgba(49,122,199,0.8)"}}>
+                                        <Notification notification={notification} num2={props.num2} setNum2={props.setNum2} socket={props.socket} />
                                     </MenuItem>
                                 ))
                             }

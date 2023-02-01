@@ -24,7 +24,6 @@ export default function ProductCard(props) {
     const [product, setProduct] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState();
 
-    const[disabledP, setDisabledP] = useState([]);
     const [transactions, setTransactions] = useState([]);
 
     /* Other user's products details */
@@ -163,9 +162,7 @@ export default function ProductCard(props) {
                 });
             }
         }
-        }
-
-
+    }
 
     /* Add image on madal */
     function afterOpenModal(){

@@ -51,7 +51,7 @@ module.exports = (app) => {
     app.route('/api/transactions/removependingtransaction/:senderpid')
         .delete(pendingTransactionsController.removePendingTransaction);
 
-    /* Used by myTransactionCard */
+    /* Used by myTransactionCard and notify modal */
     app.route('/api/product/market/getproductbyid/:id')
         .get(productController.getProductFromId);
 
@@ -62,4 +62,7 @@ module.exports = (app) => {
         .get(notifyController.getNotifyFromUserToken);
     app.route('/api/notify/deletenotify/:senderProductId/:receiverProductId')
         .delete(notifyController.deleteNotify);
+
+    app.route('/api/product/delete/:id/:userId')
+        .delete(productController.deleteProduct);
 }

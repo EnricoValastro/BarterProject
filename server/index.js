@@ -40,7 +40,6 @@ const getUser = (id) => {
 io.on('connection', (socket) => {
 
     socket.on('newUser', (id) => {
-        console.log('new user connected: ' + id)
         if(users.some(user => user.id === id)) {
             removeUser(id);
         }
@@ -60,6 +59,16 @@ io.on('connection', (socket) => {
             });
         }
         notifyController.addNewNotify(senderId, receiverId, senderName, receiverProductName, senderProductId, receiverProductId);
+    });
+
+    socket.on('resOffer', ({ receiverId, result, productName }) => {
+        const receiver = getUser(receiverId);
+        if(receiver !== undefined){
+            io.to(receiver.socketId).emit('response', {
+                result,
+                productName
+            });
+        }
     });
 
     socket.on('disconnect', () => {

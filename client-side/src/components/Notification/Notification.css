@@ -1,0 +1,188 @@
+.notificationDetails{
+    width: 30vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow: scroll;
+}
+.notificationMessage{
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+.notificationUnreadBadge{
+    width: 4%;
+}
+.pendingIcon{
+    background-color: #EE6C4D;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    transition: ease-out 0.5s;
+}
+.notificationDetails:hover .pendingIcon{
+    background-color: #317ac7;
+    cursor: pointer;
+}
+.hidden{
+    display: none;
+}
+
+.modalNotificationDetailsContainer{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modalNotificationDetails{
+    width: 70%;
+    height: 80%;
+    border-radius: 8px;
+    background-color: rgba(217, 227, 231, 0.9) ;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.modalNotificationCancel{
+    width: 95%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.modalNotificationCancelIcon{
+    color: #EE6C4D;
+}
+.modalNotificationContent{
+    width: 90%;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+.modalNotificationContentLeft{
+    width: 50%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 7px ;
+    box-shadow: 0 5px 10px 0 #343e4f;
+}
+.modalNotificationImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 7px ;
+}
+.modalNotificationContentRight{
+    width: 58%;
+    height: 100%;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Ubuntu;
+}
+.modalNotificationPName{
+    width: 100%;
+    font-size: 30px;
+    color: #317AC7 ;
+    max-height: 9%;
+    overflow: scroll;
+}
+.modalNotificationPCategory{
+    width: 100%;
+    font-size: 14px;
+    color: gray;
+}
+.modalNotificationPDetails{
+    width: 100%;
+    height: 80%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.modalNotificationPLocDate{
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: gray;
+}
+.modalNotificationPDescription{
+    max-height: 68%;
+    margin-top: 2%;
+    overflow: scroll;
+}
+.modalNotificationPStaVal{
+    width: 100%;
+    height: 20%;
+    margin-top: 2%;
+    color: gray;
+}
+
+.modalNotificationBtt{
+    width: 90%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.modalNotificationBttDecline{
+    width: 15%;
+    height: 60%;
+    margin-left: 5%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-family: Ubuntu;
+    cursor: pointer;
+    box-shadow: 0 5px 10px 0 #343e4f;
+    color: #EE6C4D;
+    background-color: white;
+    transition: ease-out 0.5s;
+}
+.modalNotificationBttDecline:hover{
+    background-color: #EE6C4D;
+    color: white;
+}
+.modalNotificationBttAccept{
+    width: 15%;
+    height: 60%;
+    margin-right: 5%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-family: Ubuntu;
+    cursor: pointer;
+    box-shadow: 0 5px 10px 0 #343e4f;
+    color: #317ac7;
+    background-color: white;
+    transition: ease-out 0.5s;
+}
+.modalNotificationBttAccept:hover{
+    background-color: #317ac7;
+    color: white;
+}
+
+@media screen and (max-width: 800px) {
+    .notificationDetails{
+        width: 80vw;
+    }
+}

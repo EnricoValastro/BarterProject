@@ -237,7 +237,7 @@ const unsetBusy = (req, res) => {
 }
 
 const getProductFromId = (req, res) => {
-    Product.find({_id: req.params.id}).select("name image -_id" ).then(
+    Product.find({_id: req.params.id}).select("-_id" ).then(
         result => {
             res.json(result);
         })
@@ -245,6 +245,24 @@ const getProductFromId = (req, res) => {
             responses.InternalServerError(res, {message: err.message});
         });
 }
+
+const deleteProduct = (req, res) => {
+    User.find({_id: req.params.userId}).select("products -_id").then(
+        result => {
+            result[0].products.remove(req.params.id);
+            User.findOneAndUpdate({_id: req.params.userId}, {products: result[0].products}, {new: true}).then(
+                result => {
+                    Product.findOneAndDelete({_id: req.params.id}).then(
+                        result => {
+                            responses.OkResponse(res, {message: "Product deleted successfully"});
+                        }
+                    ).catch(err => {
+                        responses.InternalServerError(res, {message: err.message});
+                    })
+                })
+        })
+}
+
 
 const response = (req, res) => {
     res.send("ok");
@@ -263,6 +281,7 @@ module.exports = {
     editProductWithImgFromId,
     editProductWithoutImgFromId,
     getProductFromId,
+    deleteProduct,
     setBusy,
     unsetBusy,
     response

@@ -64,7 +64,7 @@ function App() {
     /* Receives real time notifications from socket */
     useEffect(() =>{
         socket.on('getNotification', (data) => {
-            toast.info(data.senderName+" ha fatto un offerta per "+data.receiverProductName, {
+            toast(data.senderName+" ha fatto un offerta per "+data.receiverProductName+" 📫", {
                 position: "bottom-left",
                 autoClose: 6000,
                 hideProgressBar: false,
@@ -78,6 +78,49 @@ function App() {
         });
         return () => {
             socket.off('getNotification');
+        }
+    } );
+
+    useEffect(() =>{
+        socket.on('response', (data) => {
+            if(data.result){
+                toast("La tua offerta per "+data.productName+" è stata accettata. 🎉", {
+                    position: "bottom-left",
+                    autoClose: 6000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                toast.info("Abbiamo provveduto a rimuovere il tuo prodotto dalla vetrina.", {
+                    position: "bottom-left",
+                    autoClose: 6000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+
+            }
+            else{
+                toast("La tua offerta per "+data.productName+" è stata rifiutata. 😔", {
+                    position: "bottom-left",
+                    autoClose: 6000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
+        });
+        return () => {
+            socket.off('response');
         }
     } );
 
