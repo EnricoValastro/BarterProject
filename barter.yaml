@@ -1,0 +1,13 @@
+version: '3'
+services:
+  server:
+    image: docker.io/alerei94/server:1.0
+    restart: always
+    ports:
+      - '4000:4000'
+    
+  client:
+    image: docker.io/alerei94/client
+    restart: always
+    ports:
+      - '3000:3000'
