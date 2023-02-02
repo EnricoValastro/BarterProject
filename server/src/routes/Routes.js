@@ -6,14 +6,14 @@ const tradeResultController = require("../controllers/tradeResultController");
 
 module.exports = (app) => {
 
-    app.route('/api/user/emailValidation')
+    app.route('/api/authServices/emailValidation')
         .post(userController.emailValidation);
-    app.route('/api/user/signup')
+    app.route('/api/authServices/signup')
         .post(userController.signup);
-    app.route('/api/user/signin')
+    app.route('/api/authServices/signin')
         .post(userController.signin);
-    app.route('/api/user/getuseridname/:token')
-        .get(userController.getUserIdFromToken);
+    app.route('/api/user/getuser/:token')
+        .get(userController.getUser);
 
     app.route('/api/product/upload')
         .post(productController.upload.single('image'), productController.createProduct);

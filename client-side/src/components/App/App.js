@@ -53,7 +53,7 @@ function App() {
         if(token === null){
             return;
         }
-        axios.get('http://localhost:4000/api/user/getuseridname/'+token)
+        axios.get('http://localhost:4000/api/user/getuser/'+token)
             .then(res => {
                 setNum(num+1);
                 setNum2(num2+1);
@@ -132,6 +132,7 @@ function App() {
                     theme: "light",
                 });
             }
+            setNum(num+1);
         });
         return () => {
             socket.off('response');

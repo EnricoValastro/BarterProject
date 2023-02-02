@@ -65,7 +65,7 @@ const emailValidation =  (req, res) => {
     });
 }
 
-const getUserIdFromToken = (req, res) => {
+const getUser = (req, res) => {
     User.findOne({token: req.params.token}).select('name email')
         .then( profile => {
             if (profile) {
@@ -83,5 +83,5 @@ module.exports = {
     signup,
     signin,
     emailValidation,
-    getUserIdFromToken
+    getUser
 }

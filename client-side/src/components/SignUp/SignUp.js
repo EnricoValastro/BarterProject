@@ -24,7 +24,7 @@ function Signup(){
 
     function SubmitHandler(){
 
-        axios.post("http://localhost:4000/api/user/signup", {
+        axios.post("http://localhost:4000/api/authServices/signup", {
             name: name,
             surname: surname,
             email: email,
@@ -92,7 +92,7 @@ function Signup(){
         const ok        = document.getElementById('done3');
         const next      = document.getElementById('next3');
 
-        axios.post("http://localhost:4000/api/user/emailValidation", {
+        axios.post("http://localhost:4000/api/authServices/emailValidation", {
             email: emailInput
 
         }).then((response)=>{
