@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Person, Search} from "@mui/icons-material";
+import {Search} from "@mui/icons-material";
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import {Storefront} from "@mui/icons-material";
@@ -42,6 +43,12 @@ export default function Navbar(props) {
     const handleDropdownClose = () =>{
         setNotificationDropdown(false);
         props.setNum2(props.num2 + 1);
+    }
+
+    /* Logout */
+    const logout = () => {
+        sessionStorage.removeItem('token');
+        window.location.href = '/signin';
     }
 
    useEffect(() => {
@@ -168,8 +175,9 @@ export default function Navbar(props) {
                         </Menu>
 
                     </div>
-                    <div className="navItem" id="iconProfile">
-                        <span><Person className="Icon"/></span>
+
+                    <div className="navItem" id="iconProfile" onClick={logout}>
+                        <span><LogoutRoundedIcon className="Icon"/></span>
                     </div>
                 </div>
 

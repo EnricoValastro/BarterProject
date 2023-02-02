@@ -34,7 +34,7 @@ function App() {
     /* User's transactions and notifications and triggers */
     const [transactions, setTransactions] = useState([]);
     const [notifications, setNotifications] = useState([]);
-    const [unreadNotifications, setUnreadNotifications] = useState();
+    const [unreadNotifications, setUnreadNotifications] = useState(0);
     const [tradeResults, setTradeResults] = useState([]);
 
     const [num2, setNum2] = useState(0);
@@ -147,17 +147,15 @@ function App() {
             .then(res => {
                 setNotifications(res.data.sort((a, b) => (!b.read) - (!a.read)));
                 setUnreadNotifications(res.data.filter((item) => !item.read).length);
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        axios.get('http://localhost:4000/api/tradeResult/getTradeResult/'+token)
-            .then(res => {
-                setTradeResults(res.data)
-                if(res.data.filter((item) => item != null).length >0){
-                    let x = res.data.filter((item) => item != null).length;
-                    setUnreadNotifications(unreadNotifications+x);
-                }
+                axios.get('http://localhost:4000/api/tradeResult/getTradeResult/'+token)
+                    .then(res => {
+                        setTradeResults(res.data)
+                        let x = res.data.length;
+                        setUnreadNotifications(unreadNotifications+x);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
             })
             .catch(err => {
                 console.log(err)
