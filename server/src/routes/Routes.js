@@ -66,4 +66,9 @@ module.exports = (app) => {
 
     app.route('/api/product/delete/:id/:userId')
         .delete(productController.deleteProduct);
+
+    app.route('/api/tradeResult/getTradeResult/:token')
+        .get(tradeResultController.getTradeResult);
+    app.route('/api/tradeResult/deleteTradeResult/:id')
+        .delete(tradeResultController.deleteTradeResult);
 }

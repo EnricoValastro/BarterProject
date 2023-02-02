@@ -31,7 +31,7 @@ const addNewNotify = (senderId, receiverId, senderName, receiverProductName, sen
     });
     newNotify.save()
         .then(result => {
-            console.log('Notification saved successfully');
+
         })
         .catch(err => {
             console.log(err.message);

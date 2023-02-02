@@ -10,12 +10,13 @@ import {Badge, IconButton, Menu, MenuItem, styled, Tooltip} from "@mui/material"
 
 import Notification from "../Notification/Notification";
 import MenuMobile from "../MenuMobile/MenuMobile";
+import TradeResultNotification from "../TradeResultNotification/TradeResultNotification";
 import './Navbar.css'
+
 
 export default function Navbar(props) {
     //Hamburger menu
     const [menuOpen, setMenuOpen] = useState(false);
-    const arr = [1,2,3,4,5,6,7,8,9,10]
     /* Notifications dropdown */
     const [anchorEl, setAnchorEl] = useState(null);
     const [notificationDropdown, setNotificationDropdown] = useState(false);
@@ -127,7 +128,7 @@ export default function Navbar(props) {
                         <Menu
                             id="long-menu"
                             anchorEl={anchorEl}
-                            open={notificationDropdown && props.notifications.length > 0}
+                            open={notificationDropdown && (props.notifications.length > 0 || props.tradeResult.length > 0)}
                             onClose={handleDropdownClose}
                             PaperProps={{
                                 elevation: 0,
@@ -151,9 +152,9 @@ export default function Navbar(props) {
                         >
 
 
-                            { arr.map((n) => (
-                                <MenuItem key={n} divider={true} sx = {{backgroundColor: "rgba(217, 227, 231, 0.9)"}}>
-                                    <div>n</div>
+                            { props.tradeResult.map((trade,index) => (
+                                <MenuItem key={index} divider={true} sx = {{backgroundColor:  "rgba(49,122,199,0.8)" }}>
+                                    <TradeResultNotification trade={trade} num2={props.num2} setNum2={props.setNum2} />
                                 </MenuItem>
                             ))
                             }

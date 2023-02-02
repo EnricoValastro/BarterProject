@@ -11,6 +11,7 @@ const { Server } = require("socket.io");
 
 const mongoose = require('mongoose');
 const notifyController = require("./src/controllers/notifyController");
+const tradeResultController = require("./src/controllers/tradeResultController");
 
 const PORT = process.env.PORT;
 
@@ -70,7 +71,10 @@ io.on('connection', (socket) => {
                 senderEmail
             });
         }
-        
+        else{
+            tradeResultController.addNewResultNotification(receiverId, productName, senderEmail, result);
+        }
+
     });
 
     socket.on('disconnect', () => {
