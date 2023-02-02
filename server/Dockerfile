@@ -1,7 +1,7 @@
 FROM node:12-alpine3.14
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --silent
+RUN npm install
 COPY ./ ./
 
 ENV PORT=4000

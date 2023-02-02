@@ -1,7 +1,7 @@
 version: '3'
 services:
   server:
-    image: docker.io/alerei94/server:1.0
+    image: docker.io/alerei94/server
     restart: always
     ports:
       - '4000:4000'
