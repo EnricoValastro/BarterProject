@@ -139,31 +139,15 @@ export default function Notification(props) {
         });
     }
     const acceptOffer = () =>{
-        axios.delete('http://localhost:4000/api/notify/deletenotify/'+props.notification.senderProductId+"/"+props.notification.receiverProductId)
-            .then(res => {
-                axios.delete('http://localhost:4000/api/transactions/removependingtransaction/'+props.notification.senderProductId)
-                    .then(res => {
-                        axios.delete("http://localhost:4000/api/product/delete/"+props.notification.senderProductId+"/"+props.notification.senderId)
-                            .then(res => {
-                                axios.delete("http://localhost:4000/api/product/delete/"+props.notification.receiverProductId+"/"+props.notification.receiverId)
-                                    .then(res => {
-                                        handleNotificationDetailsClose();
-                                        props.setNum2(props.num2 + 1);
-                                    })
-                                    .catch(err => {
-                                        console.log(err);
-                                    });
-                        }).catch(err => {
-                            console.log(err);
-                        });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
+        axios.delete('http://localhost:4000/api/keepconsistency/'+props.notification.senderId+"/"+props.notification.receiverId+"/"+props.notification.senderProductId+"/"+props.notification.receiverProductId)
+            .then(res=>{
+                handleNotificationDetailsClose();
+                props.setNum2(props.num2 + 1);
             })
             .catch(err => {
                 console.log(err);
             });
+
         props.socket.emit('resOffer', {
             receiverId: props.notification.senderId,
             result: true,

@@ -15,7 +15,6 @@ module.exports = (app) => {
     app.route('/api/user/getuseridname/:token')
         .get(userController.getUserIdFromToken);
 
-
     app.route('/api/product/upload')
         .post(productController.upload.single('image'), productController.createProduct);
     app.route('/api/product/update')
@@ -37,6 +36,8 @@ module.exports = (app) => {
         .get(productController.getProductFromCategory);
     app.route('/api/product/search/getproductbyname/:name/:token')
         .get(productController.getProductFromName);
+    app.route('/api/product/delete/:id/:userId')
+        .delete(productController.deleteProduct);
 
     app.route('/api/product/market/deleteproduct/:id/:token')
         .delete(productController.deleteProductFromId);
@@ -64,11 +65,12 @@ module.exports = (app) => {
     app.route('/api/notify/deletenotify/:senderProductId/:receiverProductId')
         .delete(notifyController.deleteNotify);
 
-    app.route('/api/product/delete/:id/:userId')
-        .delete(productController.deleteProduct);
-
     app.route('/api/tradeResult/getTradeResult/:token')
         .get(tradeResultController.getTradeResult);
     app.route('/api/tradeResult/deleteTradeResult/:id')
         .delete(tradeResultController.deleteTradeResult);
+
+    app.route('/api/keepconsistency/:senderId/:receiverId/:senderProductId/:receiverProductId')
+        .delete(productController.keepConsistency);
+
 }

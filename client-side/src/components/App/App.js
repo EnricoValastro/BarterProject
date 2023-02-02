@@ -100,7 +100,7 @@ function App() {
                 });
                 toast("Contatta "+ data.senderEmail+" per concludere lo scambio.", {
                     position: "bottom-left",
-                    autoClose: 6000,
+                    autoClose: false,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -143,15 +143,16 @@ function App() {
         if(token === null){
             return;
         }
+        let countNotify = 0
         axios.get('http://localhost:4000/api/notify/getnotify/'+token)
             .then(res => {
-                setNotifications(res.data.sort((a, b) => (!b.read) - (!a.read)));
-                setUnreadNotifications(res.data.filter((item) => !item.read).length);
+                setNotifications(res.data);
+                countNotify = res.data.filter((item) => !item.read).length
                 axios.get('http://localhost:4000/api/tradeResult/getTradeResult/'+token)
                     .then(res => {
                         setTradeResults(res.data)
-                        let x = res.data.length;
-                        setUnreadNotifications(unreadNotifications+x);
+                        countNotify += res.data.filter((item) => item!=null).length
+                        setUnreadNotifications(countNotify);
                     })
                     .catch(err => {
                         console.log(err)

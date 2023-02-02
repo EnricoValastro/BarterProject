@@ -18,7 +18,7 @@ export default function TradeResultNotification(props){
         if(props.trade.result){
             toast("Contatta "+ props.trade.senderEmail+" per concludere lo scambio.", {
                 position: "bottom-left",
-                autoClose: 6000,
+                autoClose: false,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -37,7 +37,18 @@ export default function TradeResultNotification(props){
                 theme: "light",
             });
         }
-
+        else {
+            toast("Ci dispiace che la tua offerta sia stata rifiutata 😭. Il tuo prodotto è di nuovo disponibile per nuove offerte.", {
+                position: "bottom-left",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
         axios.delete('http://localhost:4000/api/tradeResult/deleteTradeResult/'+props.trade._id)
             .then(res => {
                 props.setNum2(props.num2+1);

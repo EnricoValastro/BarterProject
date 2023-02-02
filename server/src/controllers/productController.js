@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const PendingTransaction = require('../models/pendingTransactions')(mongoose);
+const Notifications = require('../models/notifyModel')(mongoose);
 const Product = require('../models/productModel')(mongoose);
 const responses = require('./responses/response');
 const multer = require('multer');
@@ -263,6 +265,84 @@ const deleteProduct = (req, res) => {
         })
 }
 
+const keepConsistency = (req, res) => {
+    /* Delete transaction and notification done with receiverProduct */
+    Notifications.findOneAndDelete({senderProductId: req.params.receiverProductId})
+        .then(result => {
+        })
+    PendingTransaction.findOneAndDelete({senderProductId: req.params.receiverProductId})
+        .then(result => {
+        })
+
+    /* Delete transaction and notification done with senderProduct (is the transaction accepted) */
+    Notifications.findOneAndDelete({senderProductId: req.params.senderProductId})
+        .then(result => {
+        })
+    PendingTransaction.findOneAndDelete({senderProductId: req.params.senderProductId})
+        .then(result => {
+        })
+
+    PendingTransaction.find({receiverProductId: req.params.receiverProductId}).select("senderProductId -_id")
+        .then(result => {
+            result.forEach(element => {
+                Notifications.findOneAndDelete({senderProductId: element.senderProductId})
+                    .then(result => {
+                    })
+                PendingTransaction.findOneAndDelete({senderProductId: element.senderProductId})
+                    .then(result => {
+                    })
+                Product.findOneAndUpdate({_id: element.senderProductId}, {busy: false}, {new: true})
+                    .then(result => {
+                    })
+            });
+
+        });
+    PendingTransaction.find({receiverProductId: req.params.senderProductId}).select("senderProductId -_id")
+        .then(result => {
+            result.forEach(element => {
+                Notifications.findOneAndDelete({senderProductId: element.senderProductId})
+                    .then(result => {
+                    })
+                PendingTransaction.findOneAndDelete({senderProductId: element.senderProductId})
+                    .then(result => {
+                    })
+                Product.findOneAndUpdate({_id: element.senderProductId}, {busy: false}, {new: true})
+                    .then(result => {
+                    })
+            });
+
+        });
+
+    User.find({_id: req.params.senderId}).select("products -_id").then(
+        result => {
+            result[0].products.remove(req.params.senderProductId);
+            User.findOneAndUpdate({_id: req.params.senderId}, {products: result[0].products}, {new: true}).then(
+                result => {
+                    Product.findOneAndDelete({_id: req.params.senderProductId}).then(
+                        result => {
+                        }
+                    ).catch(err => {
+                        responses.InternalServerError(res, {message: err.message});
+                    })
+                })
+        })
+
+    User.find({_id: req.params.receiverId}).select("products -_id").then(
+        result => {
+            result[0].products.remove(req.params.receiverProductId);
+            User.findOneAndUpdate({_id: req.params.receiverId}, {products: result[0].products}, {new: true}).then(
+                result => {
+                    Product.findOneAndDelete({_id: req.params.receiverProductId}).then(
+                        result => {
+                        }
+                    ).catch(err => {
+                        responses.InternalServerError(res, {message: err.message});
+                    })
+                })
+        })
+    responses.OkResponse(res, {message: "Product deleted successfully"});
+}
+
 
 const response = (req, res) => {
     res.send("ok");
@@ -282,6 +362,7 @@ module.exports = {
     editProductWithoutImgFromId,
     getProductFromId,
     deleteProduct,
+    keepConsistency,
     setBusy,
     unsetBusy,
     response

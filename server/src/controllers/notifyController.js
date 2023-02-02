@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Notifications = require('../models/notifyModel')(mongoose);
+const Notifications = mongoose.model("Notification");
 const User = mongoose.model('User');
 const responses = require('./responses/response');
 

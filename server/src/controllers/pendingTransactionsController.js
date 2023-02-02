@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const PendingTransaction = require('../models/pendingTransactions')(mongoose);
+const PendingTransaction = mongoose.model('PendingTransactions');
 const User = mongoose.model('User');
 const responses = require('./responses/response');
 

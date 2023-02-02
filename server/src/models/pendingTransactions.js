@@ -1,7 +1,5 @@
-const mongoose = require('mongoose')
-
 module.exports = function (mongoose){
-    const pendingTransactionsSchema = new mongoose.Schema({
+    const PendingTransactionsSchema = new mongoose.Schema({
         senderId: {
             type: String,
             required: true
@@ -19,5 +17,5 @@ module.exports = function (mongoose){
             required: true
         }
     });
-    return mongoose.model('PendingTransactions', pendingTransactionsSchema);
+    return mongoose.model('PendingTransactions', PendingTransactionsSchema);
 }
