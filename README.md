@@ -17,6 +17,8 @@ Una volta installato Docker sarà sufficente scaricare il file [barter.yaml](htt
   docker-compose -f barter.yaml up
 ```
 
+A questo punto basterà collegarsi da qualsiasi browser (si consiglia Firefox) all'indirizzo `http://localhost:3000`
+
 ## Documentazione
 
 La documentazione del progetto è allegata di seguito, essa contiene tutti i mockup fatti in fase di progettazione, indicazioni sulle principali scelte progettuali e sulle tecnologie utilizzate.
